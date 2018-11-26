@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="前段时间聊微信的时候，看到微信群里有个童鞋的头像变成了自己的自拍并且打上了马赛克（(╯-_-)╯~╩╩  绝对不是我撸多了视力下降了）。轻度模糊的整体马赛克还挺有意思的，也具有一定的辨识度，于是我就想着：马赛克这玩意儿，前端也可以做的嘛（canvas），所以就试着写了一个图片马赛克小工具 由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。 demo地址">
+<meta name="keywords" content="js,马赛克">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片马赛克小工具">
+<meta property="og:url" content="http://yoursite.com/2017/07/10/image-tool/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="前段时间聊微信的时候，看到微信群里有个童鞋的头像变成了自己的自拍并且打上了马赛克（(╯-_-)╯~╩╩  绝对不是我撸多了视力下降了）。轻度模糊的整体马赛克还挺有意思的，也具有一定的辨识度，于是我就想着：马赛克这玩意儿，前端也可以做的嘛（canvas），所以就试着写了一个图片马赛克小工具 由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。 demo地址">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/origin-image.jpg">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/download.png">
+<meta property="og:updated_time" content="2018-11-26T11:09:13.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图片马赛克小工具">
+<meta name="twitter:description" content="前段时间聊微信的时候，看到微信群里有个童鞋的头像变成了自己的自拍并且打上了马赛克（(╯-_-)╯~╩╩  绝对不是我撸多了视力下降了）。轻度模糊的整体马赛克还挺有意思的，也具有一定的辨识度，于是我就想着：马赛克这玩意儿，前端也可以做的嘛（canvas），所以就试着写了一个图片马赛克小工具 由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。 demo地址">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/origin-image.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>图片马赛克小工具</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/11/26/hello-world/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/07/10/php-fpm-nginx/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/07/10/image-tool/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/07/10/image-tool/&text=图片马赛克小工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/07/10/image-tool/&is_video=false&description=图片马赛克小工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=图片马赛克小工具&body=Check out this article: http://yoursite.com/2017/07/10/image-tool/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/07/10/image-tool/&name=图片马赛克小工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现过程"><span class="toc-number">1.</span> <span class="toc-text">实现过程</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        图片马赛克小工具
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-07-10T11:05:13.000Z" itemprop="datePublished">2017-07-10</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>, <a class="tag-link" href="/tags/马赛克/">马赛克</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>前段时间聊微信的时候，看到微信群里有个童鞋的头像变成了自己的自拍并且打上了马赛克（(╯-_-)╯~╩╩  绝对不是我撸多了视力下降了）。轻度模糊的整体马赛克还挺有意思的，也具有一定的辨识度，于是我就想着：马赛克这玩意儿，前端也可以做的嘛（canvas），所以就试着写了一个图片马赛克小工具</p>
+<p>由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。</p>
+<p>demo地址：<a href="http://web-site-files.ashshen.cc/blog/pages/index.html" target="_blank" rel="noopener">http://web-site-files.ashshen.cc/blog/pages/index.html</a></p>
+<p>小工具效果展示：</p>
+<p><img src="http://web-site-files.ashshen.cc/blog/origin-image.jpg" style="width:49%;display: inline-block;"><img src="http://web-site-files.ashshen.cc/blog/download.png" style="width:49%;display: inline-block;"></p>
+<p>实现步骤：</p>
+<ol>
+<li><p>上传图片</p>
+</li>
+<li><p>图片转化成添加了马赛克的canvas</p>
+</li>
+<li><p>从canvas提取出图片的dataurl</p>
+</li>
+<li><p>展示添加马赛克后的图片并下载</p>
+</li>
+</ol>
+<p>去网上搜了一下前端给图片添加马赛克的方法，然后搜到了<a href="https://github.com/desandro/close-pixelate" target="_blank" rel="noopener">close-pixelate</a>这个插件，一个可以把图片转换成添加了马赛克的canvas的插件。</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>由于只是一个简单的小工具，我也就没有使用想jQuery的库来实现了，全部使用原生的js，也好锻炼一下原生js。</p>
+<p><em>首先</em>，是上传图片的过程，使用input type=file，然后把input使用display:none隐藏，并使用一个botton的点击事件来模拟input的点击事件触发文件选择。</p>
+<p>PS：这里在实现的时候遇到了一个问题：我的想法是限制使用者选择文件的类型，于是使用input的accept属性做了如下限制：“image/jpg,image/jpeg,,image/png,image/gif”；写法麻烦不说，还会导致由于浏览器每次在弹出文件选择框之前都要去判断文件夹下文件类型是不是accpet的文件类型，所以容易造成弹框的卡顿。</p>
+<p>google了之后，解决办法为：修改accept为“image/*”，这样不仅写法简单，还可以让支持更多图片格式选择，文件选择的弹框也不会卡顿了。</p>
+<p><em>然后</em>，文件上传完毕之后就是一些错误判断了，比如：使用者没有选择文件，选择了其他类型的文件。是的，即使设置了accept，使用者也是可以点击文件选择下面的选项去选择其他文件的，只是选择完之后，相当于没有选择。不过这一部分的错误提示是不能少的。</p>
+<p>错误提示之后，就是图片文件的提取了，这里需要用到FileReader()，将选择的图片转换成DataURL，并使用FileReader自带的API：onload处理提取到DataURL之后的相关逻辑（创建img节点，并赋值src属性，然后使用appendChild将节点添加到dom指定位置，然后使用close-pixelate将img转化成canvas）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">reader.readAsDataURL(files[<span class="number">0</span>]);</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现过程"><span class="toc-number">1.</span> <span class="toc-text">实现过程</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/07/10/image-tool/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/07/10/image-tool/&text=图片马赛克小工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/07/10/image-tool/&is_video=false&description=图片马赛克小工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=图片马赛克小工具&body=Check out this article: http://yoursite.com/2017/07/10/image-tool/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/07/10/image-tool/&name=图片马赛克小工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

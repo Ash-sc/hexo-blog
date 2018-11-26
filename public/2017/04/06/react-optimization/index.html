@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="场景公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。 工具工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依">
+<meta name="keywords" content="前端,react,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react项目构建优化笔记">
+<meta property="og:url" content="http://yoursite.com/2017/04/06/react-optimization/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="场景公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。 工具工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ashshen.cc/wp-content/uploads/2017/04/Screen-Shot-2017-04-06-at-11.25.03.png">
+<meta property="og:updated_time" content="2018-11-26T09:50:18.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react项目构建优化笔记">
+<meta name="twitter:description" content="场景公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。 工具工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依">
+<meta name="twitter:image" content="https://ashshen.cc/wp-content/uploads/2017/04/Screen-Shot-2017-04-06-at-11.25.03.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>react项目构建优化笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/05/14/ubuntu-shadowsocks/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/03/19/call-bind-apply/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/04/06/react-optimization/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/04/06/react-optimization/&text=react项目构建优化笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/04/06/react-optimization/&is_video=false&description=react项目构建优化笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=react项目构建优化笔记&body=Check out this article: http://yoursite.com/2017/04/06/react-optimization/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/04/06/react-optimization/&name=react项目构建优化笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具"><span class="toc-number">2.</span> <span class="toc-text">工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步，分离第三方模块"><span class="toc-number">2.1.</span> <span class="toc-text">第一步，分离第三方模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步，react-router按需加载"><span class="toc-number">2.2.</span> <span class="toc-text">第二步，react-router按需加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步，模块中的配置项"><span class="toc-number">2.3.</span> <span class="toc-text">第三步，模块中的配置项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        react项目构建优化笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-04-06T09:33:43.000Z" itemprop="datePublished">2017-04-06</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/react/">react</a>, <a class="tag-link" href="/tags/webpack/">webpack</a>, <a class="tag-link" href="/tags/前端/">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依赖以及各个模块占用的比重。</p>
+<p>这里推荐一个比较好用的图形化工具：<a href="http://alexkuz.github.io/webpack-chart/" target="_blank" rel="noopener">Webpack Chart</a>。</p>
+<p>使用”webpack –profile –json &gt; stats.json”在项目根目录下生成stats.json将文件上传到网页中解析就可以得到bundle.js中各模块占用的比重了。</p>
+<p>效果图如下:</p>
+<p><img src="https://ashshen.cc/wp-content/uploads/2017/04/Screen-Shot-2017-04-06-at-11.25.03.png" alt="webpack-chat-img"></p>
+<p>“~”部分代表第三方的依赖，”src”部分则代表项目自身编写的模块。</p>
+<h3 id="第一步，分离第三方模块"><a href="#第一步，分离第三方模块" class="headerlink" title="第一步，分离第三方模块"></a>第一步，分离第三方模块</h3><p>从Webpack Chart中可以看出，调用的第三方模块中，占比较大的有echarts、react、moment、zrender等。其中zrender是echarts的依赖。完全可以把这部分从bundle.js中拆分出来。然后用外联js的方式通过 script 标签在index.html中引入。</p>
+<p>这里需要注意的是：分离的第三方依赖 script 标签需要写在bundle.js前面。</p>
+<p>拆分方法：使用weback配置项中的externals，比如，我这边拆分出了moment.js、lodash、echarts：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br><span class="line">externals: &#123;</span><br><span class="line">  <span class="string">"echarts"</span>: <span class="string">'echarts'</span>,</span><br><span class="line">  <span class="string">"moment"</span>: <span class="string">'moment'</span>,</span><br><span class="line">  <span class="string">"lodash"</span>: <span class="string">'lodash'</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>拆分之前bundle.js的大小为3.1MB；拆分之后，减小到2.2MB。可以看到拆分后的效果还是比较显著的。</p>
+<h3 id="第二步，react-router按需加载"><a href="#第二步，react-router按需加载" class="headerlink" title="第二步，react-router按需加载"></a>第二步，react-router按需加载</h3><p>第三方模块拆分完成之后，剩下的就是按照路由来拆分chunk了，react-router本身带有按需加载的设置：使用”<a href="https://react-guide.github.io/react-router-cn/docs/guides/advanced/DynamicRouting.html" target="_blank" rel="noopener">getComponent</a>“配合webpack的”require.ensure”。</p>
+<p>下面给出我的部分代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">const</span> App = <span class="function">(<span class="params">location, callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">require</span>.ensure([], (<span class="built_in">require</span>) =&gt; &#123;</span><br><span class="line">    callback(<span class="literal">null</span>, <span class="built_in">require</span>(<span class="string">'../components/_shared/App/App'</span>).default);</span><br><span class="line">  &#125;, <span class="string">'app'</span>); <span class="comment">// 这里的"app"为chunk的名称，可自定义</span></span><br><span class="line">&#125;;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">getComponent</span>=<span class="string">&#123;App&#125;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>然后需要在webpack的配置项中增加：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  ...</span><br><span class="line">  filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">  chunkFilename: <span class="string">'[id].[hash:8].chunk.js'</span>, <span class="comment">// "[id]"代表模块加载的id，"[hash:8]"表示使用8位hash值，还可以使用"[name]"获取到chunk的名称</span></span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>写法上大多与这个类似。</p>
+<p>这里比较值得注意的一点是：</p>
+<p><strong>如果component使用的是es5标准（module.exports = …）的话，不需要以上代码中的”default”；如果使用的是es6标准（export default…）的话，需要加上”default”。</strong></p>
+<p>将react-router改成按需加载后，发现bundle.js文件的大小已经从原本的2.2MB减小到了670KB，拆分的效果比之前的分离第三方模块还要显著。</p>
+<h3 id="第三步，模块中的配置项"><a href="#第三步，模块中的配置项" class="headerlink" title="第三步，模块中的配置项"></a>第三步，模块中的配置项</h3><p>OK，拆分了第三方的模块以及路由chunk之后，我们再来看看项目中还有哪些东西是可以拆分掉的。</p>
+<p>使用”webpack –display-modules –sort-modules-by size”可以在打包是按照文件大小顺序显示所有的模块体积，把shell拉到最下面，发现项目中居然还有一个大小为231KB的json文件！！查看之后发现是一个省份城市地区的json，在之前的版本开发中直接把这部分的代码放在了前端。于是果断把它丢到后端去，改成通过fetch获取。</p>
+<p>建议项目中的一些配置项尽量不要写死在前端，第一个原因是会增加前端js文件的体积；第二个原因则是不利于系统的扩展。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里，本次对于bundle.js文件体积的优化也就告一段落了。</p>
+<p>从结果来看：优化之前的文件体积为3.1MB，首屏加载时间大约为22秒；拆分优化之后的文件体积为510KB，首屏加载时间为5秒。</p>
+<p>然后加上gzip压缩后，生产环境下js文件体积为220KB，首屏加载时间为2.2s。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具"><span class="toc-number">2.</span> <span class="toc-text">工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步，分离第三方模块"><span class="toc-number">2.1.</span> <span class="toc-text">第一步，分离第三方模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步，react-router按需加载"><span class="toc-number">2.2.</span> <span class="toc-text">第二步，react-router按需加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步，模块中的配置项"><span class="toc-number">2.3.</span> <span class="toc-text">第三步，模块中的配置项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/04/06/react-optimization/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/04/06/react-optimization/&text=react项目构建优化笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/04/06/react-optimization/&is_video=false&description=react项目构建优化笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=react项目构建优化笔记&body=Check out this article: http://yoursite.com/2017/04/06/react-optimization/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/04/06/react-optimization/&name=react项目构建优化笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="nvm作为当前主流的Node.js版本管理工具，可以做为一个Node.js版本切换工具或者Node.js安装工具使用。 安装nvm1$ curl https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh 如果使用的是是zsh，需要在安装完成后使用source ~/.zshrc重启配置。 如果使用的是自带的Teminal的话，则需要在安">
+<meta name="keywords" content="mac,nvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac下nvm安装与使用">
+<meta property="og:url" content="http://yoursite.com/2017/06/11/mac-install-nvm/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="nvm作为当前主流的Node.js版本管理工具，可以做为一个Node.js版本切换工具或者Node.js安装工具使用。 安装nvm1$ curl https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh 如果使用的是是zsh，需要在安装完成后使用source ~/.zshrc重启配置。 如果使用的是自带的Teminal的话，则需要在安">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-26T10:02:20.757Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac下nvm安装与使用">
+<meta name="twitter:description" content="nvm作为当前主流的Node.js版本管理工具，可以做为一个Node.js版本切换工具或者Node.js安装工具使用。 安装nvm1$ curl https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh 如果使用的是是zsh，需要在安装完成后使用source ~/.zshrc重启配置。 如果使用的是自带的Teminal的话，则需要在安">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>mac下nvm安装与使用</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/07/04/react-node-online-reader/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/05/14/ubuntu-shadowsocks/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/06/11/mac-install-nvm/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/06/11/mac-install-nvm/&text=mac下nvm安装与使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/06/11/mac-install-nvm/&is_video=false&description=mac下nvm安装与使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mac下nvm安装与使用&body=Check out this article: http://yoursite.com/2017/06/11/mac-install-nvm/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/06/11/mac-install-nvm/&name=mac下nvm安装与使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装nvm"><span class="toc-number">1.</span> <span class="toc-text">安装nvm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nvm命令"><span class="toc-number">2.</span> <span class="toc-text">nvm命令</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        mac下nvm安装与使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-06-11T09:58:11.000Z" itemprop="datePublished">2017-06-11</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/mac/">mac</a>, <a class="tag-link" href="/tags/nvm/">nvm</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>nvm作为当前主流的Node.js版本管理工具，可以做为一个Node.js版本切换工具或者Node.js安装工具使用。</p>
+<h3 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装nvm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh</span><br></pre></td></tr></table></figure>
+<p>如果使用的是是<code>zsh</code>，需要在安装完成后使用<code>source ~/.zshrc</code>重启配置。</p>
+<p>如果使用的是自带的<code>Teminal</code>的话，则需要在安装完成后使用<code>source ~/.profile</code>重启配置。</p>
+<p>重启后，在命令行中输入<code>nvm</code>，如果出现<code>nvm</code>相关信息则表示安装成功。</p>
+<h3 id="nvm命令"><a href="#nvm命令" class="headerlink" title="nvm命令"></a>nvm命令</h3><p><strong>查看版本：</strong></p>
+<p>安装完nvm之后，我们可以使用<code>nvm ls-remote</code>来查看Node.js发布的所有版本。</p>
+<p><strong>安装Node.js：</strong></p>
+<p>然后使用<code>nvm install v6.2.0</code>来安装6.2.0版本。</p>
+<p><strong>切换版本：</strong></p>
+<p>切换版本之前，我们需要使用<code>nvm install</code>安装至少两个版本；</p>
+<p>ps: 不能在使用nvm安装的Node.js版本与其他安装方式安装的Node.js版本之间切换。</p>
+<p>然后，使用<code>nvm use v8.0.0</code>来切换到8.0.0版本的Node.js。</p>
+<p><strong>查看当前已经安装的版本：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm ls</span><br></pre></td></tr></table></figure></p>
+<p><strong>查看正在使用的版本：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm current</span><br></pre></td></tr></table></figure></p>
+<p><strong>设置默认版本：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm <span class="built_in">alias</span> default x.x.x</span><br></pre></td></tr></table></figure></p>
+<p><strong>以指定版本执行脚本：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm run 6.2.0 app.js</span><br></pre></td></tr></table></figure></p>
+<p><strong>卸载nvm：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/.nvm</span><br></pre></td></tr></table></figure></p>
+<p>PS:关掉终端，或者在其他的终端tab中使用nvm的话，如果出现错误提示：<code>command not found: nvm</code>的话，使用<code>source ~/.zshrc</code>或者<code>source ~/.profile</code>即可。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装nvm"><span class="toc-number">1.</span> <span class="toc-text">安装nvm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nvm命令"><span class="toc-number">2.</span> <span class="toc-text">nvm命令</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/06/11/mac-install-nvm/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/06/11/mac-install-nvm/&text=mac下nvm安装与使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/06/11/mac-install-nvm/&is_video=false&description=mac下nvm安装与使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mac下nvm安装与使用&body=Check out this article: http://yoursite.com/2017/06/11/mac-install-nvm/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/06/11/mac-install-nvm/&title=mac下nvm安装与使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/06/11/mac-install-nvm/&name=mac下nvm安装与使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

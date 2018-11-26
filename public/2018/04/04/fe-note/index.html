@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="探索知识的过程总是让人兴奋的，尤其是当你发现你所了解的知识对于接受新的知识有帮助，并且他们之间是有关联的时候。 GZIP（这里仅仅针对web前端中的应用，不讨论其算法实现） gzip在前端是很常见的一种压缩（编码）方式，同时也是效果比较显著的一种网页优化手段。 那么，服务端是怎么知道浏览器支持gzip压缩呢？浏览器是怎么知道服务端传输文件的是gzip压缩过的呢？ 下面这张图是一个使用了gzip压缩">
+<meta name="keywords" content="fe,note">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端笔记（持续更新）">
+<meta property="og:url" content="http://yoursite.com/2018/04/04/fe-note/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="探索知识的过程总是让人兴奋的，尤其是当你发现你所了解的知识对于接受新的知识有帮助，并且他们之间是有关联的时候。 GZIP（这里仅仅针对web前端中的应用，不讨论其算法实现） gzip在前端是很常见的一种压缩（编码）方式，同时也是效果比较显著的一种网页优化手段。 那么，服务端是怎么知道浏览器支持gzip压缩呢？浏览器是怎么知道服务端传输文件的是gzip压缩过的呢？ 下面这张图是一个使用了gzip压缩">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/font-end-notes/gzip.png">
+<meta property="og:updated_time" content="2018-11-26T13:09:30.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端笔记（持续更新）">
+<meta name="twitter:description" content="探索知识的过程总是让人兴奋的，尤其是当你发现你所了解的知识对于接受新的知识有帮助，并且他们之间是有关联的时候。 GZIP（这里仅仅针对web前端中的应用，不讨论其算法实现） gzip在前端是很常见的一种压缩（编码）方式，同时也是效果比较显著的一种网页优化手段。 那么，服务端是怎么知道浏览器支持gzip压缩呢？浏览器是怎么知道服务端传输文件的是gzip压缩过的呢？ 下面这张图是一个使用了gzip压缩">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/font-end-notes/gzip.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>前端笔记（持续更新）</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/04/27/fe-question/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/02/28/docker-mongo/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/04/fe-note/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/04/fe-note/&text=前端笔记（持续更新）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/04/fe-note/&is_video=false&description=前端笔记（持续更新）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端笔记（持续更新）&body=Check out this article: http://yoursite.com/2018/04/04/fe-note/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/04/fe-note/&name=前端笔记（持续更新）&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GZIP"><span class="toc-number">1.</span> <span class="toc-text">GZIP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gzip的两种常用方式："><span class="toc-number">1.1.</span> <span class="toc-text">gzip的两种常用方式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gzip压缩级别："><span class="toc-number">1.2.</span> <span class="toc-text">gzip压缩级别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不推荐使用gzip压缩图片："><span class="toc-number">1.3.</span> <span class="toc-text">不推荐使用gzip压缩图片：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Base64"><span class="toc-number">2.</span> <span class="toc-text">Base64</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点："><span class="toc-number">2.1.</span> <span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点："><span class="toc-number">2.2.</span> <span class="toc-text">缺点：</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        前端笔记（持续更新）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-04T12:39:54.000Z" itemprop="datePublished">2018-04-04</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/fe/">fe</a>, <a class="tag-link" href="/tags/note/">note</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>探索知识的过程总是让人兴奋的，尤其是当你发现你所了解的知识对于接受新的知识有帮助，并且他们之间是有关联的时候。</p>
+<h2 id="GZIP"><a href="#GZIP" class="headerlink" title="GZIP"></a>GZIP</h2><p>（这里仅仅针对web前端中的应用，不讨论其算法实现）</p>
+<p>gzip在前端是很常见的一种压缩（编码）方式，同时也是效果比较显著的一种网页优化手段。</p>
+<p>那么，服务端是怎么知道浏览器支持gzip压缩呢？浏览器是怎么知道服务端传输文件的是gzip压缩过的呢？</p>
+<p>下面这张图是一个使用了gzip压缩传输的一个http请求：</p>
+<p><img src="//web-site-files.ashshen.cc/font-end-notes/gzip.png" alt="gzip-console"></p>
+<p><strong>图中的两个箭头标注了两个字段</strong></p>
+<p>一个是请求头（<code>Request Headers</code>）中的<code>Accept-Encoding</code>字段</p>
+<p>另一个是响应头（<code>Response Headers</code>）中的<code>Content-Encoding</code>字段</p>
+<p>这两个字段分别表示的是浏览器能够支持的编码方式、以及服务器返回的内容编码的方式。通过这两个字段，客户端与服务端直接关于http请求的编码也就能够统一了。</p>
+<h3 id="gzip的两种常用方式："><a href="#gzip的两种常用方式：" class="headerlink" title="gzip的两种常用方式："></a>gzip的两种常用方式：</h3><ol>
+<li><p>服务端在收到客户端发起的http请求后，对（静态）资源进行压缩，然后传输给客户端。（当然，服务端会使用缓存来减少服务端压力）</p>
+</li>
+<li><p>服务器直接存储压缩后的.gz文件，当服务端收到http请求（eg: index.html）时，返回对应的压缩文件（index.html.gz）。（这种场景通常使用于vue、react等spa框架构建的项目）</p>
+</li>
+</ol>
+<h3 id="gzip压缩级别："><a href="#gzip压缩级别：" class="headerlink" title="gzip压缩级别："></a>gzip压缩级别：</h3><p>gzip压缩是有级别的（1-9）。级别越高压缩强度越大，同时消耗的cpu资源也越高。</p>
+<p>以下是nginx中开启gzip的部分配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gzip on; <span class="comment"># 打开gzip压缩</span></span><br><span class="line">gzip_http_version 1.0; <span class="comment"># 启用gzip的最低http版本</span></span><br><span class="line">gzip_disable <span class="string">"MSIE [1-6]."</span>; <span class="comment"># 禁用gzip的条件，这里表示ie6以下不使用gzip（兼容性）</span></span><br><span class="line">gzip_types text/plain application/javascript text/css text/javascript application/x-httpd-php; <span class="comment"># 使用gzip压缩的静态资源类型 </span></span><br><span class="line">gzip_min_length 1000; <span class="comment"># 小于1000b的文件不使用gzip压缩</span></span><br><span class="line">gzip_proxied expired no-cache no-store private auth; <span class="comment"># 反向代理相关</span></span><br></pre></td></tr></table></figure>
+<h3 id="不推荐使用gzip压缩图片："><a href="#不推荐使用gzip压缩图片：" class="headerlink" title="不推荐使用gzip压缩图片："></a>不推荐使用gzip压缩图片：</h3><p>像jpg、png之类格式的图片，本身就有针对文件体积做压缩处理，所以使用gzip的意义不大，反而浪费服务器资源。</p>
+<p><em>PS</em>：页面性能优化中，我们经常提到可以使用Base64来代替图片url，从而减少http请求的数量，达到优化的目的。但是，Base64也不是万能的，同一张图片的Base64的体积是要远大于jpg、png这样的格式的。但是嘛！！！如果是将Base64编码后的图片再进行gzip压缩的话，得到的图片大小与jpg、png的体积是没有多大差别的。</p>
+<h2 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h2><p>Base64是一种基于64个可打印字符来表示二进制数据的表示方法（维基百科）。简单来说就是使用64个字符来表达0-63从而表示二进制数据（2^6 = 64）。</p>
+<p>Base64不仅仅可以用来表示图片，它还可以用来字体文件（.ttf等），也有一些网页应用的数据请求返回也是用Base64格式。</p>
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><p>从前端来讲，Base64最大的优点应该算是使用它来替代图片url或者字体文件从而减少http请求数量了。</p>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><p>同样，Base64的缺点也十分明显：</p>
+<ol>
+<li><p>体积问题</p>
+</li>
+<li><p>缓存问题</p>
+</li>
+<li><p>性能问题</p>
+</li>
+</ol>
+<p><em>体积问题：</em></p>
+<p>Base64表示的图片体积相较于jpg、png格式的同一图片的体积会要大很多。（当然，这个问题可以通过Gzip压缩来解决）</p>
+<p><em>缓存问题：</em></p>
+<p>减少http请求就意味着合并，合并也就意味着当一个部分发生变化时，整体资源都需要重新加载。打一个很简单的比方：CSS文件a中使用了base64格式的图片，那么，当a文件中的任意代码发生变化（哪怕只是一个字母）时，整个a文件都要重新从服务端获取。这也就意味着你无法单独缓存a中的图片以及字体这一类非频繁变化的资源。</p>
+<p><em>性能问题：</em></p>
+<p>首先我们要知道，当浏览器解析渲染一个网页时：图片资源（url）是不会阻塞浏览器解析渲染的，但是css则会。也就是说：<em>当你的css文件没有加载完成前，浏览器是无法构造渲染树的（因为无法生成CSSOM树）</em>。所以，如果你在css中使用了Base64的样式（background-image、@font-face等）的时候，这些资源将会影响你的页面加载。</p>
+<p>PS：假设你的CSS文件中有使用媒体查询来根据不同的分辨率使用不同的图片作为background-image。那么，如果你使用的是url的图片资源，那么浏览器只会根据实际情况下载其中的一个（浏览器自身优化）；但是，如果你使用的是Base64格式的图片，浏览器则会<strong>下载全部</strong>。</p>
+<p>举个栗子：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.section-body</span> &#123;</span><br><span class="line">  background-image: url(https://www.xxx.com/.../image-normal.png); // 方案1： 使用url</span><br><span class="line">  background-image: url('data:image/png;base64,...') // 方案2：使用base64</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">800px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.section-body</span> &#123;</span><br><span class="line">    background-image: url(https://www.xxx.com/.../image-middle.png); // 方案1： 使用url</span><br><span class="line">    background-image: url('data:image/png;base64,...') // 方案2：使用base64</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">600px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.section-body</span> &#123;</span><br><span class="line">    background-image: url(https://www.xxx.com/.../image-small.png); // 方案1： 使用url</span><br><span class="line">    background-image: url('data:image/png;base64,...') // 方案2：使用base64</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#### 当屏幕宽度为500<span class="selector-tag">px</span>时，方案1仅会下载<span class="selector-tag">image-small</span><span class="selector-class">.png</span>，而方案2无论宽度大小，都会下载3张图片的<span class="selector-tag">base64</span>数据</span><br></pre></td></tr></table></figure></p>
+<p>总的来说，使用Base64来表示静态资源的时候，我们需要找到它的优缺点之间的平衡点（比如：小图片、图片验证码可以考虑使用Base64）。并没有什么方案是绝对最优的，因地制宜才是关键。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GZIP"><span class="toc-number">1.</span> <span class="toc-text">GZIP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gzip的两种常用方式："><span class="toc-number">1.1.</span> <span class="toc-text">gzip的两种常用方式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gzip压缩级别："><span class="toc-number">1.2.</span> <span class="toc-text">gzip压缩级别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不推荐使用gzip压缩图片："><span class="toc-number">1.3.</span> <span class="toc-text">不推荐使用gzip压缩图片：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Base64"><span class="toc-number">2.</span> <span class="toc-text">Base64</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点："><span class="toc-number">2.1.</span> <span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点："><span class="toc-number">2.2.</span> <span class="toc-text">缺点：</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/04/fe-note/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/04/fe-note/&text=前端笔记（持续更新）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/04/fe-note/&is_video=false&description=前端笔记（持续更新）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端笔记（持续更新）&body=Check out this article: http://yoursite.com/2018/04/04/fe-note/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/04/fe-note/&title=前端笔记（持续更新）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/04/fe-note/&name=前端笔记（持续更新）&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

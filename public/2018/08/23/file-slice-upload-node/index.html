@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="单请求文件上传对于文件上传，我们通常的做法是使用单个请求来上传所有的文件内容，这样的做法在上传较小文件时比较适用。但是，当上传的文件达到百兆甚至GB级别时，使用单请求来上传文件就会遇到一些问题。 首先，请求超时时间和请求体大小的问题。我们通常需要在服务器给请求统一设置更大的请求体大小限值和超时时间限值，这对其他请求和服务器安全是十分不友好的。 再者，用户上传过程中的网络波动也容易造成大文件的上传失">
+<meta name="keywords" content="nodejs,upload,分片上传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件分片上传——Node.js部分">
+<meta property="og:url" content="http://yoursite.com/2018/08/23/file-slice-upload-node/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="单请求文件上传对于文件上传，我们通常的做法是使用单个请求来上传所有的文件内容，这样的做法在上传较小文件时比较适用。但是，当上传的文件达到百兆甚至GB级别时，使用单请求来上传文件就会遇到一些问题。 首先，请求超时时间和请求体大小的问题。我们通常需要在服务器给请求统一设置更大的请求体大小限值和超时时间限值，这对其他请求和服务器安全是十分不友好的。 再者，用户上传过程中的网络波动也容易造成大文件的上传失">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/slice-file-upload/upload-example.png">
+<meta property="og:updated_time" content="2018-11-26T13:09:47.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件分片上传——Node.js部分">
+<meta name="twitter:description" content="单请求文件上传对于文件上传，我们通常的做法是使用单个请求来上传所有的文件内容，这样的做法在上传较小文件时比较适用。但是，当上传的文件达到百兆甚至GB级别时，使用单请求来上传文件就会遇到一些问题。 首先，请求超时时间和请求体大小的问题。我们通常需要在服务器给请求统一设置更大的请求体大小限值和超时时间限值，这对其他请求和服务器安全是十分不友好的。 再者，用户上传过程中的网络波动也容易造成大文件的上传失">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/slice-file-upload/upload-example.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>文件分片上传——Node.js部分</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/09/12/tools/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/04/27/fe-question/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&text=文件分片上传——Node.js部分"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&is_video=false&description=文件分片上传——Node.js部分"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件分片上传——Node.js部分&body=Check out this article: http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&name=文件分片上传——Node.js部分&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单请求文件上传"><span class="toc-number">1.</span> <span class="toc-text">单请求文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分片上传原理"><span class="toc-number">2.</span> <span class="toc-text">分片上传原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口字段约定"><span class="toc-number">3.</span> <span class="toc-text">接口字段约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js实现"><span class="toc-number">4.</span> <span class="toc-text">Node.js实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于断点续传"><span class="toc-number">4.1.</span> <span class="toc-text">关于断点续传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传部分源码（express）"><span class="toc-number">4.2.</span> <span class="toc-text">上传部分源码（express）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不足之处："><span class="toc-number">4.3.</span> <span class="toc-text">不足之处：</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        文件分片上传——Node.js部分
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-08-23T12:52:33.000Z" itemprop="datePublished">2018-08-23</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/nodejs/">nodejs</a>, <a class="tag-link" href="/tags/upload/">upload</a>, <a class="tag-link" href="/tags/分片上传/">分片上传</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="单请求文件上传"><a href="#单请求文件上传" class="headerlink" title="单请求文件上传"></a>单请求文件上传</h2><p>对于文件上传，我们通常的做法是使用单个请求来上传所有的文件内容，这样的做法在上传较小文件时比较适用。但是，当上传的文件达到百兆甚至GB级别时，使用单请求来上传文件就会遇到一些问题。</p>
+<p>首先，请求超时时间和请求体大小的问题。我们通常需要在服务器给请求统一设置更大的请求体大小限值和超时时间限值，这对其他请求和服务器安全是十分不友好的。</p>
+<p>再者，用户上传过程中的网络波动也容易造成大文件的上传失败，而单请求上传文件是不具备断点续传的条件的，一次上传失败后第二次仍然需要从头开始上传，比较反人类。</p>
+<p>所以才出现了文件分片上传的概念。</p>
+<h2 id="分片上传原理"><a href="#分片上传原理" class="headerlink" title="分片上传原理"></a>分片上传原理</h2><p>其实文件分片上传的原理很好理解，用一句话来说就是：<strong>将大文件分割成固定长度的小块，然后挨个上传，后端进行拼接还原</strong>。</p>
+<p>那么，具体实现时，需要注意哪些细节呢？</p>
+<ol>
+<li><p>服务端需要知道当前得到的片是谁上传的哪个文件。</p>
+</li>
+<li><p>服务端需要知道当前得到的片是第几片</p>
+</li>
+<li><p>服务端需要知道上传的文件类型是什么（后缀）</p>
+</li>
+<li><p>浏览器需要知道是否之前上传过？如果是，上传到了多少？接下来应该传什么给服务端</p>
+</li>
+<li><p>…</p>
+</li>
+</ol>
+<p>大概就这么多吧。</p>
+<p>前端文件分片的方式采用HTML5的File API获取文件信息，并且使用form-data的形式上传给后端，在这里不做展开。</p>
+<p>本文主要介绍如何使用Node.js实现文件分片上传的接收与合并。</p>
+<p>demo地址：<a href="https://github.com/Ash-sc/slice-file-upload-server" target="_blank" rel="noopener">https://github.com/Ash-sc/slice-file-upload-server</a></p>
+<h2 id="接口字段约定"><a href="#接口字段约定" class="headerlink" title="接口字段约定"></a>接口字段约定</h2><p>根据上面提到的细节，我们约定：前端在文件分片上传过程中，除了文件分片的blob数据之外，还需要传给后端以下字段。</p>
+<p>key、currentChunk、totalChunk、offset、chunkSize、filename</p>
+<p>首先是key。很好理解，每一个文件都应该有一个单独的key，服务端用以区分当前上传的片是属于哪个文件的，我采用的办法是第0个片的md5值+文件的size。</p>
+<p>然后是currentChunk和totalChunk，表示当前上传的是第几片和总共的片数，类似于Array的index和length。</p>
+<p>offset和chunkSize表示当前片的偏移量以及片大小，比如我每片大小为200,000b的话，那么第2片(第三个请求，因为我第一个请求是第0片)的offset和chunkSize分别为400,000、200,000。</p>
+<p>filename 服务端用来获取文件后缀。</p>
+<p>然后才是带有blob数据file字段。</p>
+<p>控制台示例大致如下：</p>
+<p><img src="//web-site-files.ashshen.cc/slice-file-upload/upload-example.png" alt="console-eg"></p>
+<h2 id="Node-js实现"><a href="#Node-js实现" class="headerlink" title="Node.js实现"></a>Node.js实现</h2><p>Node.js部分我使用的是express框架，当然你也可以使用koa2，原理都是一致的。</p>
+<p>express下可以使用connect-multiparty作为中间件，然后使用req.body获取form-data信息。</p>
+<p>大致流程：</p>
+<ol>
+<li><p>服务端接收到文件上传请求，并解析其参数</p>
+</li>
+<li><p>创建一个空文件</p>
+</li>
+<li><p>若发现currentChunk = 0 &amp; totalChunk = 1，表示只有一个片，直接读取上传的文件buffer然后存入文件中，返回url至前端</p>
+</li>
+<li><p>若发现有多个片，则根据req参数向文件中固定位置写入buffer</p>
+</li>
+<li><p>直到最后一个一个片写入完毕，返回url至前端</p>
+</li>
+</ol>
+<p>在这里，文件读写采用的均是Node自带的文件系统fs，关于fs文件操作可以看<a href="https://www.html-js.cn/details/E1CJFSes.html" target="_blank" rel="noopener">这篇文章</a>。</p>
+<h3 id="关于断点续传"><a href="#关于断点续传" class="headerlink" title="关于断点续传"></a>关于断点续传</h3><p>断点续传的原理也很简单。</p>
+<p>服务端只需要在每次收到前端请求时，根据前端传入的key去数据库中查找，如果没有找到对应的数据，则在数据库中存入一条数据（key和currentChunk）。如果有找到数据，则返回这条数据的currentChunk+1给前端，并且更新这条记录的currentChunk。</p>
+<p>前端根据后端返回的currentChunk，重新截取新的片给后端。</p>
+<p>后端收到最后一个文件片信息后，删除数据库中关于该文件key的记录。</p>
+<p>demo中我使用的是lowdb，当然你也可以用其他任何数据库。</p>
+<h3 id="上传部分源码（express）"><a href="#上传部分源码（express）" class="headerlink" title="上传部分源码（express）"></a>上传部分源码（express）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">router.post(<span class="string">'/upload'</span>, multipartyMiddleware, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    key,</span><br><span class="line">    currentChunk,</span><br><span class="line">    totalChunk,</span><br><span class="line">    filename,</span><br><span class="line">    chunkSize</span><br><span class="line">  &#125; = req.body</span><br><span class="line">  <span class="keyword">const</span> tmpBuffer = fs.readFileSync(req.files.file.path) <span class="comment">// 上传文件的buffer信息</span></span><br><span class="line">  <span class="keyword">const</span> distFileName = key + <span class="string">'.'</span> + filename.split(<span class="string">'.'</span>).pop() <span class="comment">// 生成新文件名称</span></span><br><span class="line">  <span class="keyword">const</span> downloadUrl = config.serverName + <span class="string">':'</span> + config.port + <span class="string">'/static/'</span> + distFileName <span class="comment">// 下载地址</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 文件只有一片，直接保存</span></span><br><span class="line">  <span class="keyword">if</span> (currentChunk === <span class="string">'0'</span> &amp;&amp; totalChunk === <span class="string">'1'</span>) &#123;</span><br><span class="line">    fs.open(path.join(__dirname, <span class="string">'../static/'</span> + distFileName), <span class="string">'a'</span>, (err, fd) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) <span class="built_in">console</span>.error(err)</span><br><span class="line">      fs.writeSync(fd, tmpBuffer, <span class="number">0</span>, tmpBuffer.length, currentChunk * chunkSize)</span><br><span class="line">      fs.closeSync(fd)</span><br><span class="line">      res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">        errno: <span class="number">0</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">          path: downloadUrl</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> nextIndex = <span class="number">0</span> <span class="comment">// 当前已经保存的片</span></span><br><span class="line">    <span class="keyword">const</span> savedFileInfo = db.getFileInfo(key) <span class="comment">// 查询数据库中是否已经有记录</span></span><br><span class="line">    <span class="keyword">if</span> (savedFileInfo) nextIndex = savedFileInfo.savedIndex + <span class="number">1</span> <span class="comment">// 有记录则更新变量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      fs.open(path.join(__dirname, <span class="string">'../static/'</span> + distFileName), <span class="string">'a'</span>, (err, fd) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="built_in">console</span>.error(err)</span><br><span class="line">        fs.writeSync(fd, tmpBuffer, <span class="number">0</span>, tmpBuffer.length, currentChunk * chunkSize)</span><br><span class="line">        fs.closeSync(fd)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">parseInt</span>(currentChunk, <span class="number">10</span>) + <span class="number">1</span> === <span class="built_in">parseInt</span>(totalChunk, <span class="number">10</span>)) &#123;</span><br><span class="line">          db.deleteFileInfo(key) <span class="comment">// 全部存取完毕 删除数据库信息</span></span><br><span class="line">          res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">            errno: <span class="number">0</span>,</span><br><span class="line">            data: &#123;</span><br><span class="line">              path: downloadUrl</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          db.saveFileInfo(key, <span class="built_in">parseInt</span>(currentChunk, <span class="number">10</span>)) <span class="comment">// 更新数据库信息</span></span><br><span class="line">          res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">            errno: <span class="number">0</span>,</span><br><span class="line">            data: nextIndex ? &#123;</span><br><span class="line">              nextIndex: nextIndex</span><br><span class="line">            &#125; : &#123;&#125;</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">        errno: <span class="number">1</span>,</span><br><span class="line">        errorInfo: err</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="不足之处："><a href="#不足之处：" class="headerlink" title="不足之处："></a>不足之处：</h3><ol>
+<li><p>对于同一个文件，两个用户同时上传时应该互不干涉，所以，在实际应用中生成key的方式应该结合用户唯一的标识或者由后端接口生成给前端，不过后端接口生成给前端的话则难以实现刷新页面后也能断点续传。</p>
+</li>
+<li><p>断点续传的逻辑应该更加完善，比如，用户断点续传时的第一个请求中currentChunk仍然是0，此时上传成功后后端返回新的currentChunk不应该把数据库中currentChunk更新成0，因为如果下一个请求挂了，那么用户就无法再断点续传了。</p>
+</li>
+</ol>
+<p>demo只是为了介绍上传原理，对于其中的漏洞不做深究。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单请求文件上传"><span class="toc-number">1.</span> <span class="toc-text">单请求文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分片上传原理"><span class="toc-number">2.</span> <span class="toc-text">分片上传原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口字段约定"><span class="toc-number">3.</span> <span class="toc-text">接口字段约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js实现"><span class="toc-number">4.</span> <span class="toc-text">Node.js实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于断点续传"><span class="toc-number">4.1.</span> <span class="toc-text">关于断点续传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传部分源码（express）"><span class="toc-number">4.2.</span> <span class="toc-text">上传部分源码（express）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不足之处："><span class="toc-number">4.3.</span> <span class="toc-text">不足之处：</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&text=文件分片上传——Node.js部分"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&is_video=false&description=文件分片上传——Node.js部分"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件分片上传——Node.js部分&body=Check out this article: http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&name=文件分片上传——Node.js部分&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

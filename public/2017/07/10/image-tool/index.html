@@ -16,7 +16,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/origin-image.jpg">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/download.png">
-<meta property="og:updated_time" content="2018-11-26T11:09:13.207Z">
+<meta property="og:updated_time" content="2018-11-26T13:11:05.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片马赛克小工具">
 <meta name="twitter:description" content="前段时间聊微信的时候，看到微信群里有个童鞋的头像变成了自己的自拍并且打上了马赛克（(╯-_-)╯~╩╩  绝对不是我撸多了视力下降了）。轻度模糊的整体马赛克还挺有意思的，也具有一定的辨识度，于是我就想着：马赛克这玩意儿，前端也可以做的嘛（canvas），所以就试着写了一个图片马赛克小工具 由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。 demo地址">
@@ -76,7 +76,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2018/11/26/hello-world/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/08/17/https/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2017/07/10/php-fpm-nginx/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -149,9 +149,9 @@
   <div class="content" itemprop="articleBody">
     <p>前段时间聊微信的时候，看到微信群里有个童鞋的头像变成了自己的自拍并且打上了马赛克（(╯-_-)╯~╩╩  绝对不是我撸多了视力下降了）。轻度模糊的整体马赛克还挺有意思的，也具有一定的辨识度，于是我就想着：马赛克这玩意儿，前端也可以做的嘛（canvas），所以就试着写了一个图片马赛克小工具</p>
 <p>由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。</p>
-<p>demo地址：<a href="http://web-site-files.ashshen.cc/blog/pages/index.html" target="_blank" rel="noopener">http://web-site-files.ashshen.cc/blog/pages/index.html</a></p>
+<p>demo地址：<a href="//web-site-files.ashshen.cc/blog/pages/index.html">http://web-site-files.ashshen.cc/blog/pages/index.html</a></p>
 <p>小工具效果展示：</p>
-<p><img src="http://web-site-files.ashshen.cc/blog/origin-image.jpg" style="width:49%;display: inline-block;"><img src="http://web-site-files.ashshen.cc/blog/download.png" style="width:49%;display: inline-block;"></p>
+<p><img src="//web-site-files.ashshen.cc/blog/origin-image.jpg" style="width:49%;display: inline-block;"><img src="//web-site-files.ashshen.cc/blog/download.png" style="width:49%;display: inline-block;"></p>
 <p>实现步骤：</p>
 <ol>
 <li><p>上传图片</p>
@@ -171,6 +171,13 @@
 <p><em>然后</em>，文件上传完毕之后就是一些错误判断了，比如：使用者没有选择文件，选择了其他类型的文件。是的，即使设置了accept，使用者也是可以点击文件选择下面的选项去选择其他文件的，只是选择完之后，相当于没有选择。不过这一部分的错误提示是不能少的。</p>
 <p>错误提示之后，就是图片文件的提取了，这里需要用到FileReader()，将选择的图片转换成DataURL，并使用FileReader自带的API：onload处理提取到DataURL之后的相关逻辑（创建img节点，并赋值src属性，然后使用appendChild将节点添加到dom指定位置，然后使用close-pixelate将img转化成canvas）。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">reader.readAsDataURL(files[<span class="number">0</span>]);</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>第三步</em>，上传文件 → 提取图片DataURL → 添加img到dom中 → 转化成带马赛克的canvas，这几步都是在选择完文件之后需要顺序执行的，所以我全部把它写在了一个函数中，需要在使用者上传了图片之后调用。</p>
+<p>另外，还需要添加一个输入框让使用者自行选择马赛克颗粒的大小，以及一个文件导出格式的单选按钮，并监听对应的触发事件。</p>
+<p><em>第四步</em>，处理完这些之后，剩下的就是图片导出下载的功能了。</p>
+<p>  一，从canvas中提取出DataURL，这个可以直接用canvas自带的API中的toDataURL()，参数为图片的格式，eg:”image/png”。</p>
+<p>  二，将获取到的DataURL赋值给页面中已经准备好的a元素（a元素设置download属性可以用于下载），然后使用js模拟a元素的点击事件实现下载功能。</p>
+<p>PS：由于使用者上传的文件大小是不确定的，但是页面中展示图片效果的区域是固定大小的，而close-pixelate插件也是按照图片大小生成1：1比例的canvas的，所以在图片上传完成之后，我需要先获取图片的大小，并与展示区域的大小进行比较，并计算缩放的比例，然后使用css中的scale()对canvas进行缩放和平移。</p>
+<p>图片马赛克小工具完成，gitHub地址：<a href="https://github.com/Ash-sc/mosaic-image" target="_blank" rel="noopener">https://github.com/Ash-sc/mosaic-image</a>。</p>
 
   </div>
 </article>

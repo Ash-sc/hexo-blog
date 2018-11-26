@@ -14,15 +14,15 @@
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="前言虽然用前端语言写桌面应用已经不是什么稀奇的事情了，现有的工具也有Electron、heX、NW.js等，但是用HTML、CSS和JS来构建一个自己的桌面应用还是挺让人兴奋的。 于是我也用Electron来封装了一下我的在线小说阅读器，GitHub地址。 关于ElectronElectron内置了chromium内核以及Node，这意味着我们可以直接使用在浏览器端运行良好的代码直接构建一个桌面应">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ashshen.cc/wp-content/uploads/2017/07/electron-error.png">
-<meta property="og:image" content="http://ashshen.cc/wp-content/uploads/2017/07/Screen-Shot-2017-07-05-at-12.33.58-PM.png">
-<meta property="og:image" content="http://ashshen.cc/wp-content/uploads/2017/07/electron-request-error.png">
-<meta property="og:image" content="http://ashshen.cc/wp-content/uploads/2017/07/electron-success.png">
-<meta property="og:updated_time" content="2018-11-26T10:17:37.744Z">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/react-online-reader/electron-error.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/react-online-reader/dev-success.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/react-online-reader/electron-request-error.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/react-online-reader/electron-success.png">
+<meta property="og:updated_time" content="2018-11-26T13:09:26.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Electron构建React桌面应用">
 <meta name="twitter:description" content="前言虽然用前端语言写桌面应用已经不是什么稀奇的事情了，现有的工具也有Electron、heX、NW.js等，但是用HTML、CSS和JS来构建一个自己的桌面应用还是挺让人兴奋的。 于是我也用Electron来封装了一下我的在线小说阅读器，GitHub地址。 关于ElectronElectron内置了chromium内核以及Node，这意味着我们可以直接使用在浏览器端运行良好的代码直接构建一个桌面应">
-<meta name="twitter:image" content="http://ashshen.cc/wp-content/uploads/2017/07/electron-error.png">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/react-online-reader/electron-error.png">
     
     
         
@@ -160,17 +160,17 @@
 <p>然后我们按照教程修改package.json中的main和script中的start，并使用npm安装electron。</p>
 <p>（为什么要配置script的start：配置了script的start之后，我们可以直接用npm start或者npm run XXX来调用electron，否则的话，想要直接在shell中使用electron等命令的话，需要全局安装electron并配合环境变量，否则就只能用./node_modules/.bin/electron，这样太过麻烦）</p>
 <p>安装完成后shell中执行”npm start”，发现程序弹框正常，但是页面的中的内容不见了，打开控制台发现：</p>
-<p><img src="http://ashshen.cc/wp-content/uploads/2017/07/electron-error.png" alt="dev-error"></p>
+<p><img src="//web-site-files.ashshen.cc/blog/react-online-reader/electron-error.png" alt="dev-error"></p>
 <p>由于我在React项目中，对路由进行了分块打包，优化页面加载速度 ( <a href="/2017/04/06/react-optimization/">具体看这里</a> ) 。而在Electron应用中，会发生分块文件路径引用错误，导致页面不能正常加载。</p>
 <p>打开Electron控制台中的Network，发现引用的路径变成了file:///1.app.chunk.js，因此推测是webpack打包时，bundle.js中引用分块的js文件使用的路径在Electron中解析会出现问题。</p>
 <p>好在这个路由分块的优化是为了解决由于用户网络差异导致bundle.js过大的情况下页面加载需要很长时间，而使用Electron打包后的js文件都在本地，所以可以不从bundle.js中拆分出chunk。</p>
 <p>于是，恢复react-router的component方法为直接import，然后重新打包，再次执行npm start。</p>
-<p><img src="http://ashshen.cc/wp-content/uploads/2017/07/Screen-Shot-2017-07-05-at-12.33.58-PM.png" alt="dev-success"></p>
+<p><img src="//web-site-files.ashshen.cc/blog/react-online-reader/dev-success.png" alt="dev-success"></p>
 <p>现在界面已经可以正常显示了，但是这仅仅是静态页面。</p>
 <p>显然，我们的目标不只是静态页面的展示，我们需要与服务器进行数据交互。试着在搜索框中输入一些搜索关键字然后搜索：</p>
-<p><img src="http://ashshen.cc/wp-content/uploads/2017/07/electron-request-error.png" alt="search-error"></p>
+<p><img src="//web-site-files.ashshen.cc/blog/react-online-reader/electron-request-error.png" alt="search-error"></p>
 <p>从控制台中，我发现：还是之前js文件那个问题，相对路径的资源和请求在Electron下被引用成了”file://”，怎么解决呢？既然相对路径解析会出错，那么我们换成绝对路径呢？于是我试着将”/src/js/utils/api/api.js”中将后端请求的地址改成了绝对路径”<a href="http://localhost:4396″，然后重新编译、运行：" target="_blank" rel="noopener">http://localhost:4396″，然后重新编译、运行：</a></p>
-<p><img src="http://ashshen.cc/wp-content/uploads/2017/07/electron-success.png" alt="search-success"></p>
+<p><img src="//web-site-files.ashshen.cc/blog/react-online-reader/electron-success.png" alt="search-success"></p>
 <p>发现请求是成功的，也没有发生在浏览器中会发生的跨域行为，看来是Electron本身对此做了处理。</p>
 <p>OK，到这里，一个桌面React应用已经成功运行起来了，接下来要做的就是将React应用封装成可以直接在操作系统上运行的文件。</p>
 <h2 id="打包可运行的Electron应用"><a href="#打包可运行的Electron应用" class="headerlink" title="打包可运行的Electron应用"></a>打包可运行的Electron应用</h2><p>打包的话，我这边使用的是<a href="https://github.com/electron-userland/electron-packager" target="_blank" rel="noopener">electron-packager</a>这个npm包，安装了之后，只需要在shell中敲一行命令就行了。同样，为了避免每次都敲太过复杂的命令或者全局安装electron-packager，我们把electron-packager的命令配置到package.json的script中去。</p>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。  那么，它们之间又有什么区别和关系呢？  Node.js中的模块又是如何加载的呢？  Webpack打包后的模块又是如何加载的呢？   本文将针对这几个问题做一些简单的梳理和介绍。 AMD ( asynchronous module definition )从字面的意思来理解，AMD的意思是异步">
+<meta name="keywords" content="module">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端模块加载浅析">
+<meta property="og:url" content="http://yoursite.com/2018/11/26/module-in-js/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。  那么，它们之间又有什么区别和关系呢？  Node.js中的模块又是如何加载的呢？  Webpack打包后的模块又是如何加载的呢？   本文将针对这几个问题做一些简单的梳理和介绍。 AMD ( asynchronous module definition )从字面的意思来理解，AMD的意思是异步">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-console.png">
+<meta property="og:updated_time" content="2018-11-26T13:11:18.412Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端模块加载浅析">
+<meta name="twitter:description" content="提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。  那么，它们之间又有什么区别和关系呢？  Node.js中的模块又是如何加载的呢？  Webpack打包后的模块又是如何加载的呢？   本文将针对这几个问题做一些简单的梳理和介绍。 AMD ( asynchronous module definition )从字面的意思来理解，AMD的意思是异步">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-console.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>前端模块加载浅析</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/11/26/hello-world/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/11/26/module-in-js/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/11/26/module-in-js/&text=前端模块加载浅析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/11/26/module-in-js/&is_video=false&description=前端模块加载浅析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端模块加载浅析&body=Check out this article: http://yoursite.com/2018/11/26/module-in-js/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/11/26/module-in-js/&name=前端模块加载浅析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AMD-asynchronous-module-definition"><span class="toc-number">1.</span> <span class="toc-text">AMD ( asynchronous module definition )</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        前端模块加载浅析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-11-26T13:03:52.000Z" itemprop="datePublished">2018-11-26</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/module/">module</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。</p>
+<ol>
+<li><p>那么，它们之间又有什么区别和关系呢？</p>
+</li>
+<li><p>Node.js中的模块又是如何加载的呢？</p>
+</li>
+<li><p>Webpack打包后的模块又是如何加载的呢？</p>
+</li>
+</ol>
+<p>本文将针对这几个问题做一些简单的梳理和介绍。</p>
+<h2 id="AMD-asynchronous-module-definition"><a href="#AMD-asynchronous-module-definition" class="headerlink" title="AMD ( asynchronous module definition )"></a>AMD ( asynchronous module definition )</h2><p>从字面的意思来理解，AMD的意思是异步模块加载规范，它是为浏览器设计的一套规范。</p>
+<p>通过require.js来了解AMD规范是一个比较不错的方式。当然，这里你并不需要深入理解require.js，我们只是借用了一些它的API。</p>
+<p>让我们来写一个简单的 Demo—— 在页面中调用一个add函数和一个isUrl函数。</p>
+<p>目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- root folder</span><br><span class="line">|-- index.html (调用 main.js，并执行 add 以及 isUrl 两个方法)</span><br><span class="line">|-- main.js (依赖 calculate.js 以及 is-url.js)</span><br><span class="line">|-- calculate.js (依赖 add.js )</span><br><span class="line">|-- add.js</span><br><span class="line">|-- is-url.js</span><br></pre></td></tr></table></figure>
+<p>index.html中主要代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>AMD DEMO<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">data-main</span>=<span class="string">"main"</span> <span class="attr">src</span>=<span class="string">"./require.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- &lt;script src="./main.js"&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>data-main是require.js的写法，主要表示require.js的主模块为main.js文件，当然你也可以另写一个script标签来引用它。</p>
+<p>然后是main.js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>([<span class="string">'./is-url'</span>, <span class="string">'./calculate'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">isUrlModule, calculateModule</span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'main.js loaded !'</span>)</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'add result :'</span>, calculateModule.add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>))</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'is url \'https://google.com.ph\' :'</span>, isUrlModule.isUrl(<span class="string">'https://google.com.ph'</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>比较容易理解，require是require.js的API，第一个参数为一个数组，表示它依赖的模块；第二个参数为一个callback函数，函数的参数为依赖的模块的输出。</p>
+<p>calculate.js代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./add'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">addModule</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'calculate.js loaded ! (required by main.js)'</span>)</span><br><span class="line"> <span class="keyword">return</span> &#123;</span><br><span class="line">  add: addModule.add</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>我们可以发现，calculate.js与main.js只有一点细微的差别：require变成了define、多了一个return。</p>
+<p>add.js代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'add.js loaded ! (required by calculate.js)'</span>)</span><br><span class="line"> <span class="keyword">const</span> add = <span class="function"><span class="keyword">function</span>(<span class="params">a = <span class="number">0</span>, ...args</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">let</span> result = a</span><br><span class="line"> <span class="keyword">if</span> (args.length) result += add(...args)</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> &#123;</span><br><span class="line">  add</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>由于add.js没有依赖其他js文件了，所以它与calculate.js的差别在于它的第一个参数是空的了，在这里空的参数可以省略掉。</p>
+<p>is-url.js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'isUrl.js loaded ! (required by main.js)'</span>)</span><br><span class="line"> <span class="keyword">return</span> &#123;</span><br><span class="line">  isUrl: <span class="function"><span class="keyword">function</span>(<span class="params">url = <span class="string">''</span></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> url ? <span class="regexp">/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]&#123;2,256&#125;\.[a-z]&#123;2,6&#125;\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*)$/</span>.test(url) : <span class="string">''</span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>is-url.js与add.js一致。</p>
+<p><a href="https://github.com/Ash-sc/js-module-definition/tree/master/amd-demo" target="_blank" rel="noopener">github代码点这里</a>。</p>
+<p>上面例子中使用到的写法就是符合AMD规范的写法</p>
+<p>（ 使用define定义模块；参数依次为(模块名称、)依赖的模块与回调；被依赖的模块提供return ）</p>
+<p>在浏览器中打开index.html，控制台中会有如下输出：</p>
+<p><img src="//web-site-files.ashshen.cc/blog/module-in-js/amd-demo-console.png" alt="amd-module-console"></p>
+<p>可以看到，使用AMD规范的模块加载顺序为：被依赖的模块先加载，主模块最后加载。</p>
+<p>而main.js中实际上是依赖了两个模块—— is-url.js与calculate.js，加载的顺序与他们的层数有关（is-url.js只有一层而calculate.js还依赖了add.js），层数相同的模块依赖，顺序靠前的先加载。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AMD-asynchronous-module-definition"><span class="toc-number">1.</span> <span class="toc-text">AMD ( asynchronous module definition )</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/11/26/module-in-js/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/11/26/module-in-js/&text=前端模块加载浅析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/11/26/module-in-js/&is_video=false&description=前端模块加载浅析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端模块加载浅析&body=Check out this article: http://yoursite.com/2018/11/26/module-in-js/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/11/26/module-in-js/&title=前端模块加载浅析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/11/26/module-in-js/&name=前端模块加载浅析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

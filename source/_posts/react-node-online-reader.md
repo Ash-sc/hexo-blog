@@ -52,7 +52,7 @@ OK，思路有了，开始。
 
 获取到了页面的代码，接下来要做的事情就是从页面代码中过滤出我们需要的内容：小说名称、链接、作者、更新时间、最新章节、封面等。so，右键页面 → 审查元素，然后发现搜索结果在id为”newscontent”的div下面的ul的li中，除了封面链接。
 
-![www-image](https://ashshen.cc/wp-content/uploads/2017/07/search-result.png)
+![www-image](//web-site-files.ashshen.cc/blog/react-online-reader/search-result.png)
 
 使用cheerio获取到ul中所有的搜索结果，并放入数组中，返回给前端页面，代码如下：
 
@@ -123,5 +123,5 @@ router.get('/searchArticle', (req, res) => {
 
 项目实现效果图：
 
-![preview-image](http://web-site-files.ashshen.cc/gitHub/online-reader-preview.gif)
+![preview-image](//web-site-files.ashshen.cc/gitHub/online-reader-preview.gif)
 

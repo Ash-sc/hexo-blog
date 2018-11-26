@@ -8,11 +8,11 @@ tags: [马赛克, js]
 
 由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。
 
-demo地址：[http://web-site-files.ashshen.cc/blog/pages/index.html](http://web-site-files.ashshen.cc/blog/pages/index.html)
+demo地址：[http://web-site-files.ashshen.cc/blog/pages/index.html](//web-site-files.ashshen.cc/blog/pages/index.html)
 
 小工具效果展示：
 
-<img src="http://web-site-files.ashshen.cc/blog/origin-image.jpg" style="width:49%;display: inline-block;" /><img src="http://web-site-files.ashshen.cc/blog/download.png" style="width:49%;display: inline-block;" />
+<img src="//web-site-files.ashshen.cc/blog/origin-image.jpg" style="width:49%;display: inline-block;" /><img src="//web-site-files.ashshen.cc/blog/download.png" style="width:49%;display: inline-block;" />
 
 实现步骤：
 
@@ -48,6 +48,16 @@ reader.onload = function() {
 }
 ```
 
+*第三步*，上传文件 → 提取图片DataURL → 添加img到dom中 → 转化成带马赛克的canvas，这几步都是在选择完文件之后需要顺序执行的，所以我全部把它写在了一个函数中，需要在使用者上传了图片之后调用。
 
+另外，还需要添加一个输入框让使用者自行选择马赛克颗粒的大小，以及一个文件导出格式的单选按钮，并监听对应的触发事件。
 
+*第四步*，处理完这些之后，剩下的就是图片导出下载的功能了。
 
+  一，从canvas中提取出DataURL，这个可以直接用canvas自带的API中的toDataURL()，参数为图片的格式，eg:”image/png”。
+
+  二，将获取到的DataURL赋值给页面中已经准备好的a元素（a元素设置download属性可以用于下载），然后使用js模拟a元素的点击事件实现下载功能。
+
+PS：由于使用者上传的文件大小是不确定的，但是页面中展示图片效果的区域是固定大小的，而close-pixelate插件也是按照图片大小生成1：1比例的canvas的，所以在图片上传完成之后，我需要先获取图片的大小，并与展示区域的大小进行比较，并计算缩放的比例，然后使用css中的scale()对canvas进行缩放和平移。
+
+图片马赛克小工具完成，gitHub地址：[https://github.com/Ash-sc/mosaic-image](https://github.com/Ash-sc/mosaic-image)。

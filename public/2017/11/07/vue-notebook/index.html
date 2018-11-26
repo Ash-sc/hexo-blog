@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="在很久之前曾用过一段时间的Evernote，后来由于在手机上经常卡顿，也就弃坑了改用Wiznote。然鹅Wiznote也不是个什么好鸟，相较于Evernote对于免费用户只能同时绑定两个客户端而言，Wiznote居然对免费用户限制笔记数量。好吧，不能忍了，刚好最近这段时间也在看Vue，所以也就自己动手撸了个网页版的笔记，存放点BT网站url地址啥的（笑）。 功能还在陆续完善中，后续应该会有手机版的">
+<meta name="keywords" content="vue,notebook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用vue撸了一发Evernote网页版">
+<meta property="og:url" content="http://yoursite.com/2017/11/07/vue-notebook/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="在很久之前曾用过一段时间的Evernote，后来由于在手机上经常卡顿，也就弃坑了改用Wiznote。然鹅Wiznote也不是个什么好鸟，相较于Evernote对于免费用户只能同时绑定两个客户端而言，Wiznote居然对免费用户限制笔记数量。好吧，不能忍了，刚好最近这段时间也在看Vue，所以也就自己动手撸了个网页版的笔记，存放点BT网站url地址啥的（笑）。 功能还在陆续完善中，后续应该会有手机版的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/login_page.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/notebook_page_1.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/notebook_page_newnotebook.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/notebook_page_list.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/note_page_1.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/note_page_newnote.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/note_page_edit.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/account_option.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/search_function.png">
+<meta property="og:updated_time" content="2018-11-26T13:12:51.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用vue撸了一发Evernote网页版">
+<meta name="twitter:description" content="在很久之前曾用过一段时间的Evernote，后来由于在手机上经常卡顿，也就弃坑了改用Wiznote。然鹅Wiznote也不是个什么好鸟，相较于Evernote对于免费用户只能同时绑定两个客户端而言，Wiznote居然对免费用户限制笔记数量。好吧，不能忍了，刚好最近这段时间也在看Vue，所以也就自己动手撸了个网页版的笔记，存放点BT网站url地址啥的（笑）。 功能还在陆续完善中，后续应该会有手机版的">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/notebook/login_page.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>用vue撸了一发Evernote网页版</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/11/28/vue-upload/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/05/react-component/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/07/vue-notebook/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/07/vue-notebook/&text=用vue撸了一发Evernote网页版"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/07/vue-notebook/&is_video=false&description=用vue撸了一发Evernote网页版"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用vue撸了一发Evernote网页版&body=Check out this article: http://yoursite.com/2017/11/07/vue-notebook/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/07/vue-notebook/&name=用vue撸了一发Evernote网页版&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前端部分：Vue-vuex-axios"><span class="toc-number">1.</span> <span class="toc-text">前端部分：Vue+vuex+axios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端部分：Node-js-MongoDB"><span class="toc-number">2.</span> <span class="toc-text">服务端部分：Node.js+MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端部分代码分层："><span class="toc-number">2.1.</span> <span class="toc-text">服务端部分代码分层：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据加密："><span class="toc-number">2.2.</span> <span class="toc-text">数据加密：</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        用vue撸了一发Evernote网页版
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-11-07T11:55:14.000Z" itemprop="datePublished">2017-11-07</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/notebook/">notebook</a>, <a class="tag-link" href="/tags/vue/">vue</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>在很久之前曾用过一段时间的Evernote，后来由于在手机上经常卡顿，也就弃坑了改用Wiznote。然鹅Wiznote也不是个什么好鸟，相较于Evernote对于免费用户只能同时绑定两个客户端而言，Wiznote居然对免费用户限制笔记数量。好吧，不能忍了，刚好最近这段时间也在看Vue，所以也就自己动手撸了个网页版的笔记，存放点BT网站url地址啥的（笑）。</p>
+<p>功能还在陆续完善中，后续应该会有手机版的…… ￣▽￣   我的todo，我自己都不信。</p>
+<p>项目地址：<a href="https://github.com/Ash-sc/notebook" target="_blank" rel="noopener">https://github.com/Ash-sc/notebook</a></p>
+<p>前端：Vue + vuex + axios （不得不说Vue比react上手容易太多）</p>
+<p>后端：Node + Express + MongoDB </p>
+<p>项目结构：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">│   README.md</span><br><span class="line">│   package.json</span><br><span class="line">│   .eslintrc</span><br><span class="line">│   ...</span><br><span class="line">└───build  // webpack配置</span><br><span class="line">│</span><br><span class="line">└───server  // Node部分</span><br><span class="line">│   │</span><br><span class="line">│   │   node-app.js // 启动文件 </span><br><span class="line">│   └───controller // 路由控制器</span><br><span class="line">│   └───models // model层</span><br><span class="line">│   └───middlewares // 中间件，负责过滤拦截</span><br><span class="line">│   └───mongo // 数据库配置</span><br><span class="line">│</span><br><span class="line">└───src // <span class="built_in">source</span>文件夹，主要代码</span><br><span class="line">│   │   index.html // html入口</span><br><span class="line">│   │   app.js // js入口 </span><br><span class="line">│   └───assets // css、font、image等</span><br><span class="line">│   └───components // 公共组件</span><br><span class="line">│   └───filter // 过滤器</span><br><span class="line">│   └───routers // 路由</span><br><span class="line">│   └───services // 数据请求</span><br><span class="line">│   └───store // vuex</span><br><span class="line">│   └───validate // 校验器</span><br><span class="line">│   └───views // 页面模块</span><br><span class="line">│</span><br><span class="line">└───static // 静态资源（moment、bootstrap等）</span><br><span class="line">│</span><br></pre></td></tr></table></figure></p>
+<h2 id="前端部分：Vue-vuex-axios"><a href="#前端部分：Vue-vuex-axios" class="headerlink" title="前端部分：Vue+vuex+axios"></a>前端部分：Vue+vuex+axios</h2><p><strong>注册/登录页面：</strong></p>
+<p>暂时只做了注册和登录功能。</p>
+<p>登录页面采用左右布局，左边暂时还没想好放什么，先用一个css3动画占位好了，右边是固定宽度的表单模块。</p>
+<p> // todo: 邮箱验证<br><img src="//web-site-files.ashshen.cc/blog/notebook/login_page.png" alt="login-page"></p>
+<p><strong>笔记本页面：</strong></p>
+<p>登录之后则跳转到笔记本页面，与Evernote布局一致，分为顶部功能栏和左侧菜单栏，顶部和左侧部分与其他页面公用，所以抽出成组件以便复用。</p>
+<p>笔记本页面截图：</p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/notebook_page_1.png" alt="main-page"></p>
+<p>新用户第一次进入页面是没有任何默认笔记本存在的，点击左上方的按钮可以新建一个笔记本</p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/notebook_page_newnotebook.png" alt="new-notebook"></p>
+<p>笔记本有私有和公开两种分类，暂时来说都是私有的。</p>
+<p>// todo: 公开的笔记将可以通过url或二维码分享给他人。</p>
+<p>新建笔记本后，笔记本将以条状块形式展示，显示笔记本名称和该笔记本下笔记数量，鼠标悬浮笔记数量出现删除操作按钮，这里选用悬浮是为了不占用右键操作，避免修改网页用户习惯。</p>
+<p>// todo: 需要添加笔记本名称修改功能。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/notebook_page_list.png" alt="notebook-list"></p>
+<p>顶部功能栏设置有排序功能，可根据名称、笔记数量、更新时间 来对笔记本进行排列。</p>
+<p>双击笔记本部分跳转到对应笔记本的笔记页面。</p>
+<p><strong>笔记页面</strong></p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/note_page_1.png" alt="note-page"></p>
+<p>同样，初始状态的笔记页面也是啥都没有滴，除了页面公共顶部和左侧之外，右侧的主体部分被我分成了两块：</p>
+<p>左边是笔记预览部分，右边是笔记编辑部分。</p>
+<p>OK，点击添加按钮添加一个笔记，添加笔记与添加笔记本不同，添加笔记是直接添加了一个标题和内容都为空的笔记。所以不使用弹框的形式，点击按钮后直接生成新笔记。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/note_page_newnote.png" alt="edit-note"></p>
+<p>然后你会发现左侧菜单会有一些变化，多出来一个“最近笔记”部分；是的，最新更新的五条笔记会显示在左侧菜单的顶部。</p>
+<p>然后我们可以直接编辑新建笔记的标题和内容，让界面看起来不那么丑……</p>
+<p>编辑完毕，点击保存（不保存也没有关系，下一次刷新页面时会自动同步最新的笔记到服务端）。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/note_page_edit.png" alt="save-note"></p>
+<p>Emmmm……回头看了一下床上，还好，这次的女朋友质量还是可以的。</p>
+<p>同样，笔记缩略图的显示跟笔记本缩略图类似，只是添加了高亮并且右边没有了笔记数量，取而代之的是一个操作提示按钮，鼠标悬浮上去变为删除。</p>
+<p>然后是登出功能，与Evernote一样，点击顶部栏的账号名称，会弹出账号操作的悬浮框，然后点击“Log Out”即可退出并清空所有本地缓存。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/account_option.png" alt="user-info"></p>
+<p>OK，有这些基本功能已经可以确保项目的正常使用了，但是为了方便，再添加一个关键字搜索好了。</p>
+<p>搜索的入口：顶部栏右侧，输入关键词并后，会从笔记标题、内容和笔记本名称中搜索出含有改关键词的结果，点击之后跳转到相应的页面。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/notebook/search_function.png" alt="search"></p>
+<p>搜索功能也加好了，前端的工作到这里也就告一段落了。</p>
+<p><em>前端数据的处理：</em></p>
+<p>笔记的本地缓存：笔记本和笔记的数据都是缓存在本地的localStorage中的，但是笔记的标题和内容是加密过的。</p>
+<p><em>数据刷新问题：</em></p>
+<p>每次刷新页面，都会去后台取数据库中最新的笔记列表，但是只返回笔记的id和更新时间，并且以更新时间降序排列，然后与用户本地数据进行比较，如果二者长度和最新的一条不能匹配，那么则对二者全量进行比较，本地较新的上传到服务端，然后更新列表。</p>
+<p><em>登录验证：</em></p>
+<p>服务端接口通过session进行登录验证，session设置过期时间时间为30天。</p>
+<h2 id="服务端部分：Node-js-MongoDB"><a href="#服务端部分：Node-js-MongoDB" class="headerlink" title="服务端部分：Node.js+MongoDB"></a>服务端部分：Node.js+MongoDB</h2><p>待续……</p>
+<p>/<strong><strong><strong>**</strong></strong></strong> 2017-11-13 <strong><strong><strong><em>**</em></strong></strong></strong>/</p>
+<p>由于主要是为了熟悉Vue的api，顺便寻找一个存储笔记数据的应用；</p>
+<p>想来用户也不会超过一掌之数，所以服务端的实现也就直接使用Node.js了</p>
+<p>Node.js的强大之处在于它有丰富的package可以使用，比起前端还要自己撸组件，Node省事了不少。</p>
+<p>MongoDB的操作与连接部分，我使用的是mongoose这个包，API使用方式也比较简单易懂。</p>
+<h3 id="服务端部分代码分层："><a href="#服务端部分代码分层：" class="headerlink" title="服务端部分代码分层："></a>服务端部分代码分层：</h3><ol>
+<li><p>node-app.js ：  入口文件。</p>
+</li>
+<li><p>router/ ：          路由转发部分，权限控制可以在这边添加。</p>
+</li>
+<li><p>controllers/ ：  请求处理控制器。</p>
+</li>
+<li><p>modal/ ：         数据库modal层，只对外暴露特定接口。</p>
+</li>
+</ol>
+<p>由于是自用，暂时不考虑数据量比较大的情况，所以也就没有对数据库操作进行优化， ……然而实际情况是：ﾉ)ﾟДﾟ(  作为一个前端，并不擅长数据库性能优化。</p>
+<h3 id="数据加密："><a href="#数据加密：" class="headerlink" title="数据加密："></a>数据加密：</h3><p>服务端数据加密的方式采用了比较简单的对称加密算法——AES算法，加解密的密钥在用户注册时生成并存放在用户信息中，生成的规则也比较简单：使用md5加密用户的用户名和密码和一个随机值。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前端部分：Vue-vuex-axios"><span class="toc-number">1.</span> <span class="toc-text">前端部分：Vue+vuex+axios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端部分：Node-js-MongoDB"><span class="toc-number">2.</span> <span class="toc-text">服务端部分：Node.js+MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端部分代码分层："><span class="toc-number">2.1.</span> <span class="toc-text">服务端部分代码分层：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据加密："><span class="toc-number">2.2.</span> <span class="toc-text">数据加密：</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/07/vue-notebook/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/07/vue-notebook/&text=用vue撸了一发Evernote网页版"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/07/vue-notebook/&is_video=false&description=用vue撸了一发Evernote网页版"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用vue撸了一发Evernote网页版&body=Check out this article: http://yoursite.com/2017/11/07/vue-notebook/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/07/vue-notebook/&title=用vue撸了一发Evernote网页版"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/07/vue-notebook/&name=用vue撸了一发Evernote网页版&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

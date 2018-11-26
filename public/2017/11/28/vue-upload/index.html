@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="文件上传组件算得上是vue组件中使用比较频繁的了，npmjs上的vue文件上也有很多，但是找到一款适合自己的应用场景的还真不是那么容易。 于是，秉持着自己动手丰衣足食（闲着也是闲着）的理念，花了半天时间撸了一个简单的文件上传组件。 初始版本核心代码包含注释和代码分割也才两百行左右。 项目地址：https://github.com/Ash-sc/vue-simple-upload 示例地址：http">
+<meta name="keywords" content="vue,file-upload">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的vue文件上传组件">
+<meta property="og:url" content="http://yoursite.com/2017/11/28/vue-upload/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="文件上传组件算得上是vue组件中使用比较频繁的了，npmjs上的vue文件上也有很多，但是找到一款适合自己的应用场景的还真不是那么容易。 于是，秉持着自己动手丰衣足食（闲着也是闲着）的理念，花了半天时间撸了一个简单的文件上传组件。 初始版本核心代码包含注释和代码分割也才两百行左右。 项目地址：https://github.com/Ash-sc/vue-simple-upload 示例地址：http">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/vue-upload-component/upload-component-logic.png">
+<meta property="og:updated_time" content="2018-11-26T12:07:21.824Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个简单的vue文件上传组件">
+<meta name="twitter:description" content="文件上传组件算得上是vue组件中使用比较频繁的了，npmjs上的vue文件上也有很多，但是找到一款适合自己的应用场景的还真不是那么容易。 于是，秉持着自己动手丰衣足食（闲着也是闲着）的理念，花了半天时间撸了一个简单的文件上传组件。 初始版本核心代码包含注释和代码分割也才两百行左右。 项目地址：https://github.com/Ash-sc/vue-simple-upload 示例地址：http">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/vue-upload-component/upload-component-logic.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>一个简单的vue文件上传组件</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/06/fe-page-communication/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/11/07/vue-notebook/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/28/vue-upload/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/28/vue-upload/&text=一个简单的vue文件上传组件"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/28/vue-upload/&is_video=false&description=一个简单的vue文件上传组件"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=一个简单的vue文件上传组件&body=Check out this article: http://yoursite.com/2017/11/28/vue-upload/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/28/vue-upload/&name=一个简单的vue文件上传组件&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件运行逻辑"><span class="toc-number">2.</span> <span class="toc-text">组件运行逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码框架"><span class="toc-number">3.</span> <span class="toc-text">代码框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键点实现"><span class="toc-number">4.</span> <span class="toc-text">关键点实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件使用方法"><span class="toc-number">5.</span> <span class="toc-text">组件使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加多文件上传：（2017-11-30）"><span class="toc-number">6.</span> <span class="toc-text">添加多文件上传：（2017-11-30）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加上传取消功能：（2017-12-01）"><span class="toc-number">7.</span> <span class="toc-text">添加上传取消功能：（2017-12-01）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加手动开始上传功能：（2017-12-28）"><span class="toc-number">8.</span> <span class="toc-text">添加手动开始上传功能：（2017-12-28）</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        一个简单的vue文件上传组件
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-11-28T12:02:09.000Z" itemprop="datePublished">2017-11-28</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/file-upload/">file-upload</a>, <a class="tag-link" href="/tags/vue/">vue</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>文件上传组件算得上是vue组件中使用比较频繁的了，npmjs上的vue文件上也有很多，但是找到一款适合自己的应用场景的还真不是那么容易。</p>
+<p>于是，秉持着自己动手丰衣足食（闲着也是闲着）的理念，花了半天时间撸了一个简单的文件上传组件。</p>
+<p>初始版本核心代码包含注释和代码分割也才两百行左右。</p>
+<p>项目地址：<a href="https://github.com/Ash-sc/vue-simple-upload" target="_blank" rel="noopener">https://github.com/Ash-sc/vue-simple-upload</a></p>
+<p>示例地址：<a href="http://demo.2017017.xyz/vue-demo/#/vue-simple-file-upload" target="_blank" rel="noopener">http://demo.2017017.xyz/vue-demo/#/vue-simple-file-upload</a></p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>既然是一个简单的文件上传组件，那么只要保证必要的功能点都有就行了：</p>
+<ol>
+<li><p>单文件上传 （后续可考虑扩展为多文件，// 2017-11-30 已添加该功能）</p>
+</li>
+<li><p>支持文件类型限制</p>
+</li>
+<li><p>支持实时上传进度以及上传速度</p>
+</li>
+<li><p>支持额外的formData数据</p>
+</li>
+</ol>
+<p>当然，还有像支持手动开始、支持上传取消、拖拽上传等功能。由于当前的使用场景中并没有要求此类功能，所以也就放在后续版本的todoList中了。</p>
+<h2 id="组件运行逻辑"><a href="#组件运行逻辑" class="headerlink" title="组件运行逻辑"></a>组件运行逻辑</h2><p>写组件之前，先整理出组件的运行步骤和需要注意的点，这对之后的编码环节会有很大帮助，大致如下</p>
+<p><img src="http://web-site-files.ashshen.cc/blog/vue-upload-component/upload-component-logic.png" alt="flow"></p>
+<p>ok，大致罗列出组件的运行步骤以及注意事项后，开始编写组件的代码。</p>
+<h2 id="代码框架"><a href="#代码框架" class="headerlink" title="代码框架"></a>代码框架</h2><p>组件项目的框架的话，使用webpack-simple就可以生成一个，具体步骤的话，可以自行google。当然，也直接可以从我的Github项目中clone现成的代码，然后修改src/lib下的文件即可。</p>
+<h2 id="关键点实现"><a href="#关键点实现" class="headerlink" title="关键点实现"></a>关键点实现</h2><p><em>首先</em>，对于步骤图中第一步的上传按钮，我直接写在了template中，而不是使用<slot>插槽，对于不需要按钮的用户而言，可以使用css隐藏然后再用js模拟点击事件即可。</slot></p>
+<p>对于第一步到第二步的<em>两个注意点</em>的处理：</p>
+<ol>
+<li><p>由于input标签的<em>accept属性</em>并不能完全限制用户的文件选择行为（用户仍然可以选择限制之外的文件，并且会录入input的值中），我在第二步到第三步之间，XHR上传之前，会针对选择的文件类型重新使用js校验一次，对于不符合的文件类型，不会触发XHR请求。</p>
+</li>
+<li><p>为了防止由于浏览器的文件选择框具有响应时间而导致的<em>多个文件选择框</em>问题，我采用的办法是：在组件的data中设置一个标志位，文件选择完成(change)后，重置标志位，但是这样也会有问题：如果点击了”取消”，那么文件选择input的change事件是不会触发的，所以我在上传按钮上也添加了一个blur事件，当事件触发时，重置标志位。</p>
+</li>
+</ol>
+<p>选择完成文件后，input的change事件触发，然后通过event参数获取到已经选择的文件。</p>
+<p>PS：这里还需要注意的一点就是，在选择完文件，并获取到已选择文件之后，需要清空input的value以保证下一次选择相同的文件仍然可以触发change事件（当文件上传失败时，用户可能需要重新选择相同的文件）。</p>
+<p>然后我将选择的文件导入到data中定义的文件信息数组fileInfoList中（是的，数组。因为要考虑到之后的多文件扩展）。</p>
+<p>fileInfoList中的元素存储的不仅仅是文件信息，还包括一个具有唯一性的id（时间戳加随机数，用来作为标志位，为之后的abort功能做准备），包括一个type（值为”waiting”、”uploading”、”success”、”fail”、”abort”(添加取消上传后新增)中的一个，为手动开始功能做准备），包括一个用来描述上传进度的progress、上传速度描述uploadSpeed，以及文件名属性name。</p>
+<p>接下来是XHR上传的部分，直接使用js的XMLHttpRequest方法发送http请求。同样，也在组件的data中定义了一个xhrObj用来存放上传的XMLHttpRequest实例对象（为了方便abort功能的实现）。</p>
+<p>遍历上一步中定义的fileInfoList，把选择的文件依次上传，并且把id作为key，XMLHttpRequest实例作为value存入xhrObj中。</p>
+<p><em>上传进度的实现方法：</em></p>
+<p>首先定义一个uploading方法用于更新fileInfoList元素中的progress属性</p>
+<p>然后在XMLHttpRequest的onprogress方法中调用uploading方法，onprogress方法带有一个progress参数，其中就包含loaded，也就是已经上传的文件size，除以文件总size就得到了上传的进度。</p>
+<p><em>上传速度的实现：</em></p>
+<p>上传速度的实现稍微要麻烦一点；由于已经上传的文件size是可以获取到的，而在onprogress过程中，每两次触发uploading方法的时间间隔是不一定的，所以需要在data中定义一个对象uploadedSize，用于存放每一个文件在uploading方法触发时已经上传的size以及当前时间戳，于是在下一次触发uploading方法时，用上传的size之差除以时间戳之差得到的就是上传的进度（PS：同时也要更新uploadedSize）。</p>
+<p><em>数据传出到父组件：</em></p>
+<p>每当uploading方法触发从而改变fileInfoList时，使用vue组件自带的$emit方法将fileInfoList变动通知父组件。</p>
+<p><em>上传失败和上传完成：</em></p>
+<p>文件上传成功以及上传失败，是通过XMLHttpRequest的onreadystatechange方法来判断的，当文件上传成功或者失败后，将该文件上传请求的reponseString存入fileInfoList对应元素的response属性中，并修改其type属性为”success”或”fail”，然后通过$emit方法通知父组件。</p>
+<h2 id="组件使用方法"><a href="#组件使用方法" class="headerlink" title="组件使用方法"></a>组件使用方法</h2><p>文件上传组件总共有两个props：options与progress-update。</p>
+<p>options为配置项入口。</p>
+<p>progress-update为组件上传进度出口。</p>
+<p>具体使用方法见：<a href="https://github.com/Ash-sc/vue-simple-upload/blob/master/README.md" target="_blank" rel="noopener">README.md</a></p>
+<p><em>PS： 2017-11-29  // todo: 多文件上传、上传取消、拖拽上传、手动开始。</em></p>
+<h2 id="添加多文件上传：（2017-11-30）"><a href="#添加多文件上传：（2017-11-30）" class="headerlink" title="添加多文件上传：（2017-11-30）"></a>添加多文件上传：（2017-11-30）</h2><p>由于之前的代码中已经预留了多文件上传的相关接口（文件信息使用数组存放、组件传出参数为数组），所以添加多文件上传几乎没有花费什么力气。</p>
+<p>首先，在options中增加支持属性”multiple”，类型为布尔类型；同时设定pros中默认值为false（防止用户未定义改属性值报错）；然后再将该属性绑定到input上即可。</p>
+<h2 id="添加上传取消功能：（2017-12-01）"><a href="#添加上传取消功能：（2017-12-01）" class="headerlink" title="添加上传取消功能：（2017-12-01）"></a>添加上传取消功能：（2017-12-01）</h2><p>考虑到上传取消功能的扩展，我在初始版本中就已经将XHR实例缓存在了data中，扩展上传取消功能只需要调用对应XHR实例中的abort钩子即可。</p>
+<p>关于上传取消功能的使用：</p>
+<p>我最初的想法是用户将需要取消的项id(传入”all”则表示所有)作为props传给组件，组件内部感知props变化从而abort请求；不过这样一来很可能出现用户忘记重置props而导致的无法上传。</p>
+<p>为了避免这样的bug，最终还是决定由用户通过ref去自行调用组件内部的abort方法。</p>
+<p>PS：添加了abort后，fileInfoList中的元素同时也添加了一个type：”abort”用于区分手动取消与上传失败。</p>
+<h2 id="添加手动开始上传功能：（2017-12-28）"><a href="#添加手动开始上传功能：（2017-12-28）" class="headerlink" title="添加手动开始上传功能：（2017-12-28）"></a>添加手动开始上传功能：（2017-12-28）</h2><p>2017年12月28日，在版本v1.2.0中添加了用户可手动选择开始上传功能。当然，为了保持版本的向下兼容以及使用的简易性，该功能默认是关闭的。</p>
+<p>使用手动开始上传的功能首先要在config中将”autoStart”设置为false。与上传取消功能一样，同样是通过ref去调用组件内部的startUpload方法，传入需要开始上传的文件id（不传则表示开始上传所有等待上传的文件）。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件运行逻辑"><span class="toc-number">2.</span> <span class="toc-text">组件运行逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码框架"><span class="toc-number">3.</span> <span class="toc-text">代码框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键点实现"><span class="toc-number">4.</span> <span class="toc-text">关键点实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件使用方法"><span class="toc-number">5.</span> <span class="toc-text">组件使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加多文件上传：（2017-11-30）"><span class="toc-number">6.</span> <span class="toc-text">添加多文件上传：（2017-11-30）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加上传取消功能：（2017-12-01）"><span class="toc-number">7.</span> <span class="toc-text">添加上传取消功能：（2017-12-01）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加手动开始上传功能：（2017-12-28）"><span class="toc-number">8.</span> <span class="toc-text">添加手动开始上传功能：（2017-12-28）</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/28/vue-upload/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/28/vue-upload/&text=一个简单的vue文件上传组件"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/28/vue-upload/&is_video=false&description=一个简单的vue文件上传组件"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=一个简单的vue文件上传组件&body=Check out this article: http://yoursite.com/2017/11/28/vue-upload/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/28/vue-upload/&title=一个简单的vue文件上传组件"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/28/vue-upload/&name=一个简单的vue文件上传组件&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

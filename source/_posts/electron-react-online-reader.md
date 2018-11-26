@@ -32,7 +32,7 @@ Electron的入门教程这边就不赘述了，比较简单，[electron传送门
 
 安装完成后shell中执行”npm start”，发现程序弹框正常，但是页面的中的内容不见了，打开控制台发现：
 
-![dev-error](http://ashshen.cc/wp-content/uploads/2017/07/electron-error.png)
+![dev-error](//web-site-files.ashshen.cc/blog/react-online-reader/electron-error.png)
 
 由于我在React项目中，对路由进行了分块打包，优化页面加载速度 ( [具体看这里](/2017/04/06/react-optimization/) ) 。而在Electron应用中，会发生分块文件路径引用错误，导致页面不能正常加载。
 
@@ -42,17 +42,17 @@ Electron的入门教程这边就不赘述了，比较简单，[electron传送门
 
 于是，恢复react-router的component方法为直接import，然后重新打包，再次执行npm start。
 
-![dev-success](http://ashshen.cc/wp-content/uploads/2017/07/Screen-Shot-2017-07-05-at-12.33.58-PM.png)
+![dev-success](//web-site-files.ashshen.cc/blog/react-online-reader/dev-success.png)
 
 现在界面已经可以正常显示了，但是这仅仅是静态页面。
 
 显然，我们的目标不只是静态页面的展示，我们需要与服务器进行数据交互。试着在搜索框中输入一些搜索关键字然后搜索：
 
-![search-error](http://ashshen.cc/wp-content/uploads/2017/07/electron-request-error.png)
+![search-error](//web-site-files.ashshen.cc/blog/react-online-reader/electron-request-error.png)
 
 从控制台中，我发现：还是之前js文件那个问题，相对路径的资源和请求在Electron下被引用成了”file://”，怎么解决呢？既然相对路径解析会出错，那么我们换成绝对路径呢？于是我试着将”/src/js/utils/api/api.js”中将后端请求的地址改成了绝对路径”http://localhost:4396″，然后重新编译、运行：
 
-![search-success](http://ashshen.cc/wp-content/uploads/2017/07/electron-success.png)
+![search-success](//web-site-files.ashshen.cc/blog/react-online-reader/electron-success.png)
 
 发现请求是成功的，也没有发生在浏览器中会发生的跨域行为，看来是Electron本身对此做了处理。
 

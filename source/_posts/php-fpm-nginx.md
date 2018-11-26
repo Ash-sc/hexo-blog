@@ -25,7 +25,7 @@ mac OS中已经自带php以及php-fpm的环境了，所以也就省去了安装p
 
 但是，php-fpm还是需要配置之后才可以使用，在shell中直接运行php-fpm会报错找不到配置文件。
 
-![install-fpm](http://web-site-files.ashshen.cc/blog/php-fpm_error.png)
+![install-fpm](//web-site-files.ashshen.cc/blog/php-fpm_error.png)
 
 配置php-fpm：
 

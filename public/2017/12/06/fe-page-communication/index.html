@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="近日开发项目时遇到一个需求，大致就是：A页面里面用iframe嵌套了一个B页面，希望用户在B页面进行操作（B页面路由改变）后，刷新整个页面，iframe中显示B页面操作后的路由。 很明显，这是一个网页跨域通信的问题，由于浏览器同源策略，我并不能用一个timer去轮询获取iframe的contentWindow中的信息。 于是我花了一些时间去了解了一下网页跨域通信相关的方法。再然后，我看到了这篇文章">
+<meta name="keywords" content="iframe,webpage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端iframe跨域通信">
+<meta property="og:url" content="http://yoursite.com/2017/12/06/fe-page-communication/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="近日开发项目时遇到一个需求，大致就是：A页面里面用iframe嵌套了一个B页面，希望用户在B页面进行操作（B页面路由改变）后，刷新整个页面，iframe中显示B页面操作后的路由。 很明显，这是一个网页跨域通信的问题，由于浏览器同源策略，我并不能用一个timer去轮询获取iframe的contentWindow中的信息。 于是我花了一些时间去了解了一下网页跨域通信相关的方法。再然后，我看到了这篇文章">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-26T12:12:38.126Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端iframe跨域通信">
+<meta name="twitter:description" content="近日开发项目时遇到一个需求，大致就是：A页面里面用iframe嵌套了一个B页面，希望用户在B页面进行操作（B页面路由改变）后，刷新整个页面，iframe中显示B页面操作后的路由。 很明显，这是一个网页跨域通信的问题，由于浏览器同源策略，我并不能用一个timer去轮询获取iframe的contentWindow中的信息。 于是我花了一些时间去了解了一下网页跨域通信相关的方法。再然后，我看到了这篇文章">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>前端iframe跨域通信</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/01/09/vue-spider-app/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/11/28/vue-upload/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/06/fe-page-communication/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/06/fe-page-communication/&text=前端iframe跨域通信"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/06/fe-page-communication/&is_video=false&description=前端iframe跨域通信"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端iframe跨域通信&body=Check out this article: http://yoursite.com/2017/12/06/fe-page-communication/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/06/fe-page-communication/&name=前端iframe跨域通信&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法一、document-domain"><span class="toc-number">1.</span> <span class="toc-text">方法一、document.domain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法二、hash"><span class="toc-number">2.</span> <span class="toc-text">方法二、hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法三、window-name"><span class="toc-number">3.</span> <span class="toc-text">方法三、window.name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法四、postMessage"><span class="toc-number">4.</span> <span class="toc-text">方法四、postMessage</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        前端iframe跨域通信
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-12-06T12:08:15.000Z" itemprop="datePublished">2017-12-06</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/iframe/">iframe</a>, <a class="tag-link" href="/tags/webpage/">webpage</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>近日开发项目时遇到一个需求，大致就是：A页面里面用iframe嵌套了一个B页面，希望用户在B页面进行操作（B页面路由改变）后，刷新整个页面，iframe中显示B页面操作后的路由。</p>
+<p>很明显，这是一个网页跨域通信的问题，由于浏览器同源策略，我并不能用一个timer去轮询获取iframe的contentWindow中的信息。</p>
+<p>于是我花了一些时间去了解了一下网页跨域通信相关的方法。再然后，我看到了这篇文章<a href="https://www.ibm.com/developerworks/library/wa-crossdomaincomm/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/library/wa-crossdomaincomm/</a>，并在其中找到了适合我的解决办法。</p>
+<p>解决完我的问题之后，我把这篇文章重新看了一遍，并将其中提到的几种方法用简单的demo实践了一遍，于是便有了这篇博客。</p>
+<p>Github代码：<a href="https://github.com/Ash-sc/cross-domain-communication" target="_blank" rel="noopener">https://github.com/Ash-sc/cross-domain-communication</a></p>
+<p>在线Demo：<a href="http://eg1.2017017.xyz/cdc" target="_blank" rel="noopener">http://eg1.2017017.xyz/cdc</a> （服务器在国外，可能会比较慢）</p>
+<h2 id="方法一、document-domain"><a href="#方法一、document-domain" class="headerlink" title="方法一、document.domain"></a>方法一、document.domain</h2><p>此方法适用于需要通信的两个页面属于同一个根域名下（eg：eg1.aaa.cc与eg2.aaa.cc都属于aaa.cc的子域名）</p>
+<p>使用方法：只需要分别在A、B两个页面<strong>设置document.domain为公共的根域名即可</strong>。</p>
+<p>至于为什么只适用于相同根域名下的两个子域名之间的跨域通信：</p>
+<p>原因很简单，使用document.domain设置的根域名只能是当前页面URL的根域名，也就是说：如果A页面的访问地址是eg1.example.com，那么document.domain只能设置为example.com。</p>
+<p>demo：<a href="http://eg1.2017017.xyz/cdc/1-document.domain/page1.html" target="_blank" rel="noopener">http://eg1.2017017.xyz/cdc/1-document.domain/page1.html</a></p>
+<h2 id="方法二、hash"><a href="#方法二、hash" class="headerlink" title="方法二、hash"></a>方法二、hash</h2><p>方法二没有子域名的限制，适用性比方法一稍广。</p>
+<p>方法二的原理在于：<strong>当URL发生变化任何时，网页将会刷新。但是hash值的变化却不在此列（也就是URL中”#”及后面部分</strong>），所以我们可以利用hash来做一些事情。</p>
+<p>方法二的流程大致是这样的，当A页面需要与iframe中的B页面通信时：</p>
+<ol>
+<li><p>A、B页面分别使用timer轮询监听自身URL中hash值变化</p>
+</li>
+<li><p>A页面js事件修改iframe的src，添加hash值</p>
+</li>
+<li><p>B页面监听到自身hash值变化，做出相应的响应</p>
+</li>
+<li><p>B页面使用”parent.location.href”修改A页面URL中的hash值</p>
+</li>
+<li><p>A页面监听到自身hash值变化，得到响应数据</p>
+</li>
+</ol>
+<p>demo：<a href="http://eg1.2017017.xyz/cdc/2-hash/page1.html" target="_blank" rel="noopener">http://eg1.2017017.xyz/cdc/2-hash/page1.html</a></p>
+<p>但是，目前市面上的一部分网页中的hash值已经用于其他用途（比如SPA项目用来作为前端路由）。当这些页面想要使用hash来进行跨域通信时，就比较复杂了。</p>
+<h2 id="方法三、window-name"><a href="#方法三、window-name" class="headerlink" title="方法三、window.name"></a>方法三、window.name</h2><p>window.name这一属性原本应该是用来描述浏览器窗口名称的（然鹅现在几乎用不到它了）。</p>
+<p>由于window.name用于窗口，所以<strong>无论窗口中的内容与地址如何变化，window.name都不会发生变化，除非手动赋值</strong>。</p>
+<p>利用window.name进行跨域通信的步骤大致如下：</p>
+<ol>
+<li><p>假设A页面(eg1.example.com/xxx)需要与B页面(eg2.example.com/xxx)进行跨域通信</p>
+</li>
+<li><p>在A页面打开一个隐藏的iframe，设置iframe的src值为向B页面通信的请求(eg1.example.com/xxx?name=aa&amp;age=11&amp;…)</p>
+</li>
+<li><p>B页面响应该请求，并且将请求的响应数据保存在window.name中</p>
+</li>
+<li><p>此时，A并不能通过iframe.contentWindow.name访问到iframe中的window.name；所以B页面需要在第3步保存完window.name后，将页面导向至A页面所在域名的某个目录</p>
+</li>
+<li><p>此时A页面就可以通过iframe.contentWindow.name获取到保存在iframe的window.name中的数据了，因为此时的iframe与A页面属于同一域下</p>
+</li>
+</ol>
+<p>demo：<a href="http://eg1.2017017.xyz/cdc/3-window.name/page1.html" target="_blank" rel="noopener">http://eg1.2017017.xyz/cdc/3-window.name/page1.html</a></p>
+<h2 id="方法四、postMessage"><a href="#方法四、postMessage" class="headerlink" title="方法四、postMessage"></a>方法四、postMessage</h2><p>postMessage是Html5新增的特性，本身就用与安全跨域通信。所以，如果你的用户浏览器环境支持Html5，那么可以考虑这种方法。</p>
+<p>使用postMessage方法进行跨域通信比较简单：</p>
+<pre><code>1. A页面需要与B页面(iframe)进行跨域通信
+
+2. A页面window对象添加事件监听”window.addEventListener(‘message’, (e) =&gt; { console.log(e.data), false})”
+
+3. B页面需要向A页面发送数据时，使用”parent.window.postMessage(‘消息内容’, ‘*’)”即可。parent.window.postMessage第一个参数为需要传递的消息内容，第二个参数为需要传递的域名（’*’表示所有）。
+</code></pre><p>demo：<a href="http://eg1.2017017.xyz/cdc/4-postMessage/page1.html" target="_blank" rel="noopener">http://eg1.2017017.xyz/cdc/4-postMessage/page1.html</a></p>
+<p>以上四种方法都可用于前端跨域通信，可根据实际业务场景灵活选用。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法一、document-domain"><span class="toc-number">1.</span> <span class="toc-text">方法一、document.domain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法二、hash"><span class="toc-number">2.</span> <span class="toc-text">方法二、hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法三、window-name"><span class="toc-number">3.</span> <span class="toc-text">方法三、window.name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法四、postMessage"><span class="toc-number">4.</span> <span class="toc-text">方法四、postMessage</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/06/fe-page-communication/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/06/fe-page-communication/&text=前端iframe跨域通信"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/06/fe-page-communication/&is_video=false&description=前端iframe跨域通信"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端iframe跨域通信&body=Check out this article: http://yoursite.com/2017/12/06/fe-page-communication/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/06/fe-page-communication/&name=前端iframe跨域通信&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

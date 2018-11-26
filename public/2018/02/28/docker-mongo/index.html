@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="鉴于在windows下安装mongo的曲折经历（无力吐槽），最终决定使用docker来安装mongo。docker中运行的mongo与本地安装的mongo并没有什么区别，同时也可以实现在本地维护db文件，安装过程更加简洁（不用满世界的找安装文件了、也不用去官网填写表单注册账号了）。 首先首先，你需要去docker官网下一个docker客户端，安装完成之后，设置docker镜像源为国内镜像（国外镜像">
+<meta name="keywords" content="docker,mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用docker安装和启动mongo">
+<meta property="og:url" content="http://yoursite.com/2018/02/28/docker-mongo/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="鉴于在windows下安装mongo的曲折经历（无力吐槽），最终决定使用docker来安装mongo。docker中运行的mongo与本地安装的mongo并没有什么区别，同时也可以实现在本地维护db文件，安装过程更加简洁（不用满世界的找安装文件了、也不用去官网填写表单注册账号了）。 首先首先，你需要去docker官网下一个docker客户端，安装完成之后，设置docker镜像源为国内镜像（国外镜像">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/docker/docker-mirrors.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/docker/docker-images.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/docker/docker-ps.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/docker/windows-error.png">
+<meta property="og:updated_time" content="2018-11-26T13:09:17.088Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用docker安装和启动mongo">
+<meta name="twitter:description" content="鉴于在windows下安装mongo的曲折经历（无力吐槽），最终决定使用docker来安装mongo。docker中运行的mongo与本地安装的mongo并没有什么区别，同时也可以实现在本地维护db文件，安装过程更加简洁（不用满世界的找安装文件了、也不用去官网填写表单注册账号了）。 首先首先，你需要去docker官网下一个docker客户端，安装完成之后，设置docker镜像源为国内镜像（国外镜像">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/docker/docker-mirrors.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>使用docker安装和启动mongo</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/04/04/fe-note/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/24/html5-dialog/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/02/28/docker-mongo/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/02/28/docker-mongo/&text=使用docker安装和启动mongo"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/02/28/docker-mongo/&is_video=false&description=使用docker安装和启动mongo"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用docker安装和启动mongo&body=Check out this article: http://yoursite.com/2018/02/28/docker-mongo/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/28/docker-mongo/&name=使用docker安装和启动mongo&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#首先"><span class="toc-number">1.</span> <span class="toc-text">首先</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mongo镜像与新建容器"><span class="toc-number">2.</span> <span class="toc-text">mongo镜像与新建容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置mongodb"><span class="toc-number">3.</span> <span class="toc-text">配置mongodb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mongo客户端"><span class="toc-number">4.</span> <span class="toc-text">mongo客户端</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        使用docker安装和启动mongo
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-02-28T12:32:45.000Z" itemprop="datePublished">2018-02-28</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/docker/">docker</a>, <a class="tag-link" href="/tags/mongodb/">mongodb</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>鉴于在windows下安装mongo的曲折经历（无力吐槽），最终决定使用docker来安装mongo。docker中运行的mongo与本地安装的mongo并没有什么区别，同时也可以实现在本地维护db文件，安装过程更加简洁（不用满世界的找安装文件了、也不用去官网填写表单注册账号了）。</p>
+<h2 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h2><p>首先，你需要去docker官网下一个docker客户端，安装完成之后，设置docker镜像源为国内镜像（国外镜像的速度嘛，呵呵哒…）。</p>
+<p>我这边的话，加了这三个镜像源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">registry.docker-cn.com</span><br><span class="line">https://docker.mirrors.ustc.edu.cn</span><br><span class="line">https://hub-mirror.c.163.com</span><br></pre></td></tr></table></figure>
+<p><img src="//web-site-files.ashshen.cc/blog/docker/docker-mirrors.png" alt="docker-install"></p>
+<p>应用，然后重新启动。</p>
+<h2 id="mongo镜像与新建容器"><a href="#mongo镜像与新建容器" class="headerlink" title="mongo镜像与新建容器"></a>mongo镜像与新建容器</h2><p>安装完docker之后，通过docker pull mongo获取到mongo镜像。</p>
+<p>pull完成之后可以通过docker images查看本地拥有的镜像列表。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/docker/docker-images.png" alt="windows-shell"></p>
+<p>然后我们就可以通过mongo镜像来新建一个容器了。</p>
+<p>这里，如果你本地有安装git的话，可以在文件夹中或者桌面“右键”，然后使用“git bash”来打开git命令行工具；如果本地没有安装git的话，那么你需要安装一个git，git的安装也比较简单，直接官网下载安装包一件安装即可。</p>
+<p>PS：为什么要使用git bash？ 因为windows下的git客户端会自带一个叫<strong>mingw</strong>的命令行工具，可以执行简单的shell命令，之后用到的命令需要它。</p>
+<p>在git bash中使用以下命令新建一个mongo的容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name &lt;自定义容器名&gt; -p 27017:27017 -v F:/docker/mongodb:/data/db -d mongo --auth // （mac用户可以加上sudo）</span><br></pre></td></tr></table></figure>
+<p><code>-p 27017:27017</code>表示：前面的27017是映射到本地主机的端口（如果你本地27017被占用，可以选择其他端口），后面的27017是docker容器中运行的mongo端口，这个是固定的。</p>
+<p><code>-v F:/docker/mongodb:/data/db</code>表示：冒号前面是本地维护的数据库文件所在，后面的是容器中mongo服务数据库文件，实际应用中一般都会将数据库文件映射到本地，方便维护。</p>
+<p>新建容器完成后，可以使用<code>docker ps</code>查看当前运行的容器列表，使用<code>docker ps -a</code>可以查看当前所有的容器列表。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/docker/docker-ps.png" alt="window-shell-2"></p>
+<p>可以看到，我们刚刚运行的容器在列表中（mongoTest），使用<code>docker stop mongoTest</code>命令停止运行容器，更多常见docker命令，可以看<a href="http://www.youruncloud.com/docker/1_37.html" target="_blank" rel="noopener">这篇文章</a>。</p>
+<h2 id="配置mongodb"><a href="#配置mongodb" class="headerlink" title="配置mongodb"></a>配置mongodb</h2><p>mongodb服务已经启动起来了，接下来需要做的就是mongodb配置相关了（配置用户等）。</p>
+<p>首先在git bash中执行以下命令：（容器名称请自行替换）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;自定义容器名&gt; mongo admin</span><br></pre></td></tr></table></figure>
+<p>PS：在这里，windows用户执行上面的命令时会遇到这样的问题。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/docker/windows-error.png" alt="shell-3"></p>
+<p>这时候在命令前面加上“mintty ”变成“mintty docker ……”，就可以正常新建容器了。</p>
+<p>然后，会进入到mongodb的命令行状态。执行以下命令，创建管理员账号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123; user: <span class="string">'&lt;USER&gt;'</span>, <span class="built_in">pwd</span>: <span class="string">'&lt;PASSWORD&gt;'</span>, roles: [ &#123; role: <span class="string">'userAdminAnyDatabase'</span>, db: <span class="string">'admin'</span> &#125; ]&#125;);</span><br></pre></td></tr></table></figure>
+<p>mongodb提示用户创建成功，以后想要使用管理员身份登录mongo就可以使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;YOUR-NAME&gt; mongo -u &lt;USER&gt; -p &lt;PASSWORD&gt; --authenticationDatabase admin</span><br></pre></td></tr></table></figure></p>
+<p>假设我们项目中用到的数据库为test，上面创建的管理员是没有test数据库的读写权限的，所以我们还需要再建一个用户。</p>
+<p>在命令行中依次输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use <span class="built_in">test</span>; // 新建<span class="built_in">test</span>数据库</span><br><span class="line">db.createUser(&#123;user: <span class="string">'&lt;USER&gt;'</span>,<span class="built_in">pwd</span>: <span class="string">'&lt;PASSWORD&gt;'</span>, roles: [&#123;role: <span class="string">'readWrite'</span>, db: <span class="string">'test'</span>&#125;]&#125;); // 创建新用户</span><br><span class="line">db.auth(<span class="string">'&lt;USER&gt;'</span>, <span class="string">'&lt;PASSWORD&gt;'</span>); // 切换到新建的用户</span><br><span class="line">db.test.insert(&#123;name: <span class="string">'test db'</span>&#125;); // 确定用户是否新建成功</span><br></pre></td></tr></table></figure></p>
+<p>新建用户完成后，就可以使用新建的用户密码连接操作mongo了。</p>
+<h2 id="mongo客户端"><a href="#mongo客户端" class="headerlink" title="mongo客户端"></a>mongo客户端</h2><p>mongo的客户端的话，windows和mac都可以使用Robo 3T，下载地址：<a href="https://robomongo.org/；当然，你如果有使用IDEA家族的编辑器的话，可以直接装mongo插件：`mongo4idea`。" target="_blank" rel="noopener">https://robomongo.org/；当然，你如果有使用IDEA家族的编辑器的话，可以直接装mongo插件：`mongo4idea`。</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#首先"><span class="toc-number">1.</span> <span class="toc-text">首先</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mongo镜像与新建容器"><span class="toc-number">2.</span> <span class="toc-text">mongo镜像与新建容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置mongodb"><span class="toc-number">3.</span> <span class="toc-text">配置mongodb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mongo客户端"><span class="toc-number">4.</span> <span class="toc-text">mongo客户端</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/02/28/docker-mongo/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/02/28/docker-mongo/&text=使用docker安装和启动mongo"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/02/28/docker-mongo/&is_video=false&description=使用docker安装和启动mongo"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用docker安装和启动mongo&body=Check out this article: http://yoursite.com/2018/02/28/docker-mongo/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/28/docker-mongo/&title=使用docker安装和启动mongo"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/28/docker-mongo/&name=使用docker安装和启动mongo&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

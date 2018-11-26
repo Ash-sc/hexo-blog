@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="2017年12月14日，W3C发布了HTML5.2更新版本。那么，在这个版本中，又有哪些修改与删除呢？一起来看一下。 新增对话框 Dialog 元素没错，HTML终于有原生的模态框元素了。使用dialog元素可以创建宽度默认为其内容的宽度的模态框，模态框默认隐藏。 同时，dialog元素支持show()、showModal()和close()三个方法来显示和隐藏。 简单示例如下： 12345678">
+<meta name="keywords" content="html5,dialog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML5.2发布——你要的模态框来了">
+<meta property="og:url" content="http://yoursite.com/2018/01/24/html5-dialog/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="2017年12月14日，W3C发布了HTML5.2更新版本。那么，在这个版本中，又有哪些修改与删除呢？一起来看一下。 新增对话框 Dialog 元素没错，HTML终于有原生的模态框元素了。使用dialog元素可以创建宽度默认为其内容的宽度的模态框，模态框默认隐藏。 同时，dialog元素支持show()、showModal()和close()三个方法来显示和隐藏。 简单示例如下： 12345678">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/html5.2/dialog-show.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/html5.2/dialog-style.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/html5.2/dialog-close.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/html5.2/dialog-broswer.png">
+<meta property="og:updated_time" content="2018-11-26T13:10:30.498Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5.2发布——你要的模态框来了">
+<meta name="twitter:description" content="2017年12月14日，W3C发布了HTML5.2更新版本。那么，在这个版本中，又有哪些修改与删除呢？一起来看一下。 新增对话框 Dialog 元素没错，HTML终于有原生的模态框元素了。使用dialog元素可以创建宽度默认为其内容的宽度的模态框，模态框默认隐藏。 同时，dialog元素支持show()、showModal()和close()三个方法来显示和隐藏。 简单示例如下： 12345678">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/html5.2/dialog-show.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>HTML5.2发布——你要的模态框来了</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/02/28/docker-mongo/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/09/vue-spider-app/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/24/html5-dialog/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/24/html5-dialog/&text=HTML5.2发布——你要的模态框来了"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/24/html5-dialog/&is_video=false&description=HTML5.2发布——你要的模态框来了"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTML5.2发布——你要的模态框来了&body=Check out this article: http://yoursite.com/2018/01/24/html5-dialog/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/24/html5-dialog/&name=HTML5.2发布——你要的模态框来了&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新增对话框-Dialog-元素"><span class="toc-number">1.</span> <span class="toc-text">新增对话框 Dialog 元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#给dialog添加样式和动画"><span class="toc-number">1.1.</span> <span class="toc-text">给dialog添加样式和动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器兼容性"><span class="toc-number">1.2.</span> <span class="toc-text">浏览器兼容性</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        HTML5.2发布——你要的模态框来了
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-24T12:23:33.000Z" itemprop="datePublished">2018-01-24</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/dialog/">dialog</a>, <a class="tag-link" href="/tags/html5/">html5</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>2017年12月14日，W3C发布了HTML5.2更新版本。那么，在这个版本中，又有哪些修改与删除呢？一起来看一下。</p>
+<h2 id="新增对话框-Dialog-元素"><a href="#新增对话框-Dialog-元素" class="headerlink" title="新增对话框 Dialog 元素"></a>新增对话框 Dialog 元素</h2><p>没错，HTML终于有原生的模态框元素了。使用dialog元素可以创建宽度默认为其内容的宽度的模态框，模态框默认隐藏。</p>
+<p>同时，<code>dialog</code>元素支持<code>show()</code>、<code>showModal()</code>和<code>close()</code>三个方法来显示和隐藏。</p>
+<p>简单示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># html</span><br><span class="line">&lt;dialog id=&quot;test-dialog&quot;&gt;</span><br><span class="line">    content here!</span><br><span class="line">&lt;/dialog&gt;</span><br><span class="line"></span><br><span class="line"># js</span><br><span class="line">document.getElementById(&apos;test-dialog&apos;).show()</span><br><span class="line">document.getElementById(&apos;test-dialog&apos;).showModal()</span><br><span class="line">document.getElementById(&apos;test-dialog&apos;).close()</span><br></pre></td></tr></table></figure>
+<p>在页面中（chrome浏览器、使用show方法打开）的展示是这样子的：（仅仅是html还是有点丑的）</p>
+<p><img src="//web-site-files.ashshen.cc/blog/html5.2/dialog-show.png" alt="dialog-simple"></p>
+<p>打开控制台可以看到dialog的默认样式是这样子的：</p>
+<p><img src="//web-site-files.ashshen.cc/blog/html5.2/dialog-style.png" alt="dialog-style"></p>
+<p>dialog元素是通过<code>display</code>来实现显示/隐藏的；通过绝对定位实现左右居中的。</p>
+<p>OK，我们再来看一下dialog的show、showModal和close三个方法：</p>
+<p>show和showModal方法用于模态框的打开，close方法用于模态框的关闭</p>
+<p><strong>在chrome浏览器下</strong>：（filefox浏览器下show和showModal并没有区别）</p>
+<p><code>showModal</code>方法会创建一个遮罩层，所以使用showModal打开的dialog是屏幕上下左右都居中的。</p>
+<p><code>showModal</code>方法创建的模态框可以通过Esc按键关闭，而show方法创建的模态框只能通过close方法关闭。</p>
+<p><code>close</code>方法支持一个String参数（当然你也可以传入一个函数，但是默认调用函数的toString方法变成字符串），并且可以通过returnValue获取到该参数值，使用方法如下：</p>
+<p><img src="//web-site-files.ashshen.cc/blog/html5.2/dialog-close.png" alt="dialog-function"></p>
+<p>因为我这边直接是在控制台中测试，所以<code>$0</code>代表的就是dialog元素。</p>
+<p>可以看到：在<code>dialog</code>元素没有使用过<code>show</code>方法之前，调用<code>close</code>方法传参<code>returnValue</code>的值是不会被复写的。</p>
+<p>至于<code>returnValue</code>的作用，暂时没有发现有什么奇特的用处。</p>
+<h3 id="给dialog添加样式和动画"><a href="#给dialog添加样式和动画" class="headerlink" title="给dialog添加样式和动画"></a>给dialog添加样式和动画</h3><p>dialog终究只是一个HTML元素，在我们的实际业务场景中，还需要用它配合CSS样式使用。</p>
+<p>需要给dialog加入动画，可以从dialog的自带的<em>open属性</em>入手，从而省去<code>addClass</code>和<code>removeClass</code>操作。</p>
+<p>大致如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.beauty-modal</span><span class="selector-attr">[open]</span> &#123;</span><br><span class="line"> <span class="attribute">animation</span>: beauty-dialog-show <span class="number">1s</span> both linear;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，关于使用<code>openModal</code>方法打开的模态框背景，可通过伪类<code>::backdrop</code>来修改样式。</p>
+<h3 id="浏览器兼容性"><a href="#浏览器兼容性" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h3><p>关于dialog浏览器的兼容性，可以从<code>caniuse</code>获取。</p>
+<p>大致如下：（可以点击show all看到更详细的信息）</p>
+<p><img src="//web-site-files.ashshen.cc/blog/html5.2/dialog-broswer.png" alt="caniuse"></p>
+<p>对于firefox浏览器，需要在about:config页面将dom.dialog_element.enabled值修改成true才能使用dialog元素。</p>
+<p>同时，上面也提到：<strong>firefox浏览器中，show和showModal方法是没有区别的，都相当于show方法</strong>。</p>
+<p>对于不兼容的浏览器，可以使用<em>polyfill</em>，有兴趣的可以点击查看。</p>
+<p>判断浏览器是否支持dialog元素，可以用：<code>typeof document.createElement(&#39;dialog&#39;).show === &#39;function&#39;</code></p>
+<p>dialog的demo地址：<a href="http://demo.2017017.xyz/html5-2/dialog.html" target="_blank" rel="noopener">http://demo.2017017.xyz/html5-2/dialog.html</a></p>
+<p><strong>PS</strong>：如果不使用CSS给dialog定位处理，在chrome浏览器中使用<code>showModal</code>方法打开模态框并关闭后，再使用<code>show</code>方法打开模态框，其位置会与直接使用<code>show</code>方法打开模态框的位置有差异。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新增对话框-Dialog-元素"><span class="toc-number">1.</span> <span class="toc-text">新增对话框 Dialog 元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#给dialog添加样式和动画"><span class="toc-number">1.1.</span> <span class="toc-text">给dialog添加样式和动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器兼容性"><span class="toc-number">1.2.</span> <span class="toc-text">浏览器兼容性</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/24/html5-dialog/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/24/html5-dialog/&text=HTML5.2发布——你要的模态框来了"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/24/html5-dialog/&is_video=false&description=HTML5.2发布——你要的模态框来了"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTML5.2发布——你要的模态框来了&body=Check out this article: http://yoursite.com/2018/01/24/html5-dialog/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/24/html5-dialog/&title=HTML5.2发布——你要的模态框来了"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/24/html5-dialog/&name=HTML5.2发布——你要的模态框来了&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

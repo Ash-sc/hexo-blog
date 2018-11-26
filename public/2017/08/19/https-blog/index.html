@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="前面有说到https与http的一些区别以及https的一些好处。当然，对于平时也就用来写写博客的的ashshen.cc来说，升级到https实际上是没有太大必要的 ( PS：可以避免某些网络运营商插入广告 ) ；不过闲着也是闲着，有时间和精力又有条件的话，练练手熟悉熟悉也是极好的。 本文主要是针对使用wordpress（apache2 + php7）搭建的博客如何升级到https。 Let’s">
+<meta name="keywords" content="https,blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="十分钟升级wordpress博客到https">
+<meta property="og:url" content="http://yoursite.com/2017/08/19/https-blog/index.html">
+<meta property="og:site_name" content="Ash&#39;s Folding Page">
+<meta property="og:description" content="前面有说到https与http的一些区别以及https的一些好处。当然，对于平时也就用来写写博客的的ashshen.cc来说，升级到https实际上是没有太大必要的 ( PS：可以避免某些网络运营商插入广告 ) ；不过闲着也是闲着，有时间和精力又有条件的话，练练手熟悉熟悉也是极好的。 本文主要是针对使用wordpress（apache2 + php7）搭建的博客如何升级到https。 Let’s">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/certbot-config-1.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/certbot-config-2.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/https-site.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/change-setting.png">
+<meta property="og:updated_time" content="2018-11-26T13:10:37.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="十分钟升级wordpress博客到https">
+<meta name="twitter:description" content="前面有说到https与http的一些区别以及https的一些好处。当然，对于平时也就用来写写博客的的ashshen.cc来说，升级到https实际上是没有太大必要的 ( PS：可以避免某些网络运营商插入广告 ) ；不过闲着也是闲着，有时间和精力又有条件的话，练练手熟悉熟悉也是极好的。 本文主要是针对使用wordpress（apache2 + php7）搭建的博客如何升级到https。 Let’s">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/certbot-config-1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>十分钟升级wordpress博客到https</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/05/react-component/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/08/17/https/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/19/https-blog/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/19/https-blog/&text=十分钟升级wordpress博客到https"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/19/https-blog/&is_video=false&description=十分钟升级wordpress博客到https"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=十分钟升级wordpress博客到https&body=Check out this article: http://yoursite.com/2017/08/19/https-blog/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/19/https-blog/&name=十分钟升级wordpress博客到https&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Let’s-Encrypt和Certbot"><span class="toc-number">1.</span> <span class="toc-text">Let’s Encrypt和Certbot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#升级步骤"><span class="toc-number">2.</span> <span class="toc-text">升级步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新Let’s-Encrypt证书"><span class="toc-number">3.</span> <span class="toc-text">更新Let’s Encrypt证书</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        十分钟升级wordpress博客到https
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Ash's Folding Page</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-19T11:42:38.000Z" itemprop="datePublished">2017-08-19</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/blog/">blog</a>, <a class="tag-link" href="/tags/https/">https</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><a href="/2017/08/17/https/">前面</a>有说到https与http的一些区别以及https的一些好处。当然，对于平时也就用来写写博客的的ashshen.cc来说，升级到https实际上是没有太大必要的 ( PS：可以避免某些网络运营商插入广告 ) ；不过闲着也是闲着，有时间和精力又有条件的话，练练手熟悉熟悉也是极好的。</p>
+<p>本文主要是针对使用wordpress（apache2 + php7）搭建的博客如何升级到https。</p>
+<h2 id="Let’s-Encrypt和Certbot"><a href="#Let’s-Encrypt和Certbot" class="headerlink" title="Let’s Encrypt和Certbot"></a>Let’s Encrypt和Certbot</h2><p>对于https而言，ssl是最重要的部分。那么，对于https网站而言，ssl的证书也就是必不可少的了，所以想要升级网站到https，我们得先搞一个证书。</p>
+<p>现有的ssl证书认证机构大多是收费的，这里推荐一个免费的证书认证机构：<a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a>（只需要每3个月更新一次证书）。</p>
+<p><a href="https://certbot.eff.org/" target="_blank" rel="noopener">Certbot</a>是针对Let’s Encrypt发布的一个客户端，利用它可以完全自动化的获取、部署和更新安全证书。</p>
+<h2 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h2><p>证书搞定，开始升级。</p>
+<p>首先ssh连接服务器，并下载安装Certbot<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.eff.org/certbot-auto</span><br><span class="line">chmod a+x certbot-auto</span><br><span class="line">./certbot-auto</span><br></pre></td></tr></table></figure></p>
+<p>然后按照shell中的提示依次输入邮箱、ssl需要绑定的域名等信息<br><img src="//web-site-files.ashshen.cc/blog/certbot-config-1.png" alt="certbot-install"></p>
+<p><img src="//web-site-files.ashshen.cc/blog/certbot-config-2.png" alt="certbot-install-2"></p>
+<p>提示安装成功之后，在浏览器中输入url可以查看https是否升级成功。</p>
+<p><img src="//web-site-files.ashshen.cc/blog/https-site.png" alt="install-check"></p>
+<p>最后，不要忘记将wordpress后台设置中的地址改成https</p>
+<p><img src="//web-site-files.ashshen.cc/blog/change-setting.png" alt="wordpress-setting"></p>
+<h2 id="更新Let’s-Encrypt证书"><a href="#更新Let’s-Encrypt证书" class="headerlink" title="更新Let’s Encrypt证书"></a>更新Let’s Encrypt证书</h2><p>如果你在安装certbot的过程中设置了正确的邮箱地址，那么在https证书过期时你将收到提示更新的邮件。</p>
+<p>然后你可以使用下面的命令来更新证书</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">certbot renew</span><br><span class="line">// 或者</span><br><span class="line">certbot renew --force-renewal</span><br></pre></td></tr></table></figure>
+<p>如果更新时提示有apache插件没有安装导致安装失败，可以通过<code>apt-get install python-certbot-apache</code>安装插件（安装插件时需要停止Nginx进程） ，然后再进行renew操作。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Let’s-Encrypt和Certbot"><span class="toc-number">1.</span> <span class="toc-text">Let’s Encrypt和Certbot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#升级步骤"><span class="toc-number">2.</span> <span class="toc-text">升级步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新Let’s-Encrypt证书"><span class="toc-number">3.</span> <span class="toc-text">更新Let’s Encrypt证书</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/19/https-blog/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/19/https-blog/&text=十分钟升级wordpress博客到https"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/19/https-blog/&is_video=false&description=十分钟升级wordpress博客到https"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=十分钟升级wordpress博客到https&body=Check out this article: http://yoursite.com/2017/08/19/https-blog/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/19/https-blog/&title=十分钟升级wordpress博客到https"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/19/https-blog/&name=十分钟升级wordpress博客到https&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ash
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

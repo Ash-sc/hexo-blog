@@ -15,7 +15,7 @@
 <meta property="og:description" content="单请求文件上传对于文件上传，我们通常的做法是使用单个请求来上传所有的文件内容，这样的做法在上传较小文件时比较适用。但是，当上传的文件达到百兆甚至GB级别时，使用单请求来上传文件就会遇到一些问题。 首先，请求超时时间和请求体大小的问题。我们通常需要在服务器给请求统一设置更大的请求体大小限值和超时时间限值，这对其他请求和服务器安全是十分不友好的。 再者，用户上传过程中的网络波动也容易造成大文件的上传失">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/slice-file-upload/upload-example.png">
-<meta property="og:updated_time" content="2018-11-26T13:09:47.643Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件分片上传——Node.js部分">
 <meta name="twitter:description" content="单请求文件上传对于文件上传，我们通常的做法是使用单个请求来上传所有的文件内容，这样的做法在上传较小文件时比较适用。但是，当上传的文件达到百兆甚至GB级别时，使用单请求来上传文件就会遇到一些问题。 首先，请求超时时间和请求体大小的问题。我们通常需要在服务器给请求统一设置更大的请求体大小限值和超时时间限值，这对其他请求和服务器安全是十分不友好的。 再者，用户上传过程中的网络波动也容易造成大文件的上传失">
@@ -176,7 +176,7 @@
 <p>filename 服务端用来获取文件后缀。</p>
 <p>然后才是带有blob数据file字段。</p>
 <p>控制台示例大致如下：</p>
-<p><img src="//web-site-files.ashshen.cc/slice-file-upload/upload-example.png" alt="console-eg"></p>
+<p><img src="http://web-site-files.ashshen.cc/slice-file-upload/upload-example.png" alt="console-eg"></p>
 <h2 id="Node-js实现"><a href="#Node-js实现" class="headerlink" title="Node.js实现"></a>Node.js实现</h2><p>Node.js部分我使用的是express框架，当然你也可以使用koa2，原理都是一致的。</p>
 <p>express下可以使用connect-multiparty作为中间件，然后使用req.body获取form-data信息。</p>
 <p>大致流程：</p>

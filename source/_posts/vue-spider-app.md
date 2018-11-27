@@ -33,7 +33,7 @@ OK，按照惯例，先上Github地址：https://github.com/Ash-sc/node-spider-w
 
 在用爬虫爬豆瓣的数据之前，我先google了一下豆瓣Api，然后发现豆瓣还真的有供开发者使用的Api，然鹅当进入到应用页面后，却出现了下面这个尴尬的情况（摔）。
 
-![douban-api](//web-site-files.ashshen.cc/blog/spider-webapp/douban_api.png)
+![douban-api](http://web-site-files.ashshen.cc/blog/spider-webapp/douban_api.png)
 
 
 mmp…… 还是老老实实用爬虫吧…
@@ -42,7 +42,7 @@ mmp…… 还是老老实实用爬虫吧…
 
 然后，第一版的电影列表页面效果大概是这样子的：（2018-01-10）
 
-<video src="//web-site-files.ashshen.cc/blog/spider-webapp/movie-version01.mp4" width="300" height="550" controls="controls"></video>
+<video src="http://web-site-files.ashshen.cc/blog/spider-webapp/movie-version01.mp4" width="300" height="550" controls="controls"></video>
 
 电影列表页用双列展示，同时左右两列垂直错开2rem（40px）的像素，使列表页看上去不是那么的平淡。正下方是一个fixed定位的tab，后续考虑把这一块稍微优化一下。
 
@@ -54,7 +54,7 @@ mmp…… 还是老老实实用爬虫吧…
 
 第一版页面效果如下：
 
-<img src="//web-site-files.ashshen.cc/blog/spider-webapp/movie-detail-view.png" width="300" />
+<img src="http://web-site-files.ashshen.cc/blog/spider-webapp/movie-detail-view.png" width="300" />
 
 电影模块，第一版本需求大致差不多了。当然，还需要解决掉宣传片的问题，这个是一定不能少的。
 
@@ -74,7 +74,7 @@ PS：在此之前我也尝试过直接request模块获取到全部的视频流�
 
 实现后的电影详情页面大致如下：
 
-<video src="//web-site-files.ashshen.cc/blog/spider-webapp/movie-detail-version01.mp4" width="300" height="550" controls="controls"></video>
+<video src="http://web-site-files.ashshen.cc/blog/spider-webapp/movie-detail-version01.mp4" width="300" height="550" controls="controls"></video>
 
 
 

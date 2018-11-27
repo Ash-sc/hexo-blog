@@ -17,7 +17,7 @@ registry.docker-cn.com
 https://docker.mirrors.ustc.edu.cn
 https://hub-mirror.c.163.com
 ```
-![docker-install](//web-site-files.ashshen.cc/blog/docker/docker-mirrors.png)
+![docker-install](http://web-site-files.ashshen.cc/blog/docker/docker-mirrors.png)
 
 应用，然后重新启动。
 
@@ -27,7 +27,7 @@ https://hub-mirror.c.163.com
 
 pull完成之后可以通过docker images查看本地拥有的镜像列表。
 
-![windows-shell](//web-site-files.ashshen.cc/blog/docker/docker-images.png)
+![windows-shell](http://web-site-files.ashshen.cc/blog/docker/docker-images.png)
 
 然后我们就可以通过mongo镜像来新建一个容器了。
 
@@ -47,7 +47,7 @@ docker run --name <自定义容器名> -p 27017:27017 -v F:/docker/mongodb:/data
 
 新建容器完成后，可以使用`docker ps`查看当前运行的容器列表，使用`docker ps -a`可以查看当前所有的容器列表。
 
-![window-shell-2](//web-site-files.ashshen.cc/blog/docker/docker-ps.png)
+![window-shell-2](http://web-site-files.ashshen.cc/blog/docker/docker-ps.png)
 
 可以看到，我们刚刚运行的容器在列表中（mongoTest），使用`docker stop mongoTest`命令停止运行容器，更多常见docker命令，可以看[这篇文章](http://www.youruncloud.com/docker/1_37.html)。
 
@@ -63,7 +63,7 @@ docker exec -it <自定义容器名> mongo admin
 
 PS：在这里，windows用户执行上面的命令时会遇到这样的问题。
 
-![shell-3](//web-site-files.ashshen.cc/blog/docker/windows-error.png)
+![shell-3](http://web-site-files.ashshen.cc/blog/docker/windows-error.png)
 
 这时候在命令前面加上“mintty ”变成“mintty docker ......”，就可以正常新建容器了。
 

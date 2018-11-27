@@ -56,7 +56,7 @@ project
 登录页面采用左右布局，左边暂时还没想好放什么，先用一个css3动画占位好了，右边是固定宽度的表单模块。
 
  // todo: 邮箱验证
-![login-page](//web-site-files.ashshen.cc/blog/notebook/login_page.png)
+![login-page](http://web-site-files.ashshen.cc/blog/notebook/login_page.png)
 
 **笔记本页面：**
 
@@ -64,11 +64,11 @@ project
 
 笔记本页面截图：
 
-![main-page](//web-site-files.ashshen.cc/blog/notebook/notebook_page_1.png)
+![main-page](http://web-site-files.ashshen.cc/blog/notebook/notebook_page_1.png)
 
 新用户第一次进入页面是没有任何默认笔记本存在的，点击左上方的按钮可以新建一个笔记本
 
-![new-notebook](//web-site-files.ashshen.cc/blog/notebook/notebook_page_newnotebook.png)
+![new-notebook](http://web-site-files.ashshen.cc/blog/notebook/notebook_page_newnotebook.png)
 
 笔记本有私有和公开两种分类，暂时来说都是私有的。
 
@@ -78,7 +78,7 @@ project
 
 // todo: 需要添加笔记本名称修改功能。
 
-![notebook-list](//web-site-files.ashshen.cc/blog/notebook/notebook_page_list.png)
+![notebook-list](http://web-site-files.ashshen.cc/blog/notebook/notebook_page_list.png)
 
 顶部功能栏设置有排序功能，可根据名称、笔记数量、更新时间 来对笔记本进行排列。
 
@@ -86,7 +86,7 @@ project
 
 **笔记页面**
 
-![note-page](//web-site-files.ashshen.cc/blog/notebook/note_page_1.png)
+![note-page](http://web-site-files.ashshen.cc/blog/notebook/note_page_1.png)
 
 同样，初始状态的笔记页面也是啥都没有滴，除了页面公共顶部和左侧之外，右侧的主体部分被我分成了两块：
 
@@ -94,7 +94,7 @@ project
 
 OK，点击添加按钮添加一个笔记，添加笔记与添加笔记本不同，添加笔记是直接添加了一个标题和内容都为空的笔记。所以不使用弹框的形式，点击按钮后直接生成新笔记。
 
-![edit-note](//web-site-files.ashshen.cc/blog/notebook/note_page_newnote.png)
+![edit-note](http://web-site-files.ashshen.cc/blog/notebook/note_page_newnote.png)
 
 然后你会发现左侧菜单会有一些变化，多出来一个“最近笔记”部分；是的，最新更新的五条笔记会显示在左侧菜单的顶部。
 
@@ -102,7 +102,7 @@ OK，点击添加按钮添加一个笔记，添加笔记与添加笔记本不同
 
 编辑完毕，点击保存（不保存也没有关系，下一次刷新页面时会自动同步最新的笔记到服务端）。
 
-![save-note](//web-site-files.ashshen.cc/blog/notebook/note_page_edit.png)
+![save-note](http://web-site-files.ashshen.cc/blog/notebook/note_page_edit.png)
 
 Emmmm……回头看了一下床上，还好，这次的女朋友质量还是可以的。
 
@@ -110,13 +110,13 @@ Emmmm……回头看了一下床上，还好，这次的女朋友质量还是可
 
 然后是登出功能，与Evernote一样，点击顶部栏的账号名称，会弹出账号操作的悬浮框，然后点击“Log Out”即可退出并清空所有本地缓存。
 
-![user-info](//web-site-files.ashshen.cc/blog/notebook/account_option.png)
+![user-info](http://web-site-files.ashshen.cc/blog/notebook/account_option.png)
 
 OK，有这些基本功能已经可以确保项目的正常使用了，但是为了方便，再添加一个关键字搜索好了。
 
 搜索的入口：顶部栏右侧，输入关键词并后，会从笔记标题、内容和笔记本名称中搜索出含有改关键词的结果，点击之后跳转到相应的页面。
 
-![search](//web-site-files.ashshen.cc/blog/notebook/search_function.png)
+![search](http://web-site-files.ashshen.cc/blog/notebook/search_function.png)
 
 搜索功能也加好了，前端的工作到这里也就告一段落了。
 

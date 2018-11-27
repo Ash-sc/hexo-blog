@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/note_page_edit.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/account_option.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/notebook/search_function.png">
-<meta property="og:updated_time" content="2018-11-26T13:12:51.535Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用vue撸了一发Evernote网页版">
 <meta name="twitter:description" content="在很久之前曾用过一段时间的Evernote，后来由于在手机上经常卡顿，也就弃坑了改用Wiznote。然鹅Wiznote也不是个什么好鸟，相较于Evernote对于免费用户只能同时绑定两个客户端而言，Wiznote居然对免费用户限制笔记数量。好吧，不能忍了，刚好最近这段时间也在看Vue，所以也就自己动手撸了个网页版的笔记，存放点BT网站url地址啥的（笑）。 功能还在陆续完善中，后续应该会有手机版的">
@@ -163,37 +163,37 @@
 <h2 id="前端部分：Vue-vuex-axios"><a href="#前端部分：Vue-vuex-axios" class="headerlink" title="前端部分：Vue+vuex+axios"></a>前端部分：Vue+vuex+axios</h2><p><strong>注册/登录页面：</strong></p>
 <p>暂时只做了注册和登录功能。</p>
 <p>登录页面采用左右布局，左边暂时还没想好放什么，先用一个css3动画占位好了，右边是固定宽度的表单模块。</p>
-<p> // todo: 邮箱验证<br><img src="//web-site-files.ashshen.cc/blog/notebook/login_page.png" alt="login-page"></p>
+<p> // todo: 邮箱验证<br><img src="http://web-site-files.ashshen.cc/blog/notebook/login_page.png" alt="login-page"></p>
 <p><strong>笔记本页面：</strong></p>
 <p>登录之后则跳转到笔记本页面，与Evernote布局一致，分为顶部功能栏和左侧菜单栏，顶部和左侧部分与其他页面公用，所以抽出成组件以便复用。</p>
 <p>笔记本页面截图：</p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/notebook_page_1.png" alt="main-page"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/notebook_page_1.png" alt="main-page"></p>
 <p>新用户第一次进入页面是没有任何默认笔记本存在的，点击左上方的按钮可以新建一个笔记本</p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/notebook_page_newnotebook.png" alt="new-notebook"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/notebook_page_newnotebook.png" alt="new-notebook"></p>
 <p>笔记本有私有和公开两种分类，暂时来说都是私有的。</p>
 <p>// todo: 公开的笔记将可以通过url或二维码分享给他人。</p>
 <p>新建笔记本后，笔记本将以条状块形式展示，显示笔记本名称和该笔记本下笔记数量，鼠标悬浮笔记数量出现删除操作按钮，这里选用悬浮是为了不占用右键操作，避免修改网页用户习惯。</p>
 <p>// todo: 需要添加笔记本名称修改功能。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/notebook_page_list.png" alt="notebook-list"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/notebook_page_list.png" alt="notebook-list"></p>
 <p>顶部功能栏设置有排序功能，可根据名称、笔记数量、更新时间 来对笔记本进行排列。</p>
 <p>双击笔记本部分跳转到对应笔记本的笔记页面。</p>
 <p><strong>笔记页面</strong></p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/note_page_1.png" alt="note-page"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/note_page_1.png" alt="note-page"></p>
 <p>同样，初始状态的笔记页面也是啥都没有滴，除了页面公共顶部和左侧之外，右侧的主体部分被我分成了两块：</p>
 <p>左边是笔记预览部分，右边是笔记编辑部分。</p>
 <p>OK，点击添加按钮添加一个笔记，添加笔记与添加笔记本不同，添加笔记是直接添加了一个标题和内容都为空的笔记。所以不使用弹框的形式，点击按钮后直接生成新笔记。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/note_page_newnote.png" alt="edit-note"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/note_page_newnote.png" alt="edit-note"></p>
 <p>然后你会发现左侧菜单会有一些变化，多出来一个“最近笔记”部分；是的，最新更新的五条笔记会显示在左侧菜单的顶部。</p>
 <p>然后我们可以直接编辑新建笔记的标题和内容，让界面看起来不那么丑……</p>
 <p>编辑完毕，点击保存（不保存也没有关系，下一次刷新页面时会自动同步最新的笔记到服务端）。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/note_page_edit.png" alt="save-note"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/note_page_edit.png" alt="save-note"></p>
 <p>Emmmm……回头看了一下床上，还好，这次的女朋友质量还是可以的。</p>
 <p>同样，笔记缩略图的显示跟笔记本缩略图类似，只是添加了高亮并且右边没有了笔记数量，取而代之的是一个操作提示按钮，鼠标悬浮上去变为删除。</p>
 <p>然后是登出功能，与Evernote一样，点击顶部栏的账号名称，会弹出账号操作的悬浮框，然后点击“Log Out”即可退出并清空所有本地缓存。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/account_option.png" alt="user-info"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/account_option.png" alt="user-info"></p>
 <p>OK，有这些基本功能已经可以确保项目的正常使用了，但是为了方便，再添加一个关键字搜索好了。</p>
 <p>搜索的入口：顶部栏右侧，输入关键词并后，会从笔记标题、内容和笔记本名称中搜索出含有改关键词的结果，点击之后跳转到相应的页面。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/notebook/search_function.png" alt="search"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/notebook/search_function.png" alt="search"></p>
 <p>搜索功能也加好了，前端的工作到这里也就告一段落了。</p>
 <p><em>前端数据的处理：</em></p>
 <p>笔记的本地缓存：笔记本和笔记的数据都是缓存在本地的localStorage中的，但是笔记的标题和内容是加密过的。</p>

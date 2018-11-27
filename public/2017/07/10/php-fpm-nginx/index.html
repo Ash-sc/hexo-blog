@@ -15,7 +15,7 @@
 <meta property="og:description" content="最近公司有个项目是用的php写的后端服务，相关的开发和运维人员也没有php的项目部署经验，所以我也就协助着弄了一下关于在Linux环境下部署php项目，顺便学习一下新的知识，拓宽一下自己的知识面。然后事后在自己的电脑中也部署了一套同样的环境。 主要包括以下几个步骤：  php的安装以及php-fpm的安装  Nginx的安装以及配置  安装composer和slim  运行和测试   php的安装">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/php-fpm_error.png">
-<meta property="og:updated_time" content="2018-11-26T13:11:24.785Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac OS下配置php-fpm+Nginx服务并运行slim框架项目">
 <meta name="twitter:description" content="最近公司有个项目是用的php写的后端服务，相关的开发和运维人员也没有php的项目部署经验，所以我也就协助着弄了一下关于在Linux环境下部署php项目，顺便学习一下新的知识，拓宽一下自己的知识面。然后事后在自己的电脑中也部署了一套同样的环境。 主要包括以下几个步骤：  php的安装以及php-fpm的安装  Nginx的安装以及配置  安装composer和slim  运行和测试   php的安装">
@@ -161,7 +161,7 @@
 <h2 id="php的安装以及php-fpm的安装"><a href="#php的安装以及php-fpm的安装" class="headerlink" title="php的安装以及php-fpm的安装"></a>php的安装以及php-fpm的安装</h2><p>mac OS中已经自带php以及php-fpm的环境了，所以也就省去了安装php以及php-fpm的步骤。</p>
 <p>使用php -version，可以查看当前安装的php版本。我本机的环境是5.6.30，而slim官网要求的是php5.5或者更高，所以也不需要更新php的版本。</p>
 <p>但是，php-fpm还是需要配置之后才可以使用，在shell中直接运行php-fpm会报错找不到配置文件。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/php-fpm_error.png" alt="install-fpm"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/php-fpm_error.png" alt="install-fpm"></p>
 <p>配置php-fpm：</p>
 <p>首先复制配置文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /private/etc/php-fpm.conf.default /usr/<span class="built_in">local</span>/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>

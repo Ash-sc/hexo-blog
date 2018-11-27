@@ -14,15 +14,15 @@
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。  那么，它们之间又有什么区别和关系呢？  Node.js中的模块又是如何加载的呢？  Webpack打包后的模块又是如何加载的呢？   本文将针对这几个问题做一些简单的梳理和介绍。 AMD ( asynchronous module definition )从字面的意思来理解，AMD的意思是异步">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-console.png">
+<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-output.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/cmd-console.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/node-output.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/es6-module.png">
-<meta property="og:updated_time" content="2018-11-27T10:03:36.872Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端模块加载浅析">
 <meta name="twitter:description" content="提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。  那么，它们之间又有什么区别和关系呢？  Node.js中的模块又是如何加载的呢？  Webpack打包后的模块又是如何加载的呢？   本文将针对这几个问题做一些简单的梳理和介绍。 AMD ( asynchronous module definition )从字面的意思来理解，AMD的意思是异步">
-<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-console.png">
+<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-output.png">
     
     
         
@@ -176,7 +176,7 @@
 <p>上面例子中使用到的写法就是符合AMD规范的写法</p>
 <p>  使用define定义模块；参数依次为模块名称(可省略)、依赖的模块与回调；被依赖的模块提供return</p>
 <p>在浏览器中打开index.html，控制台中会有如下输出：</p>
-<p><img src="//web-site-files.ashshen.cc/blog/module-in-js/amd-demo-console.png" alt="amd-module-console"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-output.png" alt="amd-module-console"></p>
 <p>可以看到，使用AMD规范的模块加载顺序为：被依赖的模块先加载，主模块最后加载。</p>
 <h2 id="CMD-common-module-definition"><a href="#CMD-common-module-definition" class="headerlink" title="CMD ( common module definition )"></a>CMD ( common module definition )</h2><p>说到CMD的话，就不得不说一下seajs这个库了。</p>
 <p>还是刚刚那个add和isUrl的例子。</p>

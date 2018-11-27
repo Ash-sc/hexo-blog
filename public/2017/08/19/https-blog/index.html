@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/certbot-config-2.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/https-site.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/change-setting.png">
-<meta property="og:updated_time" content="2018-11-26T13:10:37.682Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="十分钟升级wordpress博客到https">
 <meta name="twitter:description" content="前面有说到https与http的一些区别以及https的一些好处。当然，对于平时也就用来写写博客的的ashshen.cc来说，升级到https实际上是没有太大必要的 ( PS：可以避免某些网络运营商插入广告 ) ；不过闲着也是闲着，有时间和精力又有条件的话，练练手熟悉熟悉也是极好的。 本文主要是针对使用wordpress（apache2 + php7）搭建的博客如何升级到https。 Let’s">
@@ -156,12 +156,12 @@
 <p><a href="https://certbot.eff.org/" target="_blank" rel="noopener">Certbot</a>是针对Let’s Encrypt发布的一个客户端，利用它可以完全自动化的获取、部署和更新安全证书。</p>
 <h2 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h2><p>证书搞定，开始升级。</p>
 <p>首先ssh连接服务器，并下载安装Certbot<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.eff.org/certbot-auto</span><br><span class="line">chmod a+x certbot-auto</span><br><span class="line">./certbot-auto</span><br></pre></td></tr></table></figure></p>
-<p>然后按照shell中的提示依次输入邮箱、ssl需要绑定的域名等信息<br><img src="//web-site-files.ashshen.cc/blog/certbot-config-1.png" alt="certbot-install"></p>
-<p><img src="//web-site-files.ashshen.cc/blog/certbot-config-2.png" alt="certbot-install-2"></p>
+<p>然后按照shell中的提示依次输入邮箱、ssl需要绑定的域名等信息<br><img src="http://web-site-files.ashshen.cc/blog/certbot-config-1.png" alt="certbot-install"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/certbot-config-2.png" alt="certbot-install-2"></p>
 <p>提示安装成功之后，在浏览器中输入url可以查看https是否升级成功。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/https-site.png" alt="install-check"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/https-site.png" alt="install-check"></p>
 <p>最后，不要忘记将wordpress后台设置中的地址改成https</p>
-<p><img src="//web-site-files.ashshen.cc/blog/change-setting.png" alt="wordpress-setting"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/change-setting.png" alt="wordpress-setting"></p>
 <h2 id="更新Let’s-Encrypt证书"><a href="#更新Let’s-Encrypt证书" class="headerlink" title="更新Let’s Encrypt证书"></a>更新Let’s Encrypt证书</h2><p>如果你在安装certbot的过程中设置了正确的邮箱地址，那么在https证书过期时你将收到提示更新的邮件。</p>
 <p>然后你可以使用下面的命令来更新证书</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">certbot renew</span><br><span class="line">// 或者</span><br><span class="line">certbot renew --force-renewal</span><br></pre></td></tr></table></figure>

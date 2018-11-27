@@ -20,7 +20,7 @@ PS：vscode也有一个类似的插件：Polacode
 
 截图：
 
-![carbon](//web-site-files.ashshen.cc/tools/carbon.png)
+![carbon](http://web-site-files.ashshen.cc/tools/carbon.png)
 
 
 ### 2.Just Free Templates
@@ -33,7 +33,7 @@ PS：vscode也有一个类似的插件：Polacode
 
 截图：
 
-![template](//web-site-files.ashshen.cc/tools/freetemplate.png)
+![template](http://web-site-files.ashshen.cc/tools/freetemplate.png)
 
 
 ### 3.Scrimba
@@ -46,7 +46,7 @@ PS：vscode也有一个类似的插件：Polacode
 
 截图：
 
-![scrimba](//web-site-files.ashshen.cc/tools/scrimba.png)
+![scrimba](http://web-site-files.ashshen.cc/tools/scrimba.png)
 
 ### 4....
 
@@ -63,7 +63,7 @@ shell文档查看器（too long don’t read）。
 
 截图：
 
-![tldr](//web-site-files.ashshen.cc/tools/tldr.png)
+![tldr](http://web-site-files.ashshen.cc/tools/tldr.png)
 
 ### 2.execa
 

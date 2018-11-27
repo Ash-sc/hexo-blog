@@ -16,7 +16,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/http&https.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/ssl-shake.png">
-<meta property="og:updated_time" content="2018-11-26T13:10:45.829Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="https初探">
 <meta name="twitter:description" content="最近在琢磨着把博客升级成https，于是也就去看了一些关于https的资料，把自己学到的一些知识写成笔记，以供自己将来回顾，当然，也为有需要的人提供一份参考。 什么是httphttp的全称为Hypertext Transfer Protocol，即超文本传输协议，是一种属于应用层的协议。 http的缺点使用明文传输，内容有被窃取的风险  不验证通信双方的身份，可能被与被伪装的对象交流  无法验证报">
@@ -159,12 +159,12 @@
 <p>ssl协议采用的是公钥加密算法：客户端向服务器索要公钥，然后使用服务器返回的公钥加密信息，服务器使用私钥来解密信息。</p>
 <p><em>http与https</em></p>
 <p>（http在TCP完成三次握手后即可开始报文的传输，而https在完成TCP三次握手之后，还需要进行ssl的四次握手，然后开始报文传输）</p>
-<p><img src="//web-site-files.ashshen.cc/blog/http&amp;https.png" alt="http-vs-https"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/http&amp;https.png" alt="http-vs-https"></p>
 <p>这样一来，ssl也有两个问题需要解决：一、保证公钥不被截取篡改（公钥的传输也是明文的）；二、加解密的计算开销过大。</p>
 <p>对于第一个问题，ssl的解决办法是：<strong>服务器不会直接将公钥传给客户端，而是将公钥放在证书中传输给客户端，只要保证证书的安全可信，公钥自然也就能够安全可信。</strong></p>
 <p>至于加解密计算开销过大的问题，在每次对话（TCP连接）中，客户端和服务端会都生成一个对话密钥，然后用对话密钥来加密信息，由于对话密钥使用的是对称加密，所以运算速度很快，而客户端只需要在ssl四次握手的过程中将对话密钥使用服务器提供的公钥加密后传输给服务端就行（这句话可能会有点拗口，没关系，下面还有图解）。</p>
 <p><strong>ssl四次握手过程：</strong></p>
-<p><img src="//web-site-files.ashshen.cc/blog/ssl-shake.png" alt="https-hands-shake"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/ssl-shake.png" alt="https-hands-shake"></p>
 <p><em>第一步</em>，客户端向服务器发起请求，请求包括一个随机数、客户端支持的ssl协议版本、加密算法以及压缩算法。</p>
 <p>当第一步完成后，此时：服务器和客户端都拥有了一个随机数。</p>
 <p><em>第二步</em>，服务器响应客户端的请求，并向客户端发送了第二个随机数、接下来将要使用的ssl协议版本、加密算法以及压缩算法，还有带有公钥的证书。</p>

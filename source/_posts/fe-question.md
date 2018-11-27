@@ -38,7 +38,7 @@ console.log(res);
 
 然而，真实的执行结果：
 
-![console-output](//web-site-files.ashshen.cc/blog/font-end-question/run-result.png)
+![console-output](http://web-site-files.ashshen.cc/blog/font-end-question/run-result.png)
 
 两份代码唯一的区别在于第一份代码多了一个`slice(0)`。
 
@@ -56,7 +56,7 @@ JS中，数组原生的sort方法采用的排序算法是*快速排序*，假设
 ```
 那么，你会在浏览器中看到如下执行结果：
 
-![output](//web-site-files.ashshen.cc/blog/font-end-question/arr-sort.png)
+![output](http://web-site-files.ashshen.cc/blog/font-end-question/arr-sort.png)
 
 也就是说，sort方法执行时：从数组的第二个元素开始（假设它为m），依次把该元素（m）与它前面的元素（从arr[0]开始：n）进行比较，如果return的值小于0，则把该元素（m）插入到比较元素（n）前面，否则，继续与下一位元素比较（n的下一位）。
 
@@ -75,6 +75,6 @@ PS：这两份代码就好比给你1000个游戏币，第一份代码代表你�
 
 以下为t = 10, t = 100, t = 1000, t = 10000, t =100000时两份代码执行结果：
 
-![result](//web-site-files.ashshen.cc/blog/font-end-question/final-result.png)
+![result](http://web-site-files.ashshen.cc/blog/font-end-question/final-result.png)
 
 可以看到，t越大，这样的特征是越明显的。

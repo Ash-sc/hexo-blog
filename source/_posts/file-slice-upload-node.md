@@ -56,7 +56,7 @@ filename 服务端用来获取文件后缀。
 
 控制台示例大致如下：
 
-![console-eg](//web-site-files.ashshen.cc/slice-file-upload/upload-example.png)
+![console-eg](http://web-site-files.ashshen.cc/slice-file-upload/upload-example.png)
 
 ## Node.js实现
 

@@ -28,11 +28,11 @@ document.getElementById('test-dialog').close()
 
 在页面中（chrome浏览器、使用show方法打开）的展示是这样子的：（仅仅是html还是有点丑的）
 
-![dialog-simple](//web-site-files.ashshen.cc/blog/html5.2/dialog-show.png)
+![dialog-simple](http://web-site-files.ashshen.cc/blog/html5.2/dialog-show.png)
 
 打开控制台可以看到dialog的默认样式是这样子的：
 
-![dialog-style](//web-site-files.ashshen.cc/blog/html5.2/dialog-style.png)
+![dialog-style](http://web-site-files.ashshen.cc/blog/html5.2/dialog-style.png)
 
 dialog元素是通过`display`来实现显示/隐藏的；通过绝对定位实现左右居中的。
 
@@ -48,7 +48,7 @@ show和showModal方法用于模态框的打开，close方法用于模态框的�
 
 `close`方法支持一个String参数（当然你也可以传入一个函数，但是默认调用函数的toString方法变成字符串），并且可以通过returnValue获取到该参数值，使用方法如下：
 
-![dialog-function](//web-site-files.ashshen.cc/blog/html5.2/dialog-close.png)
+![dialog-function](http://web-site-files.ashshen.cc/blog/html5.2/dialog-close.png)
 
 因为我这边直接是在控制台中测试，所以`$0`代表的就是dialog元素。
 
@@ -77,7 +77,7 @@ dialog终究只是一个HTML元素，在我们的实际业务场景中，还需�
 
 大致如下：（可以点击show all看到更详细的信息）
 
-![caniuse](//web-site-files.ashshen.cc/blog/html5.2/dialog-broswer.png)
+![caniuse](http://web-site-files.ashshen.cc/blog/html5.2/dialog-broswer.png)
 
 对于firefox浏览器，需要在about:config页面将dom.dialog_element.enabled值修改成true才能使用dialog元素。
 

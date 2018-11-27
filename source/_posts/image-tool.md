@@ -8,11 +8,11 @@ tags: [马赛克, js]
 
 由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。
 
-demo地址：[http://web-site-files.ashshen.cc/blog/pages/index.html](//web-site-files.ashshen.cc/blog/pages/index.html)
+demo地址：[http://web-site-files.ashshen.cc/blog/pages/index.html](http://web-site-files.ashshen.cc/blog/pages/index.html)
 
 小工具效果展示：
 
-<img src="//web-site-files.ashshen.cc/blog/origin-image.jpg" style="width:49%;display: inline-block;" /><img src="//web-site-files.ashshen.cc/blog/download.png" style="width:49%;display: inline-block;" />
+<img src="http://web-site-files.ashshen.cc/blog/origin-image.jpg" style="width:49%;display: inline-block;" /><img src="http://web-site-files.ashshen.cc/blog/download.png" style="width:49%;display: inline-block;" />
 
 实现步骤：
 

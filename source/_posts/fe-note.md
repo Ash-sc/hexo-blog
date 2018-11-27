@@ -16,7 +16,7 @@ gzip在前端是很常见的一种压缩（编码）方式，同时也是效果�
 
 下面这张图是一个使用了gzip压缩传输的一个http请求：
 
-![gzip-console](//web-site-files.ashshen.cc/font-end-notes/gzip.png)
+![gzip-console](http://web-site-files.ashshen.cc/font-end-notes/gzip.png)
 
 **图中的两个箭头标注了两个字段**
 

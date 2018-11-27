@@ -15,7 +15,7 @@
 <meta property="og:description" content="场景公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。 工具工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/react-online-reader/webpack-chat.png">
-<meta property="og:updated_time" content="2018-11-26T11:35:07.688Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react项目构建优化笔记">
 <meta name="twitter:description" content="场景公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。 工具工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依">
@@ -151,7 +151,7 @@
 <p>这里推荐一个比较好用的图形化工具：<a href="http://alexkuz.github.io/webpack-chart/" target="_blank" rel="noopener">Webpack Chart</a>。</p>
 <p>使用”webpack –profile –json &gt; stats.json”在项目根目录下生成stats.json将文件上传到网页中解析就可以得到bundle.js中各模块占用的比重了。</p>
 <p>效果图如下:</p>
-<p><img src="//web-site-files.ashshen.cc/blog/react-online-reader/webpack-chat.png" alt="webpack-chat-img"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/react-online-reader/webpack-chat.png" alt="webpack-chat-img"></p>
 <p>“~”部分代表第三方的依赖，”src”部分则代表项目自身编写的模块。</p>
 <h3 id="第一步，分离第三方模块"><a href="#第一步，分离第三方模块" class="headerlink" title="第一步，分离第三方模块"></a>第一步，分离第三方模块</h3><p>从Webpack Chart中可以看出，调用的第三方模块中，占比较大的有echarts、react、moment、zrender等。其中zrender是echarts的依赖。完全可以把这部分从bundle.js中拆分出来。然后用外联js的方式通过 script 标签在index.html中引入。</p>
 <p>这里需要注意的是：分离的第三方依赖 script 标签需要写在bundle.js前面。</p>

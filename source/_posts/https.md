@@ -30,7 +30,7 @@ ssl协议采用的是公钥加密算法：客户端向服务器索要公钥，�
 
 （http在TCP完成三次握手后即可开始报文的传输，而https在完成TCP三次握手之后，还需要进行ssl的四次握手，然后开始报文传输）
 
-![http-vs-https](//web-site-files.ashshen.cc/blog/http&https.png)
+![http-vs-https](http://web-site-files.ashshen.cc/blog/http&https.png)
 
 这样一来，ssl也有两个问题需要解决：一、保证公钥不被截取篡改（公钥的传输也是明文的）；二、加解密的计算开销过大。
 
@@ -40,7 +40,7 @@ ssl协议采用的是公钥加密算法：客户端向服务器索要公钥，�
 
 **ssl四次握手过程：**
 
-![https-hands-shake](//web-site-files.ashshen.cc/blog/ssl-shake.png)
+![https-hands-shake](http://web-site-files.ashshen.cc/blog/ssl-shake.png)
 
 *第一步*，客户端向服务器发起请求，请求包括一个随机数、客户端支持的ssl协议版本、加密算法以及压缩算法。
 

@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/docker/docker-images.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/docker/docker-ps.png">
 <meta property="og:image" content="http://web-site-files.ashshen.cc/blog/docker/windows-error.png">
-<meta property="og:updated_time" content="2018-11-26T13:09:17.088Z">
+<meta property="og:updated_time" content="2018-11-27T10:11:21.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用docker安装和启动mongo">
 <meta name="twitter:description" content="鉴于在windows下安装mongo的曲折经历（无力吐槽），最终决定使用docker来安装mongo。docker中运行的mongo与本地安装的mongo并没有什么区别，同时也可以实现在本地维护db文件，安装过程更加简洁（不用满世界的找安装文件了、也不用去官网填写表单注册账号了）。 首先首先，你需要去docker官网下一个docker客户端，安装完成之后，设置docker镜像源为国内镜像（国外镜像">
@@ -153,11 +153,11 @@
 <h2 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h2><p>首先，你需要去docker官网下一个docker客户端，安装完成之后，设置docker镜像源为国内镜像（国外镜像的速度嘛，呵呵哒…）。</p>
 <p>我这边的话，加了这三个镜像源：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">registry.docker-cn.com</span><br><span class="line">https://docker.mirrors.ustc.edu.cn</span><br><span class="line">https://hub-mirror.c.163.com</span><br></pre></td></tr></table></figure>
-<p><img src="//web-site-files.ashshen.cc/blog/docker/docker-mirrors.png" alt="docker-install"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/docker/docker-mirrors.png" alt="docker-install"></p>
 <p>应用，然后重新启动。</p>
 <h2 id="mongo镜像与新建容器"><a href="#mongo镜像与新建容器" class="headerlink" title="mongo镜像与新建容器"></a>mongo镜像与新建容器</h2><p>安装完docker之后，通过docker pull mongo获取到mongo镜像。</p>
 <p>pull完成之后可以通过docker images查看本地拥有的镜像列表。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/docker/docker-images.png" alt="windows-shell"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/docker/docker-images.png" alt="windows-shell"></p>
 <p>然后我们就可以通过mongo镜像来新建一个容器了。</p>
 <p>这里，如果你本地有安装git的话，可以在文件夹中或者桌面“右键”，然后使用“git bash”来打开git命令行工具；如果本地没有安装git的话，那么你需要安装一个git，git的安装也比较简单，直接官网下载安装包一件安装即可。</p>
 <p>PS：为什么要使用git bash？ 因为windows下的git客户端会自带一个叫<strong>mingw</strong>的命令行工具，可以执行简单的shell命令，之后用到的命令需要它。</p>
@@ -166,13 +166,13 @@
 <p><code>-p 27017:27017</code>表示：前面的27017是映射到本地主机的端口（如果你本地27017被占用，可以选择其他端口），后面的27017是docker容器中运行的mongo端口，这个是固定的。</p>
 <p><code>-v F:/docker/mongodb:/data/db</code>表示：冒号前面是本地维护的数据库文件所在，后面的是容器中mongo服务数据库文件，实际应用中一般都会将数据库文件映射到本地，方便维护。</p>
 <p>新建容器完成后，可以使用<code>docker ps</code>查看当前运行的容器列表，使用<code>docker ps -a</code>可以查看当前所有的容器列表。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/docker/docker-ps.png" alt="window-shell-2"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/docker/docker-ps.png" alt="window-shell-2"></p>
 <p>可以看到，我们刚刚运行的容器在列表中（mongoTest），使用<code>docker stop mongoTest</code>命令停止运行容器，更多常见docker命令，可以看<a href="http://www.youruncloud.com/docker/1_37.html" target="_blank" rel="noopener">这篇文章</a>。</p>
 <h2 id="配置mongodb"><a href="#配置mongodb" class="headerlink" title="配置mongodb"></a>配置mongodb</h2><p>mongodb服务已经启动起来了，接下来需要做的就是mongodb配置相关了（配置用户等）。</p>
 <p>首先在git bash中执行以下命令：（容器名称请自行替换）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;自定义容器名&gt; mongo admin</span><br></pre></td></tr></table></figure>
 <p>PS：在这里，windows用户执行上面的命令时会遇到这样的问题。</p>
-<p><img src="//web-site-files.ashshen.cc/blog/docker/windows-error.png" alt="shell-3"></p>
+<p><img src="http://web-site-files.ashshen.cc/blog/docker/windows-error.png" alt="shell-3"></p>
 <p>这时候在命令前面加上“mintty ”变成“mintty docker ……”，就可以正常新建容器了。</p>
 <p>然后，会进入到mongodb的命令行状态。执行以下命令，创建管理员账号：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123; user: <span class="string">'&lt;USER&gt;'</span>, <span class="built_in">pwd</span>: <span class="string">'&lt;PASSWORD&gt;'</span>, roles: [ &#123; role: <span class="string">'userAdminAnyDatabase'</span>, db: <span class="string">'admin'</span> &#125; ]&#125;);</span><br></pre></td></tr></table></figure>

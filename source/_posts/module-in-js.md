@@ -106,7 +106,7 @@ is-url.js与add.js一致。
 
 在浏览器中打开index.html，控制台中会有如下输出：
 
-![amd-module-console](//web-site-files.ashshen.cc/blog/module-in-js/amd-demo-console.png)
+![amd-module-console](http://web-site-files.ashshen.cc/blog/module-in-js/amd-demo-output.png)
 
 可以看到，使用AMD规范的模块加载顺序为：被依赖的模块先加载，主模块最后加载。
 

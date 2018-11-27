@@ -27,17 +27,17 @@ chmod a+x certbot-auto
 ./certbot-auto
 ```
 然后按照shell中的提示依次输入邮箱、ssl需要绑定的域名等信息
-![certbot-install](//web-site-files.ashshen.cc/blog/certbot-config-1.png)
+![certbot-install](http://web-site-files.ashshen.cc/blog/certbot-config-1.png)
 
-![certbot-install-2](//web-site-files.ashshen.cc/blog/certbot-config-2.png)
+![certbot-install-2](http://web-site-files.ashshen.cc/blog/certbot-config-2.png)
 
 提示安装成功之后，在浏览器中输入url可以查看https是否升级成功。
 
-![install-check](//web-site-files.ashshen.cc/blog/https-site.png)
+![install-check](http://web-site-files.ashshen.cc/blog/https-site.png)
 
 最后，不要忘记将wordpress后台设置中的地址改成https
 
-![wordpress-setting](//web-site-files.ashshen.cc/blog/change-setting.png)
+![wordpress-setting](http://web-site-files.ashshen.cc/blog/change-setting.png)
 
 ## 更新Let’s Encrypt证书
 

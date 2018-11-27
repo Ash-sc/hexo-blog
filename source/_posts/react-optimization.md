@@ -18,7 +18,7 @@ tags: [react, webpack, 前端]
 
 效果图如下:
 
-![webpack-chat-img](//web-site-files.ashshen.cc/blog/react-online-reader/webpack-chat.png)
+![webpack-chat-img](http://web-site-files.ashshen.cc/blog/react-online-reader/webpack-chat.png)
 
 “~”部分代表第三方的依赖，”src”部分则代表项目自身编写的模块。
 

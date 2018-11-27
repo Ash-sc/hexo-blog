@@ -10,7 +10,7 @@
 <meta name="keywords" content="js,前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javaScript中call、apply与bind使用方法的区别">
-<meta property="og:url" content="http://yoursite.com/2017/03/19/call-bind-apply/index.html">
+<meta property="og:url" content="https//ashshen.cc/2017/03/19/call-bind-apply/index.html">
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="js中call、apply与bind都可以用来改变this的指向，本篇主要介绍的是三者在语法使用上的区别： 首先，我们让我们来看一段代码： 123456789101112var me = &amp;#123;  name: &quot;ash&quot;,  age: 22,  introduce: function() &amp;#123;    console.log(&quot;Name: &quot; + this.name + &quot;, Age:">
 <meta property="og:locale" content="zh-CN">
@@ -89,16 +89,16 @@
     <br>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/03/19/call-bind-apply/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/03/19/call-bind-apply/&text=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/03/19/call-bind-apply/&is_video=false&description=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=javaScript中call、apply与bind使用方法的区别&body=Check out this article: http://yoursite.com/2017/03/19/call-bind-apply/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/03/19/call-bind-apply/&name=javaScript中call、apply与bind使用方法的区别&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/03/19/call-bind-apply/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/03/19/call-bind-apply/&text=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/03/19/call-bind-apply/&is_video=false&description=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javaScript中call、apply与bind使用方法的区别&body=Check out this article: https//ashshen.cc/2017/03/19/call-bind-apply/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/03/19/call-bind-apply/&name=javaScript中call、apply与bind使用方法的区别&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -196,16 +196,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/03/19/call-bind-apply/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/03/19/call-bind-apply/&text=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/03/19/call-bind-apply/&is_video=false&description=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=javaScript中call、apply与bind使用方法的区别&body=Check out this article: http://yoursite.com/2017/03/19/call-bind-apply/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/03/19/call-bind-apply/&name=javaScript中call、apply与bind使用方法的区别&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/03/19/call-bind-apply/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/03/19/call-bind-apply/&text=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/03/19/call-bind-apply/&is_video=false&description=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javaScript中call、apply与bind使用方法的区别&body=Check out this article: https//ashshen.cc/2017/03/19/call-bind-apply/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/03/19/call-bind-apply/&title=javaScript中call、apply与bind使用方法的区别"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/03/19/call-bind-apply/&name=javaScript中call、apply与bind使用方法的区别&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

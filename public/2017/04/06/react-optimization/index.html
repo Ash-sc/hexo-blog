@@ -10,7 +10,7 @@
 <meta name="keywords" content="前端,react,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react项目构建优化笔记">
-<meta property="og:url" content="http://yoursite.com/2017/04/06/react-optimization/index.html">
+<meta property="og:url" content="https//ashshen.cc/2017/04/06/react-optimization/index.html">
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="场景公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。 工具工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依">
 <meta property="og:locale" content="zh-CN">
@@ -91,16 +91,16 @@
     <br>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/04/06/react-optimization/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/04/06/react-optimization/&text=react项目构建优化笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/04/06/react-optimization/&is_video=false&description=react项目构建优化笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=react项目构建优化笔记&body=Check out this article: http://yoursite.com/2017/04/06/react-optimization/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/04/06/react-optimization/&name=react项目构建优化笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/04/06/react-optimization/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/04/06/react-optimization/&text=react项目构建优化笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/04/06/react-optimization/&is_video=false&description=react项目构建优化笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=react项目构建优化笔记&body=Check out this article: https//ashshen.cc/2017/04/06/react-optimization/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/04/06/react-optimization/&name=react项目构建优化笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -203,16 +203,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/04/06/react-optimization/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/04/06/react-optimization/&text=react项目构建优化笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/04/06/react-optimization/&is_video=false&description=react项目构建优化笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=react项目构建优化笔记&body=Check out this article: http://yoursite.com/2017/04/06/react-optimization/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/04/06/react-optimization/&name=react项目构建优化笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/04/06/react-optimization/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/04/06/react-optimization/&text=react项目构建优化笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/04/06/react-optimization/&is_video=false&description=react项目构建优化笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=react项目构建优化笔记&body=Check out this article: https//ashshen.cc/2017/04/06/react-optimization/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/04/06/react-optimization/&title=react项目构建优化笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/04/06/react-optimization/&name=react项目构建优化笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

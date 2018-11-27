@@ -10,7 +10,7 @@
 <meta name="keywords" content="upload,分片上传,nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件分片上传——Node.js部分">
-<meta property="og:url" content="http://yoursite.com/2018/08/23/file-slice-upload-node/index.html">
+<meta property="og:url" content="https//ashshen.cc/2018/08/23/file-slice-upload-node/index.html">
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="单请求文件上传对于文件上传，我们通常的做法是使用单个请求来上传所有的文件内容，这样的做法在上传较小文件时比较适用。但是，当上传的文件达到百兆甚至GB级别时，使用单请求来上传文件就会遇到一些问题。 首先，请求超时时间和请求体大小的问题。我们通常需要在服务器给请求统一设置更大的请求体大小限值和超时时间限值，这对其他请求和服务器安全是十分不友好的。 再者，用户上传过程中的网络波动也容易造成大文件的上传失">
 <meta property="og:locale" content="zh-CN">
@@ -91,16 +91,16 @@
     <br>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&text=文件分片上传——Node.js部分"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&is_video=false&description=文件分片上传——Node.js部分"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=文件分片上传——Node.js部分&body=Check out this article: http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&name=文件分片上传——Node.js部分&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2018/08/23/file-slice-upload-node/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&text=文件分片上传——Node.js部分"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&is_video=false&description=文件分片上传——Node.js部分"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件分片上传——Node.js部分&body=Check out this article: https//ashshen.cc/2018/08/23/file-slice-upload-node/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&name=文件分片上传——Node.js部分&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -236,16 +236,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&text=文件分片上传——Node.js部分"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&is_video=false&description=文件分片上传——Node.js部分"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=文件分片上传——Node.js部分&body=Check out this article: http://yoursite.com/2018/08/23/file-slice-upload-node/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/23/file-slice-upload-node/&name=文件分片上传——Node.js部分&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2018/08/23/file-slice-upload-node/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&text=文件分片上传——Node.js部分"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&is_video=false&description=文件分片上传——Node.js部分"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件分片上传——Node.js部分&body=Check out this article: https//ashshen.cc/2018/08/23/file-slice-upload-node/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&title=文件分片上传——Node.js部分"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2018/08/23/file-slice-upload-node/&name=文件分片上传——Node.js部分&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

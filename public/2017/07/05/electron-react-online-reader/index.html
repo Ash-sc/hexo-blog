@@ -10,7 +10,7 @@
 <meta name="keywords" content="nodejs,electron,react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Electron构建React桌面应用">
-<meta property="og:url" content="https//ashshen.cc/2017/07/05/electron-react-online-reader/index.html">
+<meta property="og:url" content="https://ashshen.cc/2017/07/05/electron-react-online-reader/index.html">
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="前言虽然用前端语言写桌面应用已经不是什么稀奇的事情了，现有的工具也有Electron、heX、NW.js等，但是用HTML、CSS和JS来构建一个自己的桌面应用还是挺让人兴奋的。 于是我也用Electron来封装了一下我的在线小说阅读器，GitHub地址。 关于ElectronElectron内置了chromium内核以及Node，这意味着我们可以直接使用在浏览器端运行良好的代码直接构建一个桌面应">
 <meta property="og:locale" content="zh-CN">
@@ -94,16 +94,16 @@
     <br>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&text=使用Electron构建React桌面应用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&is_video=false&description=使用Electron构建React桌面应用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=使用Electron构建React桌面应用&body=Check out this article: https//ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&name=使用Electron构建React桌面应用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&text=使用Electron构建React桌面应用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&is_video=false&description=使用Electron构建React桌面应用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用Electron构建React桌面应用&body=Check out this article: https://ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&name=使用Electron构建React桌面应用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -209,16 +209,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&text=使用Electron构建React桌面应用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&is_video=false&description=使用Electron构建React桌面应用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=使用Electron构建React桌面应用&body=Check out this article: https//ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/07/05/electron-react-online-reader/&name=使用Electron构建React桌面应用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&text=使用Electron构建React桌面应用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&is_video=false&description=使用Electron构建React桌面应用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用Electron构建React桌面应用&body=Check out this article: https://ashshen.cc/2017/07/05/electron-react-online-reader/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&title=使用Electron构建React桌面应用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/07/05/electron-react-online-reader/&name=使用Electron构建React桌面应用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

@@ -10,7 +10,7 @@
 <meta name="keywords" content="iframe,webpage">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端iframe跨域通信">
-<meta property="og:url" content="https//ashshen.cc/2017/12/06/fe-page-communication/index.html">
+<meta property="og:url" content="https://ashshen.cc/2017/12/06/fe-page-communication/index.html">
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="近日开发项目时遇到一个需求，大致就是：A页面里面用iframe嵌套了一个B页面，希望用户在B页面进行操作（B页面路由改变）后，刷新整个页面，iframe中显示B页面操作后的路由。 很明显，这是一个网页跨域通信的问题，由于浏览器同源策略，我并不能用一个timer去轮询获取iframe的contentWindow中的信息。 于是我花了一些时间去了解了一下网页跨域通信相关的方法。再然后，我看到了这篇文章">
 <meta property="og:locale" content="zh-CN">
@@ -89,16 +89,16 @@
     <br>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/12/06/fe-page-communication/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/12/06/fe-page-communication/&text=前端iframe跨域通信"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/12/06/fe-page-communication/&is_video=false&description=前端iframe跨域通信"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=前端iframe跨域通信&body=Check out this article: https//ashshen.cc/2017/12/06/fe-page-communication/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/12/06/fe-page-communication/&name=前端iframe跨域通信&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/12/06/fe-page-communication/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/12/06/fe-page-communication/&text=前端iframe跨域通信"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/12/06/fe-page-communication/&is_video=false&description=前端iframe跨域通信"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端iframe跨域通信&body=Check out this article: https://ashshen.cc/2017/12/06/fe-page-communication/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/12/06/fe-page-communication/&name=前端iframe跨域通信&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -227,16 +227,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/12/06/fe-page-communication/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/12/06/fe-page-communication/&text=前端iframe跨域通信"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/12/06/fe-page-communication/&is_video=false&description=前端iframe跨域通信"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=前端iframe跨域通信&body=Check out this article: https//ashshen.cc/2017/12/06/fe-page-communication/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/12/06/fe-page-communication/&name=前端iframe跨域通信&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/12/06/fe-page-communication/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/12/06/fe-page-communication/&text=前端iframe跨域通信"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/12/06/fe-page-communication/&is_video=false&description=前端iframe跨域通信"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端iframe跨域通信&body=Check out this article: https://ashshen.cc/2017/12/06/fe-page-communication/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/12/06/fe-page-communication/&title=前端iframe跨域通信"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/12/06/fe-page-communication/&name=前端iframe跨域通信&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

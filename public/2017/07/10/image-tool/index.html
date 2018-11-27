@@ -10,7 +10,7 @@
 <meta name="keywords" content="js,马赛克">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片马赛克小工具">
-<meta property="og:url" content="https//ashshen.cc/2017/07/10/image-tool/index.html">
+<meta property="og:url" content="https://ashshen.cc/2017/07/10/image-tool/index.html">
 <meta property="og:site_name" content="Ash&#39;s Folding Page">
 <meta property="og:description" content="前段时间聊微信的时候，看到微信群里有个童鞋的头像变成了自己的自拍并且打上了马赛克（(╯-_-)╯~╩╩  绝对不是我撸多了视力下降了）。轻度模糊的整体马赛克还挺有意思的，也具有一定的辨识度，于是我就想着：马赛克这玩意儿，前端也可以做的嘛（canvas），所以就试着写了一个图片马赛克小工具 由于只是简单的使用canvas给图片加上马赛克，所以并不需要后端的服务，整个流程可以在前端完成。 demo地址">
 <meta property="og:locale" content="zh-CN">
@@ -92,16 +92,16 @@
     <br>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/07/10/image-tool/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/07/10/image-tool/&text=图片马赛克小工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/07/10/image-tool/&is_video=false&description=图片马赛克小工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=图片马赛克小工具&body=Check out this article: https//ashshen.cc/2017/07/10/image-tool/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/07/10/image-tool/&name=图片马赛克小工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/07/10/image-tool/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/07/10/image-tool/&text=图片马赛克小工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/07/10/image-tool/&is_video=false&description=图片马赛克小工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=图片马赛克小工具&body=Check out this article: https://ashshen.cc/2017/07/10/image-tool/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/07/10/image-tool/&name=图片马赛克小工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -208,16 +208,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https//ashshen.cc/2017/07/10/image-tool/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https//ashshen.cc/2017/07/10/image-tool/&text=图片马赛克小工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https//ashshen.cc/2017/07/10/image-tool/&is_video=false&description=图片马赛克小工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=图片马赛克小工具&body=Check out this article: https//ashshen.cc/2017/07/10/image-tool/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https//ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https//ashshen.cc/2017/07/10/image-tool/&name=图片马赛克小工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/07/10/image-tool/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/07/10/image-tool/&text=图片马赛克小工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/07/10/image-tool/&is_video=false&description=图片马赛克小工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=图片马赛克小工具&body=Check out this article: https://ashshen.cc/2017/07/10/image-tool/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/07/10/image-tool/&title=图片马赛克小工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/07/10/image-tool/&name=图片马赛克小工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

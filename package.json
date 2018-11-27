@@ -1,6 +1,11 @@
 {
   "name": "hexo-site",
   "version": "0.0.0",
+  "scripts": {
+    "start": "hexo server",
+    "dev": "hexo server",
+    "build": "rm -rf public/ && hexo deploy"
+  },
   "private": true,
   "hexo": {
     "version": "3.8.0"

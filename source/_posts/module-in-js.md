@@ -506,7 +506,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _add
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isUrl\", function() { return isUrl; });\nconsole.log('isUrl.js loaded ! (imported by main.js)');\n$('order-ul').innerHTML += '<li>isUrl.js loaded ! (imported by main.js)</li>';\n\nvar isUrl = function isUrl() {\n  var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';\n\n  return url ? /^https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$/.test(url) : '';\n};\n\n\n\n//# sourceURL=webpack:///./src/is-url.js?");
+__webpack_require__.r(__webpack_exports__);
+__webpack_require__.d(__webpack_exports__,"isUrl", function() { return isUrl; });
+console.log('isUrl.js loaded ! (imported by main.js)');
+$('order-ul').innerHTML += '<li>isUrl.js loaded ! (imported by main.js)</li>';
+var isUrl = function isUrl() {
+  var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  return url ? /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/.test(url) : '';
+};
+//# sourceURL=webpack:///./src/is-url.js?
 
 /***/ }),
 
@@ -527,13 +535,70 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _cal
 
 代码看上去比较长，实际上就是一个自执行函数，我们把打包后的main.js拆开来看：
 
+**其实就是一个IIFE**。
+
 第一部分：从第一行到第85行。是函数的定义，定义了`module`、`exports`、`require`（这里为`__webpack_require__`）方法，并且直接执行了`__webpack_require__('./src/main.js')`
 
 PS：这里webpack也做了一部分优化，比如加载过的模块不再重新加载了，之后的调用直接exports。
 
 第二部分：第86行到最后，执行了前面85行所定义的函数，并且传入了参数。
 
-我们可以看到，传入的参数是一个对象，对象的key是像`./src/main.js`这样以模块路径作为模块名，而value则是一个函数，同时也把module（所有模块对象）、exports（webpack模拟的）、require（webpack模拟的）传入了这个函数中。函数内部使用eval执行了模块自身的逻辑。当然，eval并不是唯一的方法。
+我们可以看到，传入的参数是一个对象，对象的key是像`./src/main.js`这样以模块路径作为模块名，而value则是一个函数，同时也把module（所有模块对象）、exports（webpack模拟的）、require（webpack模拟的）传入了这个函数中。函数内部使用eval执行了模块自身的逻辑。我这里把`./src/is-url.js`模块的代码从eval转换成了可直接执行的代码。
+
+webpack打包之后的代码可读性不强，可以看我手写的简易版的：
+``` js
+(function(modules) {
+  // const installedModules = {}
+  const require = function(moduleName) { // 定义require
+    // if (installedModules[moduleName]) return installedModules[moduleName].exports
+    // const module = installedModules[moduleName] = {
+    const module = {
+      exports: {}
+    }
+    modules[moduleName](module, module.exports, require)
+
+    return module.exports // 返回被调用模块的module.exports
+  }
+  return require('./main.js') // 执行入口文件
+})({ // 实参是一个对象
+  './main.js': (function(module, exports, require) {
+    console.log('main.js loaded !')
+    const calculate = require('./calculate.js')
+    console.log('add result :', calculate.add(1, 2, 3, 4, 5))
+    const isUrl = require('./is-url.js')
+    console.log('is https://www,google.com.hk url :', isUrl.isUrl('https://www,google.com.hk'))
+  }),
+  './calculate.js': (function(module, exports, require) {
+    console.log('calculate.js loaded !')
+    const add = require('./add.js')
+    module.exports = { add: add.add }
+  }),
+  './add.js': (function(module, exports, require) {
+    console.log('add.js loaded !')
+    const add = function(a = 0, ...args) {
+      let result = a
+      if (args.length) result += add(...args)
+      return result
+    }
+    module.exports = {
+      add: add
+    }
+  }),
+  './is-url.js': (function(module, exports, require) {
+    console.log('is-url.js loaded !')
+    // const add = require('./add.js')
+    // console.log('use add in is-url.js :', add.add(1, 3, 5, 7))
+    module.exports = {
+      isUrl: function(url = '') {
+        return url ? /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/.test(url) : ''
+      }
+    }
+  })
+})
+```
+直接在浏览器中运行就可以看到效果。
+
+至于之前说到webpack针对模块已加载优化，可以取消上面代码中的注释进行查看。
 
 
 ## 对于模块按需加载
@@ -630,9 +695,11 @@ PS：这里webpack也做了一部分优化，比如加载过的模块不再重�
 
 2. 执行modifyPwd定义的函数，使用webpack定义的`__webpack_require__.e`获取chunkjs文件。
 
-3. chunkjs执行，页面渲染，并且`__webpack_require__`将modifyPwd定义为已加载，并将逻辑代码push到`window["webpackJsonp"]`中
+3. chunkjs获取完成 (script标签) 后，自动执行，将代码push到`window["webpackJsonp"]`中，`__webpack_require__.e`返回promise。
 
-4. 下次进入modifyPwd页面，直接从`window["webpackJsonp"]`中获取代码并执行。
+4. then()触发，`__webpack_require__`将modifyPwd定义为已加载，并且执行chunkjs逻辑代码，然后逻辑代码的exports存入`installedModules`中。
+
+5. 下次进入modifyPwd页面，直接返回`installedModules`中对应chunkId的exports。
 
 
-**PS**： 有兴趣的同学可以在webpack打包的Vue或者React项目浏览器控制台输入`window["webpackJsonp"]`查看。比如：[vue-admin](https://panjiachen.github.io/vue-element-admin)
+**PS**： 有兴趣的同学可以在webpack打包的Vue或者React项目浏览器控制台输入`window["webpackJsonp"]`查看模块加载信息。比如：[vue-admin](https://panjiachen.github.io/vue-element-admin)

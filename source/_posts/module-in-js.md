@@ -2,6 +2,9 @@
 title: 前端模块加载浅析
 date: 2018-11-26 21:03:52
 tags: [module, js]
+categories:
+  - 前端
+  - 模块化
 ---
 
 提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。
@@ -13,6 +16,8 @@ tags: [module, js]
 3. Webpack打包后的模块又是如何加载的呢？
 
 本文将针对这几个问题做一些简单的梳理和介绍。
+
+<!-- more -->
 
 ## AMD ( asynchronous module definition )
 

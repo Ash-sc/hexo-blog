@@ -2,9 +2,12 @@
 title: Linux服务器相关设置
 date: 2018-12-10 09:56:38
 tags: [Linux, ubuntu]
+categories: linux
 ---
 
 一些关于Linux服务器设置的语句，记下来防止遗忘，虽然都是可以查到的。
+
+<!-- more -->
 
 ### 服务器 SSH KEY 登录设置
 

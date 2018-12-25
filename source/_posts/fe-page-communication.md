@@ -2,7 +2,12 @@
 title: 前端iframe跨域通信
 date: 2017-12-06 20:08:15
 tags: [iframe, webpage]
+categories: 前端
 ---
+
+关于前端iframe之间的跨域通信方式。
+
+<!-- more -->
 
 近日开发项目时遇到一个需求，大致就是：A页面里面用iframe嵌套了一个B页面，希望用户在B页面进行操作（B页面路由改变）后，刷新整个页面，iframe中显示B页面操作后的路由。
 

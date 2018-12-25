@@ -2,9 +2,10 @@
 title: Vue+Node爬虫webapp（持续更新中…）
 date: 2018-01-09 20:13:43
 tags: [vue, spider]
+categories:
+  - 前端
+  - vue
 ---
-
-### 事情起因：
 
 由于想要看电影，但是又不想每次了解最新的电影信息都要去某宝之类的App上找那些藏得很深的小程序（当然，买票的时候还是得向大佬低头）。
 
@@ -14,6 +15,7 @@ tags: [vue, spider]
 
 Emmmm，东西有点多。工作之余慢慢写吧。
 
+<!-- more -->
 
 OK，按照惯例，先上Github地址：https://github.com/Ash-sc/node-spider-webapp
 

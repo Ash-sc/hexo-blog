@@ -2,7 +2,13 @@
 title: 文件分片上传——Node.js部分
 date: 2018-08-23 20:52:33
 tags: [upload, 分片上传, nodejs]
+categories:
+  - Node
 ---
+
+一种简单的文件分片上传思路 —— Node.js端
+
+<!-- more -->
 
 ## 单请求文件上传
 

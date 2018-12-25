@@ -2,9 +2,12 @@
 title: mac下nvm安装与使用
 date: 2017-06-11 17:58:11
 tags: [mac, nvm]
+categories: Node
 ---
 
 nvm作为当前主流的Node.js版本管理工具，可以做为一个Node.js版本切换工具或者Node.js安装工具使用。
+
+<!-- more -->
 
 ### 安装nvm
 

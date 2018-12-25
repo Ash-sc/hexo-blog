@@ -2,9 +2,12 @@
 title: https初探
 date: 2017-08-17 19:36:40
 tags: [https]
+categories: https
 ---
 
 最近在琢磨着把博客升级成https，于是也就去看了一些关于https的资料，把自己学到的一些知识写成笔记，以供自己将来回顾，当然，也为有需要的人提供一份参考。
+
+<!-- more -->
 
 ## 什么是http
 

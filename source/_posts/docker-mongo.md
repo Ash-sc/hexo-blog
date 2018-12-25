@@ -2,9 +2,14 @@
 title: 使用docker安装和启动mongo
 date: 2018-02-28 20:32:45
 tags: [docker, mongodb]
+categories:
+  - docker
+  - mongodb
 ---
 
 鉴于在windows下安装mongo的曲折经历（无力吐槽），最终决定使用docker来安装mongo。docker中运行的mongo与本地安装的mongo并没有什么区别，同时也可以实现在本地维护db文件，安装过程更加简洁（不用满世界的找安装文件了、也不用去官网填写表单注册账号了）。
+
+<!-- more -->
 
 ## 首先
 

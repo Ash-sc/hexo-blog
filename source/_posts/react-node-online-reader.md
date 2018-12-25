@@ -2,11 +2,16 @@
 title: React+Node.js在线小说阅读器
 date: 2017-07-04 18:03:29
 tags: [react, nodejs]
+categories:
+  - Node
+  - react
 ---
 
 一直有追小说的习惯。前段时间连载的小说都追完了，书荒之下就下了一个“书旗小说”来看一些已经完结的小说。好处就是可以不用像追连载小说那样花钱，不过书旗App现在也是各种广告了，所以看得很是蛋疼。通过网页看的话，广告也无法避免，于是就想着可不可以用React和Node.js自己撸一个在线的小说阅读器出来。
 
 [GitHub地址](https://github.com/Ash-sc/online-reader/tree/master)。
+
+<!-- more -->
 
 ## 准备工作
 

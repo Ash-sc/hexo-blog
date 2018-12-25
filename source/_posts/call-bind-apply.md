@@ -2,10 +2,13 @@
 title: javaScript中call、apply与bind使用方法的区别
 date: 2017-03-19 16:57:47
 tags: [js, 前端]
+categories: 前端
 ---
 
 
-js中call、apply与bind都可以用来改变this的指向，本篇主要介绍的是三者在语法使用上的区别：
+js中call、apply与bind都可以用来改变this的指向，本篇主要介绍的是三者在语法使用上的区别。
+
+<!-- more -->
 
 首先，我们让我们来看一段代码：
 

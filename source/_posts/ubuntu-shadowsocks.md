@@ -2,6 +2,9 @@
 title: ubuntu下搭建shadowsocks服务
 date: 2017-05-14 17:50:54
 tags: [ubuntu, shadowsocks, 科学上网]
+categories:
+  - linux
+  - shadowSocks
 ---
 
 俗话说得好：不会用Google的程序员不是好程序员。倒不是刻意贬低百度，实在是在技术问题搜索结果上，百度和Google搜索出来的内容质量差别太大。
@@ -9,6 +12,8 @@ tags: [ubuntu, shadowsocks, 科学上网]
 对我而言，百度只用来日常生活的搜索，至于工作中技术问题的搜索，还是google合适。
 
 本篇主要介绍ubuntu下如何搭建shadowsocks服务，也就是我们经常说的“翻墙”。
+
+<!-- more -->
 
 ## 首先
 

@@ -2,6 +2,9 @@
 title: 一个简单的vue文件上传组件
 date: 2017-11-28 20:02:09
 tags: [vue, file-upload]
+categories:
+  - 前端
+  - vue
 ---
 
 文件上传组件算得上是vue组件中使用比较频繁的了，npmjs上的vue文件上也有很多，但是找到一款适合自己的应用场景的还真不是那么容易。
@@ -9,6 +12,8 @@ tags: [vue, file-upload]
 于是，秉持着自己动手丰衣足食（闲着也是闲着）的理念，花了半天时间撸了一个简单的文件上传组件。
 
 初始版本核心代码包含注释和代码分割也才两百行左右。
+
+<!-- more -->
 
 项目地址：[https://github.com/Ash-sc/vue-simple-upload](https://github.com/Ash-sc/vue-simple-upload)
 

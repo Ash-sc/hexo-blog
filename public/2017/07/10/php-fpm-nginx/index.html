@@ -1,153 +1,192 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN">
+
+  
 <head><meta name="generator" content="Hexo 3.8.0">
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="最近公司有个项目是用的php写的后端服务，相关的开发和运维人员也没有php的项目部署经验，所以我也就协助着弄了一下关于在Linux环境下部署php项目，顺便学习一下新的知识，拓宽一下自己的知识面。然后事后在自己的电脑中也部署了一套同样的环境。 主要包括以下几个步骤：  php的安装以及php-fpm的安装  Nginx的安装以及配置  安装composer和slim  运行和测试   php的安装">
-<meta name="keywords" content="php,fpm,nginx">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mac OS下配置php-fpm+Nginx服务并运行slim框架项目">
-<meta property="og:url" content="https://ashshen.cc/2017/07/10/php-fpm-nginx/index.html">
-<meta property="og:site_name" content="Ash&#39;s Folding Page">
-<meta property="og:description" content="最近公司有个项目是用的php写的后端服务，相关的开发和运维人员也没有php的项目部署经验，所以我也就协助着弄了一下关于在Linux环境下部署php项目，顺便学习一下新的知识，拓宽一下自己的知识面。然后事后在自己的电脑中也部署了一套同样的环境。 主要包括以下几个步骤：  php的安装以及php-fpm的安装  Nginx的安装以及配置  安装composer和slim  运行和测试   php的安装">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://web-site-files.ashshen.cc/blog/php-fpm_error.png">
-<meta property="og:updated_time" content="2018-11-27T10:11:21.395Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac OS下配置php-fpm+Nginx服务并运行slim框架项目">
-<meta name="twitter:description" content="最近公司有个项目是用的php写的后端服务，相关的开发和运维人员也没有php的项目部署经验，所以我也就协助着弄了一下关于在Linux环境下部署php项目，顺便学习一下新的知识，拓宽一下自己的知识面。然后事后在自己的电脑中也部署了一套同样的环境。 主要包括以下几个步骤：  php的安装以及php-fpm的安装  Nginx的安装以及配置  安装composer和slim  运行和测试   php的安装">
-<meta name="twitter:image" content="http://web-site-files.ashshen.cc/blog/php-fpm_error.png">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="/images/favicon.ico">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
-    
-    <!-- title -->
-    <title>mac OS下配置php-fpm+Nginx服务并运行slim框架项目</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta charset="utf-8">
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="author" content="Ashshen, mail@ashshen.cc">
+  
+  
+  
+  <title>mac OS下配置php-fpm+Nginx服务并运行slim框架项目 | Ash&#39;s Folding Page</title>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/projects_url">项目</a></li>
-        
-      </ul>
-    </span>
-    <br>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2017/07/10/image-tool/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2017/07/05/electron-react-online-reader/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/07/10/php-fpm-nginx/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&text=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&is_video=false&description=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=mac OS下配置php-fpm+Nginx服务并运行slim框架项目&body=Check out this article: https://ashshen.cc/2017/07/10/php-fpm-nginx/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&name=mac OS下配置php-fpm+Nginx服务并运行slim框架项目&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#php的安装以及php-fpm的安装"><span class="toc-number">1.</span> <span class="toc-text">php的安装以及php-fpm的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx的安装和配置"><span class="toc-number">2.</span> <span class="toc-text">Nginx的安装和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装composer和slim"><span class="toc-number">3.</span> <span class="toc-text">安装composer和slim</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        mac OS下配置php-fpm+Nginx服务并运行slim框架项目
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-        <span itemprop="name">Ash's Folding Page</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2017-07-10T10:18:32.000Z" itemprop="datePublished">2017-07-10</time>
-    </div>
-
-
-      
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/fpm/">fpm</a>, <a class="tag-link" href="/tags/nginx/">nginx</a>, <a class="tag-link" href="/tags/php/">php</a>
-    </div>
-
-
-    </div>
-  </header>
+  
+    <meta name="keywords" content="nginx,php,fpm,php,fpm,nginx,">
   
 
-  <div class="content" itemprop="articleBody">
-    <p>最近公司有个项目是用的php写的后端服务，相关的开发和运维人员也没有php的项目部署经验，所以我也就协助着弄了一下关于在Linux环境下部署php项目，顺便学习一下新的知识，拓宽一下自己的知识面。然后事后在自己的电脑中也部署了一套同样的环境。</p>
-<p>主要包括以下几个步骤：</p>
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/commentjs.css">
+
+  <script src="/js/util.js"></script>
+
+  
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+
+  
+    <script src="https://cdn.bootcss.com/marked/0.5.2/marked.min.js" async></script>
+    <script src="https://cdn.bootcss.com/timeago.js/3.0.2/timeago.min.js" async></script>
+    <script src="https://cdn.bootcss.com/spin.js/2.3.2/spin.min.js" async></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.13.1/highlight.min.js" async></script>
+    <script src="/js/commentjs.js" async></script>
+  
+</head>
+
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">ASH&#39;S FOLDING PAGE</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/" target="_self">
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/" target="_self">
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/" target="_self">
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/" target="_self">
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a href="/about/" target="_self">
+              关于
+            </a>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>mac OS下配置php-fpm+Nginx服务并运行slim框架项目</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2017-07-10
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/nginx/">
+            nginx
+          </a>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <p>主要包括以下几个步骤：</p>
 <ol>
 <li><p>php的安装以及php-fpm的安装</p>
 </li>
@@ -193,99 +232,344 @@
 <p>然后我们可以使用一个简单的例子来测试slim是否已经安装完成，将项目根目录的index.php修改为<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">require</span> <span class="string">'vendor/autoload.php'</span>; $config = [<span class="string">'settings'</span> =&gt; [</span><br><span class="line">    <span class="string">'addContentLengthHeader'</span> =&gt; <span class="keyword">false</span>,</span><br><span class="line">]];</span><br><span class="line">$app = <span class="keyword">new</span> \Slim\App($config);</span><br><span class="line"></span><br><span class="line">$app-&gt;get(<span class="string">'/hello/&#123;name&#125;'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($request, $response, $args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $response-&gt;write(<span class="string">"Hello "</span> . $args[<span class="string">'name'</span>]);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$app-&gt;run();</span><br></pre></td></tr></table></figure></p>
 <p>保存，然后在浏览器中输入<a href="http://localhost:8011/hello/ash" target="_blank" rel="noopener">http://localhost:8011/hello/ash</a> ，页面输出Hello ash，slim安装成功。</p>
 <p>OK，服务器环境部署完成。</p>
-
+    </div>
   </div>
-</article>
-
-
-
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
         
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/projects_url">项目</a></li>
         
-      </ul>
+          本文作者 : Ash Shen <br>
+        
+        原文链接 : <a href="">https://ashshen.cc/2017/07/10/php-fpm-nginx/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
     </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qq, weibo, wechat, douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#php的安装以及php-fpm的安装"><span class="toc-number">1.</span> <span class="toc-text">php的安装以及php-fpm的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx的安装和配置"><span class="toc-number">2.</span> <span class="toc-text">Nginx的安装和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装composer和slim"><span class="toc-number">3.</span> <span class="toc-text">安装composer和slim</span></a></li></ol>
+  
+    <div id="reward">
+  
+    <p id="reward-meta">您的赞赏，是对我最大的鼓励</p>
+  
+  <button id="reward-btn">
+    
+    <span>赞赏一下</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信扫一扫">
+        <p class="qrcode-meta">微信扫一扫</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝扫一扫">
+        <p class="qrcode-meta">支付宝扫一扫</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/php/">
+              #php
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/fpm/">
+              #fpm
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/nginx/">
+              #nginx
+            </a>
+          </span>
+          
+        
+      </span>
     </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ashshen.cc/2017/07/10/php-fpm-nginx/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&text=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&is_video=false&description=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=mac OS下配置php-fpm+Nginx服务并运行slim框架项目&body=Check out this article: https://ashshen.cc/2017/07/10/php-fpm-nginx/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&title=mac OS下配置php-fpm+Nginx服务并运行slim框架项目"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ashshen.cc/2017/07/10/php-fpm-nginx/&name=mac OS下配置php-fpm+Nginx服务并运行slim框架项目&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
+    <div class="article-meta pull-right">
     </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2018 Ash
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/projects_url">项目</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2017/07/05/electron-react-online-reader/" target="_self">使用Electron构建React桌面应用</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2017/07/10/image-tool/" target="_self">图片马赛克小工具</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  
+    <div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="comment-thread"></div>
+<div id="loading-spin"></div>
+
+
+<script>
+  if( true ) {
+
+    $(document).ready(function () {
+      getComments({
+        "type": "github",
+        "user": "Ash-sc",
+        "repo": "blog-comments",
+        "clientID": "c25f9357175309ad6c9c",
+        "clientSecret": "070029ae86a3de68b82a47872aeddf5ffa9e60ee",
+        "no_comment": "该页面还没有评论，快去评论吧!",
+        "go_to_comment": "去评论",
+        "issue_title": "mac OS下配置php-fpm+Nginx服务并运行slim框架项目",
+        "btn_class": "button",
+        "comments_target": "#comment-thread"
+      });
+      marked.setOptions({
+        "highlight": function (code, lang) {
+          return hljs.highlightAuto(code).value;
+        }
+      });
+      function mark() {
+        var markdowns = document.getElementsByClassName("markdown");
+        for (var i = 0; i < markdowns.length; ++i){
+          if (markdowns[i].innerHTML) {
+            markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+          }
+        }
+      }
+      window.addEventListener("DOMContentLoaded", mark, false);
+      window.addEventListener("load", mark, false);
+    });
+  }
+</script>
+
+  
+</div>
+
+
+
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
 </footer>
 
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2017, 2, 19).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
     </div>
-</body>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

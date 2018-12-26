@@ -63,8 +63,6 @@ sudo vim /etc/shadowsocks.json
 }
 ```
 
-需要注意的是：上面shadowsocks配置是有两个端口的，”server_port”是给服务端进程用的，”local_port”才是客户端设置中填入的。
-
 然后保存并退出（:wq）。
 
 ## 启动与停止

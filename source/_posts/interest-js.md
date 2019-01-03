@@ -5,13 +5,15 @@ tags: [js]
 categories: 前端
 ---
 
-![img](http://ww1.sinaimg.cn/large/005Y4rColy1fxko2ichsjj30xc0g5412.jpg)
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-1.jpg)
 
 JS中总会有一些奇奇怪怪却又非常有趣的东西，比如`[] + [] === ''`、`![] + ![] === 0`等等，时常让我们咬牙切齿、哭笑不得却又欲罢不能。
 
 当然，本文中出现的不仅仅是js搞怪玩法，更多的是一些“高逼格”但是写在业务中可能会被打死的玩法。
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-1.jpg)
 
 素材来源于平时写代码时遇到的或者论坛。
 
@@ -64,9 +66,20 @@ OK，那么我们只需要告诉js引擎第一部分是一个函数表达式，I
 
 当然，这些的前提是你对IIFE的返回值，如果你需要IIFE的返回值，那么还是推荐使用()()。
 
+### 二、构造函数
+
+第二个其实不算什么骚操作，应该算是一种比较简便的写法。
+
+在我们使用`new`关键字配合构造函数来实例化一个对象时，有时候会选在不携带参数，比如：`const today = new Date()`。
+
+这时候，我们可以省略掉`Date`后面的`()`，变成这样：`const today = new Date`。
+
+当然，如果构造函数需要接收参数时，还是需要带上`()`的，如：`const arr = new Array(10)`。
+
+
+--- 2019-01-03 ---
 
 持续施工中......
-
 
 
 

@@ -5,11 +5,15 @@ tags: [前端, 面试题]
 categories: 前端
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-8.jpg)
+
 今天在公交车上的时候，某K给我发了一道前端面试题让我解答。
 
 然后， 我看第一眼的时候，被绕了进去……(╯-_-)╯~╩╩
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-8.jpg)
 
 ## 多了一个slice(0)
 

@@ -6,9 +6,13 @@ categories:
   - Node
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-9.jpg)
+
 一种简单的文件分片上传思路 —— Node.js端
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-9.jpg)
 
 ## 单请求文件上传
 

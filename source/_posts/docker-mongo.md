@@ -7,9 +7,13 @@ categories:
   - mongodb
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-4.jpg)
+
 鉴于在windows下安装mongo的曲折经历（无力吐槽），最终决定使用docker来安装mongo。docker中运行的mongo与本地安装的mongo并没有什么区别，同时也可以实现在本地维护db文件，安装过程更加简洁（不用满世界的找安装文件了、也不用去官网填写表单注册账号了）。
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-4.jpg)
 
 ## 首先
 

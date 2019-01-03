@@ -5,9 +5,13 @@ tags: [mac, nvm]
 categories: Node
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-14.jpg)
+
 nvm作为当前主流的Node.js版本管理工具，可以做为一个Node.js版本切换工具或者Node.js安装工具使用。
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-14.jpg)
 
 ### 安装nvm
 

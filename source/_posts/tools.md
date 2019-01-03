@@ -6,9 +6,13 @@ categories:
   - 工具
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-20.jpg)
+
 分享一些工作中遇到的觉得比较好用的工具和软件。
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-20.jpg)
 
 ## 网站类
 
@@ -99,6 +103,6 @@ shell文档查看器（too long don’t read）。
 
 优点：只需要安装这个包就可以把一个本地目录host起来。
 
-地址：https://github.com/indexzero/http-serverhttps://github.com/indexzero/http-server
+地址：https://github.com/indexzero/http-server
 
 ### 6....

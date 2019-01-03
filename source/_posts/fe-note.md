@@ -5,9 +5,13 @@ tags: [fe, note]
 categories: 前端
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-6.jpg)
+
 探索知识的过程总是让人兴奋的，尤其是当你发现你所了解的知识对于接受新的知识有帮助，并且他们之间是有关联的时候。
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-6.jpg)
 
 ## GZIP
 

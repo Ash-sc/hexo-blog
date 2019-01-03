@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Ash's Folding Page
-subtitle:
+title: 就在记忆里画一个猹🦔
+subtitle: Ash's Folding Page
 description:
 keywords:
 author: Ash
@@ -84,3 +84,8 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
+
+lazyload:
+  enable: true 
+  onlypost: false
+  loadingImg: ./images/loading.gif

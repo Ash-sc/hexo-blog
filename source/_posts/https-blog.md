@@ -7,11 +7,15 @@ categories:
   - https
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-11.jpg)
+
 [前面](/2017/08/17/https/)有说到https与http的一些区别以及https的一些好处。当然，对于平时也就用来写写博客的的ashshen.cc来说，升级到https实际上是没有太大必要的 ( PS：可以避免某些网络运营商插入广告 ) ；不过闲着也是闲着，有时间和精力又有条件的话，练练手熟悉熟悉也是极好的。
 
 本文主要是针对使用wordpress（apache2 + php7）搭建的博客如何升级到https。
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-11.jpg)
 
 ## Let’s Encrypt和Certbot
 

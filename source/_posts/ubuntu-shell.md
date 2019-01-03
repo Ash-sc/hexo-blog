@@ -5,9 +5,13 @@ tags: [Linux, ubuntu]
 categories: linux
 ---
 
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-22.jpg)
+
 一些关于Linux服务器设置的语句，记下来防止遗忘，虽然都是可以查到的。
 
 <!-- more -->
+
+![img](http://web-site-files.ashshen.cc/blog-header-images/nature-22.jpg)
 
 ### 服务器 SSH KEY 登录设置
 

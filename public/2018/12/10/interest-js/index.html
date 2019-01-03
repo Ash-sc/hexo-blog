@@ -9,7 +9,7 @@
   
   
   
-  <title>JS里的那些骚操作 | Ash&#39;s Folding Page</title>
+  <title>JS里的那些骚操作 | 就在记忆里画一个猹🦔</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -186,7 +186,8 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <p>素材来源于平时写代码时遇到的或者论坛。</p>
+      <p><img src="./images/loading.gif" data-original="http://web-site-files.ashshen.cc/blog-header-images/nature-1.jpg" alt="img"></p>
+<p>素材来源于平时写代码时遇到的或者论坛。</p>
 <p>OK，话不多说，上码 ！~</p>
 <h3 id="一、IIFE"><a href="#一、IIFE" class="headerlink" title="一、IIFE"></a>一、IIFE</h3><p>IIFE自执行函数大家应该都不陌生，<code>(function() {})()</code>或者<code>(() =&gt; {})()</code>这样的形式嘛。概念的话，在这里就不介绍了；那么，IIFE为什么可以执行呢？又为什么需要两个<code>()</code>呢？</p>
 <p>首先，我们来看一下：如果我们这样写<code>function(a) {}()</code>，执行时会报这样的错：</p>
@@ -197,6 +198,11 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通IIFE</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'status :'</span>, status)</span><br><span class="line">&#125;)(<span class="string">'success'</span>) <span class="comment">// status : success</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用!</span></span><br><span class="line">!<span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'status :'</span>, status)</span><br><span class="line">&#125;(<span class="string">'success'</span>) <span class="comment">// status : success</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用+</span></span><br><span class="line">+<span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'status :'</span>, status)</span><br><span class="line">&#125;(<span class="string">'success'</span>) <span class="comment">// status : success</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用-</span></span><br><span class="line">-<span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'status :'</span>, status)</span><br><span class="line">&#125;(<span class="string">'success'</span>) <span class="comment">// status : success</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用~</span></span><br><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'status :'</span>, status)</span><br><span class="line">&#125;(<span class="string">'success'</span>) <span class="comment">// status : success</span></span><br></pre></td></tr></table></figure>
 <p>你可以使用任何一元运算符，包括 <code>void</code>。</p>
 <p>当然，这些的前提是你对IIFE的返回值，如果你需要IIFE的返回值，那么还是推荐使用()()。</p>
+<h3 id="二、构造函数"><a href="#二、构造函数" class="headerlink" title="二、构造函数"></a>二、构造函数</h3><p>第二个其实不算什么骚操作，应该算是一种比较简便的写法。</p>
+<p>在我们使用<code>new</code>关键字配合构造函数来实例化一个对象时，有时候会选在不携带参数，比如：<code>const today = new Date()</code>。</p>
+<p>这时候，我们可以省略掉<code>Date</code>后面的<code>()</code>，变成这样：<code>const today = new Date</code>。</p>
+<p>当然，如果构造函数需要接收参数时，还是需要带上<code>()</code>的，如：<code>const arr = new Array(10)</code>。</p>
+<p>— 2019-01-03 —</p>
 <p>持续施工中……</p>
     </div>
   </div>
@@ -518,6 +524,6 @@ document.querySelector(".back-to-top").addEventListener("click", backToTop, fals
 
 
     
-  </body>
+  <script>!function(o){var i=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function c(t,e){var n=new Image,o=t.getAttribute("data-original");n.onload=function(){t.src=o,e&&e()},n.src=o}function n(){for(var t=0;t<i.length;t++)e=i[t],void 0,0<=(n=e.getBoundingClientRect()).top&&0<=n.left&&n.top<=(o.innerHeight||document.documentElement.clientHeight)&&c(i[t],function(){i.splice(t,t)});var e,n;console.log("trigger")}n(),o.addEventListener("scroll",function(){var t,e;t=n,e=o,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 
 </html>

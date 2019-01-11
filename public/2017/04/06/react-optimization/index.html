@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-  
-<head><meta name="generator" content="Hexo 3.8.0">
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
   <meta name="author" content="Ashshen, mail@ashshen.cc">
@@ -14,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="react,前端,react,webpack,">
+    <meta name="keywords" content="react,react,前端,webpack,">
   
 
   
@@ -51,9 +47,9 @@
     <script src="/js/commentjs.js"></script>
   
 </head>
+<body>
 
-
-  <body>
+  
 
     
 
@@ -63,7 +59,7 @@
   <header>
     <div class="site-brand">
       <div class="site-title">
-        <a href="/">ASH&#39;S FOLDING PAGE</a>
+        <a href="/">ASH'S FOLDING PAGE</a>
       </div>
     </div>
     <nav class="site-navigation">
@@ -150,20 +146,9 @@
 </script>
 
 
-      
+      <div class="container post-index">
 
-
-
-
-
-
-
-
-<div class="container post-index">
-
-  
-
-<div class="post">
+  <div class="post">
   <h1 class="article-title">
     <span>react项目构建优化笔记</span>
   </h1>
@@ -186,23 +171,23 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="http://web-site-files.ashshen.cc/blog-header-images/nature-19.jpg" alt="img"></p>
+      <p><img alt="img" class="lazy" data-src="http://web-site-files.ashshen.cc/blog-header-images/nature-19.jpg"></p>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>工欲善其事，必先利其器。首先，我们需要知道webpack打包后的bundle.js文件里面都包含了哪些模块依赖以及各个模块占用的比重。</p>
 <p>这里推荐一个比较好用的图形化工具：<a href="http://alexkuz.github.io/webpack-chart/" target="_blank" rel="noopener">Webpack Chart</a>。</p>
-<p>使用”webpack –profile –json &gt; stats.json”在项目根目录下生成stats.json将文件上传到网页中解析就可以得到bundle.js中各模块占用的比重了。</p>
+<p>使用”webpack –profile –json > stats.json”在项目根目录下生成stats.json将文件上传到网页中解析就可以得到bundle.js中各模块占用的比重了。</p>
 <p>效果图如下:</p>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="http://web-site-files.ashshen.cc/blog/react-online-reader/webpack-chat.png" alt="webpack-chat-img"></p>
+<p><img alt="webpack-chat-img" class="lazy" data-src="http://web-site-files.ashshen.cc/blog/react-online-reader/webpack-chat.png"></p>
 <p>“~”部分代表第三方的依赖，”src”部分则代表项目自身编写的模块。</p>
 <h3 id="第一步，分离第三方模块"><a href="#第一步，分离第三方模块" class="headerlink" title="第一步，分离第三方模块"></a>第一步，分离第三方模块</h3><p>从Webpack Chart中可以看出，调用的第三方模块中，占比较大的有echarts、react、moment、zrender等。其中zrender是echarts的依赖。完全可以把这部分从bundle.js中拆分出来。然后用外联js的方式通过 script 标签在index.html中引入。</p>
 <p>这里需要注意的是：分离的第三方依赖 script 标签需要写在bundle.js前面。</p>
 <p>拆分方法：使用weback配置项中的externals，比如，我这边拆分出了moment.js、lodash、echarts：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br><span class="line">externals: &#123;</span><br><span class="line">  <span class="string">"echarts"</span>: <span class="string">'echarts'</span>,</span><br><span class="line">  <span class="string">"moment"</span>: <span class="string">'moment'</span>,</span><br><span class="line">  <span class="string">"lodash"</span>: <span class="string">'lodash'</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">output: {</span><br><span class="line">  ...</span><br><span class="line">},</span><br><span class="line">externals: {</span><br><span class="line">  <span class="string">"echarts"</span>: <span class="string">'echarts'</span>,</span><br><span class="line">  <span class="string">"moment"</span>: <span class="string">'moment'</span>,</span><br><span class="line">  <span class="string">"lodash"</span>: <span class="string">'lodash'</span>,</span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure>
 <p>拆分之前bundle.js的大小为3.1MB；拆分之后，减小到2.2MB。可以看到拆分后的效果还是比较显著的。</p>
 <h3 id="第二步，react-router按需加载"><a href="#第二步，react-router按需加载" class="headerlink" title="第二步，react-router按需加载"></a>第二步，react-router按需加载</h3><p>第三方模块拆分完成之后，剩下的就是按照路由来拆分chunk了，react-router本身带有按需加载的设置：使用”<a href="https://react-guide.github.io/react-router-cn/docs/guides/advanced/DynamicRouting.html" target="_blank" rel="noopener">getComponent</a>“配合webpack的”require.ensure”。</p>
 <p>下面给出我的部分代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">const</span> App = <span class="function">(<span class="params">location, callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">require</span>.ensure([], (<span class="built_in">require</span>) =&gt; &#123;</span><br><span class="line">    callback(<span class="literal">null</span>, <span class="built_in">require</span>(<span class="string">'../components/_shared/App/App'</span>).default);</span><br><span class="line">  &#125;, <span class="string">'app'</span>); <span class="comment">// 这里的"app"为chunk的名称，可自定义</span></span><br><span class="line">&#125;;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">getComponent</span>=<span class="string">&#123;App&#125;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>然后需要在webpack的配置项中增加：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  ...</span><br><span class="line">  filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">  chunkFilename: <span class="string">'[id].[hash:8].chunk.js'</span>, <span class="comment">// "[id]"代表模块加载的id，"[hash:8]"表示使用8位hash值，还可以使用"[name]"获取到chunk的名称</span></span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">const</span> App = <span class="function">(<span class="params">location, callback</span>) =></span> {</span><br><span class="line">  <span class="built_in">require</span>.ensure([], (<span class="built_in">require</span>) => {</span><br><span class="line">    callback(<span class="literal">null</span>, <span class="built_in">require</span>(<span class="string">'../components/_shared/App/App'</span>).default);</span><br><span class="line">  }, <span class="string">'app'</span>); <span class="comment">// 这里的"app"为chunk的名称，可自定义</span></span><br><span class="line">};</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag"><<span class="name">Route</span> <span class="attr">getComponent</span>=<span class="string">{App}</span>></span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">Route</span>></span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
+<p>然后需要在webpack的配置项中增加：<br></p><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">output: {</span><br><span class="line">  ...</span><br><span class="line">  filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">  chunkFilename: <span class="string">'[id].[hash:8].chunk.js'</span>, <span class="comment">// "[id]"代表模块加载的id，"[hash:8]"表示使用8位hash值，还可以使用"[name]"获取到chunk的名称</span></span><br><span class="line">  ...</span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure><p></p>
 <p>写法上大多与这个类似。</p>
 <p>这里比较值得注意的一点是：</p>
 <p><strong>如果component使用的是es5标准（module.exports = …）的话，不需要以上代码中的”default”；如果使用的是es6标准（export default…）的话，需要加上”default”。</strong></p>
@@ -213,6 +198,7 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里，本次对于bundle.js文件体积的优化也就告一段落了。</p>
 <p>从结果来看：优化之前的文件体积为3.1MB，首屏加载时间大约为22秒；拆分优化之后的文件体积为510KB，首屏加载时间为5秒。</p>
 <p>然后加上gzip压缩后，生产环境下js文件体积为220KB，首屏加载时间为2.2s。</p>
+
     </div>
   </div>
   
@@ -231,14 +217,14 @@
   
   
   
-    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qq, weibo, wechat, douban, google, facebook, twitter">
+    <meta name="generator" content="Hexo 3.8.0"><div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qq, weibo, wechat, douban, google, facebook, twitter">
   <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
 </div>
 <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
   
 
   
-    <div id="reward">
+    <meta name="generator" content="Hexo 3.8.0"><div id="reward">
   
     <p id="reward-meta">您的赞赏，是对我最大的鼓励</p>
   
@@ -249,12 +235,12 @@
   <div id="reward-qrcode">
     
       <div class="reward-qrcode--container">
-        <img class="qrcode-img" src="/images/wechat.png" alt="微信扫一扫">
+        <img class="qrcode-img lazy" alt="微信扫一扫" data-src="/images/wechat.png">
         <p class="qrcode-meta">微信扫一扫</p>
       </div>
     
       <div class="reward-qrcode--container">
-        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝扫一扫">
+        <img class="qrcode-img lazy" alt="支付宝扫一扫" data-src="/images/alipay.png">
         <p class="qrcode-meta">支付宝扫一扫</p>
       </div>
     
@@ -273,6 +259,55 @@
       display = !display
     }, false)
   })()
+</script><script>document.addEventListener("DOMContentLoaded", function() {
+  var lazyloadImages;
+
+  if ("IntersectionObserver" in window) {
+    lazyloadImages = document.querySelectorAll(".lazy");
+    var imageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.remove("lazy");
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    lazyloadImages.forEach(function(image) {
+      imageObserver.observe(image);
+    });
+  } else {  
+    var lazyloadThrottleTimeout;
+    lazyloadImages = document.querySelectorAll(".lazy");
+    
+    function lazyload () {
+      if(lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }    
+
+      lazyloadThrottleTimeout = setTimeout(function() {
+        var scrollTop = window.pageYOffset;
+        lazyloadImages.forEach(function(img) {
+            if(img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+        });
+        if(lazyloadImages.length == 0) { 
+          document.removeEventListener("scroll", lazyload);
+          window.removeEventListener("resize", lazyload);
+          window.removeEventListener("orientationChange", lazyload);
+        }
+      }, 20);
+    }
+
+    document.addEventListener("scroll", lazyload);
+    window.addEventListener("resize", lazyload);
+    window.addEventListener("orientationChange", lazyload);
+  }
+})
 </script>
   
 
@@ -283,14 +318,14 @@
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/前端/">
-              #前端
+            <a href="/tags/react/">
+              #react
             </a>
           </span>
           
           <span class="span--tag">
-            <a href="/tags/react/">
-              #react
+            <a href="/tags/前端/">
+              #前端
             </a>
           </span>
           
@@ -373,7 +408,56 @@
     });
   }
 </script>
+<script>document.addEventListener("DOMContentLoaded", function() {
+  var lazyloadImages;
 
+  if ("IntersectionObserver" in window) {
+    lazyloadImages = document.querySelectorAll(".lazy");
+    var imageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.remove("lazy");
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    lazyloadImages.forEach(function(image) {
+      imageObserver.observe(image);
+    });
+  } else {  
+    var lazyloadThrottleTimeout;
+    lazyloadImages = document.querySelectorAll(".lazy");
+    
+    function lazyload () {
+      if(lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }    
+
+      lazyloadThrottleTimeout = setTimeout(function() {
+        var scrollTop = window.pageYOffset;
+        lazyloadImages.forEach(function(img) {
+            if(img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+        });
+        if(lazyloadImages.length == 0) { 
+          document.removeEventListener("scroll", lazyload);
+          window.removeEventListener("resize", lazyload);
+          window.removeEventListener("orientationChange", lazyload);
+        }
+      }, 20);
+    }
+
+    document.addEventListener("scroll", lazyload);
+    window.addEventListener("resize", lazyload);
+    window.addEventListener("orientationChange", lazyload);
+  }
+})
+</script>
   
 </div>
 
@@ -551,6 +635,56 @@ document.querySelector(".back-to-top").addEventListener("click", backToTop, fals
 
 
     
-  <script>!function(o){var i=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function c(t,e){var n=new Image,o=t.getAttribute("data-original");n.onload=function(){t.src=o,e&&e()},n.src=o}function n(){for(var t=0;t<i.length;t++)e=i[t],void 0,0<=(n=e.getBoundingClientRect()).top&&0<=n.left&&n.top<=(o.innerHeight||document.documentElement.clientHeight)&&c(i[t],function(){i.splice(t,t)});var e,n;console.log("trigger")}n(),o.addEventListener("scroll",function(){var t,e;t=n,e=o,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+  <script>document.addEventListener("DOMContentLoaded", function() {
+  var lazyloadImages;
 
-</html>
+  if ("IntersectionObserver" in window) {
+    lazyloadImages = document.querySelectorAll(".lazy");
+    var imageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.remove("lazy");
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    lazyloadImages.forEach(function(image) {
+      imageObserver.observe(image);
+    });
+  } else {  
+    var lazyloadThrottleTimeout;
+    lazyloadImages = document.querySelectorAll(".lazy");
+    
+    function lazyload () {
+      if(lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }    
+
+      lazyloadThrottleTimeout = setTimeout(function() {
+        var scrollTop = window.pageYOffset;
+        lazyloadImages.forEach(function(img) {
+            if(img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+        });
+        if(lazyloadImages.length == 0) { 
+          document.removeEventListener("scroll", lazyload);
+          window.removeEventListener("resize", lazyload);
+          window.removeEventListener("orientationChange", lazyload);
+        }
+      }, 20);
+    }
+
+    document.addEventListener("scroll", lazyload);
+    window.addEventListener("resize", lazyload);
+    window.addEventListener("orientationChange", lazyload);
+  }
+})
+</script>
+
+
+</body></html>

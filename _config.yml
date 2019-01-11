@@ -85,7 +85,6 @@ sitemap:
 baidusitemap:
   path: baidusitemap.xml
 
-lazyload:
-  enable: true 
-  onlypost: false
+lazyImg:
+  enable: true
   loadingImg: ./images/loading.gif

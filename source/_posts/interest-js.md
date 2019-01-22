@@ -77,7 +77,68 @@ OK，那么我们只需要告诉js引擎第一部分是一个函数表达式，I
 当然，如果构造函数需要接收参数时，还是需要带上`()`的，如：`const arr = new Array(10)`。
 
 
---- 2019-01-03 ---
+--- 2019-01-22 ---
+
+### 三、逗号操作符
+
+在js中，逗号操作符比较少见，它一般用于在同一条语句中进行多个表达式的书写，并且返回最后一个表达式的值。
+
+什么意思呢？打个比方说：有a、b、c三个变量，他们的值都是1，我们希望a和c加1，b减1，新赋值d等于c。
+
+我们可能这么写：
+
+``` js
+let a = b = c = 1
+a++
+b--
+const d = ++c
+```
+
+使用逗号运算符我们可以这么写：
+
+``` js
+let a = b = c = 1
+const d = (a++, b--, ++c)
+```
+
+除此之外，逗号运算符还有一个用法。
+
+我们都知道IIFE（上面介绍过）。那么，当我们有如下场景时：
+
+``` js
+var obj = {
+  func: function () {
+    console.log(this === window, this === obj)
+  }
+}
+(obj.func)() // false true
+```
+
+由于`this`的指向原因，输出`false true`。那么，想要输出`true false`应该怎么写呢？
+
+可以使用`bind`。
+
+``` js
+var obj = {
+  func: function () {
+    console.log(this === window, this === obj)
+  }
+}
+(obj.func.bind(window))() // true false
+```
+
+其实，我们还可以使用逗号运算符。刚刚我们说到：逗号运算符会返回最后一个表达式的值。那么实际上，使用逗号运算符相当于做了一次赋值操作`let a = obj.func`。
+
+``` js
+var obj = {
+  func: function () {
+    console.log(this === window, this === obj)
+  }
+}
+(0, obj.func)() // true false
+```
+
+所以，在一些编译工具或者库中，经常使用`(0, xx.func)(...args)`来保证`func`执行时，`this`始终指向`window`。
 
 持续施工中......
 

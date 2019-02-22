@@ -77,3 +77,13 @@ sudo apt-get install iptables
 #### -bash: service: command not found
 
 遇到此问题，使用 `su - root` 进入root模式再执行命令。
+
+
+#### vsftp
+
+查看vsftp账号：
+
+linux中，vsftp信息保存在`/etc/vsftpd/`中。
+
+查看所有用户：`cat /etc/vsftpd/ftpusers`。无法查看密码，修改密码：`passwd [ftp_username]`。
+

@@ -7,15 +7,11 @@ categories:
   - Node
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-5.jpg)
-
 虽然用前端语言写桌面应用已经不是什么稀奇的事情了，现有的工具也有[Electron](https://electron.atom.io/)、[heX](http://hex.youdao.com/zh-cn/index.html)、[NW.js](https://nwjs.io/)等，但是用HTML、CSS和JS来构建一个自己的桌面应用还是挺让人兴奋的。
 
 于是我也用Electron来封装了一下我的在线小说阅读器，[GitHub地址](https://github.com/Ash-sc/online-reader)。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-5.jpg)
 
 ## 关于Electron
 

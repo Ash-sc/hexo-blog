@@ -5,15 +5,11 @@ tags: [js]
 categories: 前端
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-1.jpg)
-
 JS中总会有一些奇奇怪怪却又非常有趣的东西，比如`[] + [] === ''`、`![] + ![] === 0`等等，时常让我们咬牙切齿、哭笑不得却又欲罢不能。
 
 当然，本文中出现的不仅仅是js搞怪玩法，更多的是一些“高逼格”但是写在业务中可能会被打死的玩法。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-1.jpg)
 
 素材来源于平时写代码时遇到的或者论坛。
 

@@ -5,13 +5,9 @@ tags: [js, 前端]
 categories: 前端
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-3.jpg)
-
 js中call、apply与bind都可以用来改变this的指向，本篇主要介绍的是三者在语法使用上的区别。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-3.jpg)
 
 首先，我们让我们来看一段代码：
 

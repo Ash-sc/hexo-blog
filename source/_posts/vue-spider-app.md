@@ -7,8 +7,6 @@ categories:
   - vue
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-24.jpg)
-
 由于想要看电影，但是又不想每次了解最新的电影信息都要去某宝之类的App上找那些藏得很深的小程序（当然，买票的时候还是得向大佬低头）。
 
 同时又喜欢看看微博，逛逛知乎，掘金什么的；各种App切来切去很麻烦的。
@@ -18,8 +16,6 @@ categories:
 Emmmm，东西有点多。工作之余慢慢写吧。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-24.jpg)
 
 OK，按照惯例，先上Github地址：https://github.com/Ash-sc/node-spider-webapp
 

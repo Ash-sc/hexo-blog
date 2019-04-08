@@ -7,15 +7,11 @@ categories:
   - vue
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-23.jpg)
-
 在很久之前曾用过一段时间的Evernote，后来由于在手机上经常卡顿，也就弃坑了改用Wiznote。然鹅Wiznote也不是个什么好鸟，相较于Evernote对于免费用户只能同时绑定两个客户端而言，Wiznote居然对免费用户限制笔记数量。好吧，不能忍了，刚好最近这段时间也在看Vue，所以也就自己动手撸了个网页版的笔记，存放点BT网站url地址啥的（笑）。
 
 功能还在陆续完善中，后续应该会有手机版的…… ￣▽￣   我的todo，我自己都不信。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-23.jpg)
 
 项目地址：[https://github.com/Ash-sc/notebook](https://github.com/Ash-sc/notebook)
 

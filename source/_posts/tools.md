@@ -6,13 +6,9 @@ categories:
   - 工具
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-20.jpg)
-
 分享一些工作中遇到的觉得比较好用的工具和软件。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-20.jpg)
 
 ## 网站类
 

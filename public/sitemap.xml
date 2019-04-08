@@ -2,23 +2,177 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://ashshen.cc/2019/02/18/about-generator/</loc>
+    <loc>https://ashshen.cc/2017/11/28/vue-upload/</loc>
     
-    <lastmod>2019-02-22T03:10:38.623Z</lastmod>
+    <lastmod>2019-04-08T07:31:07.573Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/01/09/vue-spider-app/</loc>
+    
+    <lastmod>2019-04-08T07:31:01.696Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/11/07/vue-notebook/</loc>
+    
+    <lastmod>2019-04-08T07:30:56.227Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://ashshen.cc/2018/12/10/ubuntu-shell/</loc>
     
-    <lastmod>2019-02-22T02:09:48.907Z</lastmod>
+    <lastmod>2019-04-08T07:30:48.506Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://ashshen.cc/tags/index.html</loc>
+    <loc>https://ashshen.cc/2017/05/14/ubuntu-shadowsocks/</loc>
     
-    <lastmod>2019-02-13T02:25:54.531Z</lastmod>
+    <lastmod>2019-04-08T07:30:40.807Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/09/12/tools/</loc>
+    
+    <lastmod>2019-04-08T07:30:31.628Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/04/06/react-optimization/</loc>
+    
+    <lastmod>2019-04-08T07:30:25.233Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/07/04/react-node-online-reader/</loc>
+    
+    <lastmod>2019-04-08T07:30:19.554Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/09/05/react-component/</loc>
+    
+    <lastmod>2019-04-08T07:30:12.266Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/07/10/php-fpm-nginx/</loc>
+    
+    <lastmod>2019-04-08T07:30:06.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/11/26/module-in-js/</loc>
+    
+    <lastmod>2019-04-08T07:30:01.723Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/06/11/mac-install-nvm/</loc>
+    
+    <lastmod>2019-04-08T07:29:55.794Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/12/10/interest-js/</loc>
+    
+    <lastmod>2019-04-08T07:29:50.162Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/07/10/image-tool/</loc>
+    
+    <lastmod>2019-04-08T07:29:44.057Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/08/17/https/</loc>
+    
+    <lastmod>2019-04-08T07:29:38.485Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/08/19/https-blog/</loc>
+    
+    <lastmod>2019-04-08T07:29:32.993Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/01/24/html5-dialog/</loc>
+    
+    <lastmod>2019-04-08T07:29:27.228Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/08/23/file-slice-upload-node/</loc>
+    
+    <lastmod>2019-04-08T07:29:17.552Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/04/27/fe-question/</loc>
+    
+    <lastmod>2019-04-08T07:29:11.457Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/12/06/fe-page-communication/</loc>
+    
+    <lastmod>2019-04-08T07:29:05.840Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/04/04/fe-note/</loc>
+    
+    <lastmod>2019-04-08T07:28:57.159Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/07/05/electron-react-online-reader/</loc>
+    
+    <lastmod>2019-04-08T07:28:51.517Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/02/28/docker-mongo/</loc>
+    
+    <lastmod>2019-04-08T07:28:43.439Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2017/03/19/call-bind-apply/</loc>
+    
+    <lastmod>2019-04-08T07:28:09.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2019/02/18/about-generator/</loc>
+    
+    <lastmod>2019-04-08T07:27:40.321Z</lastmod>
     
   </url>
   
@@ -30,9 +184,9 @@
   </url>
   
   <url>
-    <loc>https://ashshen.cc/2017/11/28/vue-upload/</loc>
+    <loc>https://ashshen.cc/tags/index.html</loc>
     
-    <lastmod>2019-02-13T02:25:54.530Z</lastmod>
+    <lastmod>2019-02-13T02:25:54.531Z</lastmod>
     
   </url>
   
@@ -44,163 +198,9 @@
   </url>
   
   <url>
-    <loc>https://ashshen.cc/2017/11/07/vue-notebook/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.530Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/01/09/vue-spider-app/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.530Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/09/12/tools/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.529Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/04/06/react-optimization/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.529Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/05/14/ubuntu-shadowsocks/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.529Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/11/26/module-in-js/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.528Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/07/10/php-fpm-nginx/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.528Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/09/05/react-component/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.528Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/07/04/react-node-online-reader/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.528Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/06/11/mac-install-nvm/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.527Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/12/10/interest-js/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.527Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/07/10/image-tool/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.527Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ashshen.cc/2017/01/01/hello-world/</loc>
     
     <lastmod>2019-02-13T02:25:54.526Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/01/24/html5-dialog/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.526Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/08/19/https-blog/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.526Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/08/17/https/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.526Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/08/23/file-slice-upload-node/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.525Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/04/27/fe-question/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.525Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/02/28/docker-mongo/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.524Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/12/06/fe-page-communication/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.524Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/04/04/fe-note/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.524Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/07/05/electron-react-online-reader/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.524Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2017/03/19/call-bind-apply/</loc>
-    
-    <lastmod>2019-02-13T02:25:54.523Z</lastmod>
     
   </url>
   

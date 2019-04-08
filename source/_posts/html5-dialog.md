@@ -5,13 +5,9 @@ tags: [html5, dialog]
 categories: 前端
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-10.jpg)
-
 2017年12月14日，W3C发布了HTML5.2更新版本。那么，在这个版本中，又有哪些修改与删除呢？一起来看一下。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-10.jpg)
 
 ## 新增对话框 Dialog 元素
 

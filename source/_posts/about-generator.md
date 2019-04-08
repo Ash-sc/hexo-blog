@@ -8,15 +8,11 @@ categories:
   - generator
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-26.jpg)
-
 在js中，Generator一直是比较奇特的存在；它拥有十八般武艺却因为使用复杂、难以调试而没有得到广泛使用。
 
 本篇主要介绍Generator基本语法以及经典用法。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-26.jpg)
 
 ## 开始之前
 

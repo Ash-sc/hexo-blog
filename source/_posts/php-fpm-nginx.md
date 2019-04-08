@@ -8,13 +8,9 @@ categories:
   - fpm
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-16.jpg)
-
 最近公司有个项目是用的php写的后端服务，相关的开发和运维人员也没有php的项目部署经验，所以我也就协助着弄了一下关于在Linux环境下部署php项目，顺便学习一下新的知识，拓宽一下自己的知识面。然后事后在自己的电脑中也部署了一套同样的环境。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-16.jpg)
 
 主要包括以下几个步骤：
 

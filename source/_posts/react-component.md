@@ -5,8 +5,6 @@ tags: [react, component, npm]
 categories: react
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-17.jpg)
-
 如果说2015是属于Angular1.x的年代，那么2017已经是React和Vue两分天下了；虽然Angular4.x版本已经发布，但是无论是从目前的社区活跃还是使用比例来看，比之R&V还是有一定差距的。
 
 而前端的组件化思想也从Angular1.x的Directive到R&V的Component，逐渐发展成熟。
@@ -14,8 +12,6 @@ categories: react
 对于组件化的好处（减少代码量、易于维护…）这里就不在赘述了，今天要说的是如何从零开始封装一个react组件并发布到npmjs.com。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-17.jpg)
 
 ## 开始之前
 

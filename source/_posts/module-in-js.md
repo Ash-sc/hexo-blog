@@ -7,8 +7,6 @@ categories:
   - 模块化
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-15.jpg)
-
 提到前端中的模块加载，大概脑海中能想到的就是：AMD、CMD、UMD、ES6 Module这样的字眼。
 
 1. 那么，它们之间又有什么区别和关系呢？
@@ -20,8 +18,6 @@ categories:
 本文将针对这几个问题做一些简单的梳理和介绍。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-15.jpg)
 
 ## AMD ( asynchronous module definition )
 

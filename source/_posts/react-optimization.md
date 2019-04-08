@@ -6,13 +6,9 @@ categories:
   - react
 ---
 
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-19.jpg)
-
 公司的项目架构采用的是react + redux，环境构建则采用的是webpack打包编译的方式。随着项目中模块的增加，bundle.js文件的大小也越来越大，导致网页首屏加载时间过长（3MB的文件需要加载20秒），严重影响了用户体验。于是，优化项目js文件也就成了必须和必要的了。
 
 <!-- more -->
-
-![img](http://web-site-files.ashshen.cc/blog-header-images/nature-19.jpg)
 
 ## 工具
 

@@ -156,7 +156,7 @@ table td {
 .pull-right {
   float: right;
 }
-.site-info .google-auto-placed {
+#site-info .google-auto-placed {
   display: none;
 }
 @media screen and (max-width: 1024px) {

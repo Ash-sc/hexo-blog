@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="nginx配置多级域名泛解析"><meta name="keywords" content="nginx,domain,泛解析"><meta name="author" content="Ash"><meta name="copyright" content="Ash"><title>nginx配置多级域名泛解析 | 就在记忆里画一个猹🦔</title><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-1937033283561228',
+  enable_page_level_ads: 'true'
+});
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、泛解析域名"><span class="toc-number">1.</span> <span class="toc-text">一、泛解析域名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、nginx配置三级域名解析"><span class="toc-number">2.</span> <span class="toc-text">二、nginx配置三级域名解析</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img class="lazy" data-src="/img/avatar.jpg"></div><div class="author-info__name text-center">Ash</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/Ash-sc">Github</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">27</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">40</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">20</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">就在记忆里画一个猹🦔</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">nginx配置多级域名泛解析</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-09</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/nginx/">nginx</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/05/09/nginx-domain/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/05/09/nginx-domain/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><meta name="generator" content="Hexo 3.8.0"><p>本文主要介绍如何使用nginx配置多级域名，从而实现多级域名的80端口访问同一台服务器的不同端口。</p>
+<p>适用场景：</p>
+<ol>
+<li><p>建站服务网站搭建，让你的用户可以通过<code>[自定义用户名].your-domain.com</code>访问他们搭建的网站。</p>
+</li>
+<li><p>对于我等这些在一台服务器部署了很多web应用又不想让用户在访问的时候加上难看又难记的端口的场景。</p>
+</li>
+</ol>
+<p>PS：关于域名的分级一直是有争议的，在本文中：<code>.com、.cn、.cc</code>这些是顶级域名，也就是一级域名。<code>baidu.com、taobao.com</code>这些是二级域名。<code>pan.baidu.com</code>这些是三级域名，以此类推，N级域名就是在N-1级上追加了一个<code>xx.</code>。</p>
+<a id="more"></a>
+<h1 id="一、泛解析域名"><a href="#一、泛解析域名" class="headerlink" title="一、泛解析域名"></a>一、泛解析域名</h1><p>所以，第一步需要做的是：先得把域名解析到服务器，也就是说：首先得保证<code>a.your-domain.com</code>和<code>b.your-domain.com</code>指向同一服务器ip，然后再考虑不同端口的转发策略。</p>
+<p>我这边使用的是阿里云的服务器（假设为<code>12.34.56.78</code>），只需要在域名解析页面添加泛域名解析（将<code>*</code>解析到<code>your-domain.com</code>）即可，这样所有的<code>*.your-domain.com</code>就可以都访问到<code>12.34.56.78</code>了。</p>
+<p><img alt="aliyun-syntax" class="lazy" data-src="http://web-site-files.ashshen.cc//blog/nginx-syntax/Screen%20Shot%202019-05-13%20at%2011.23.25%20AM.png"></p>
+<h1 id="二、nginx配置三级域名解析"><a href="#二、nginx配置三级域名解析" class="headerlink" title="二、nginx配置三级域名解析"></a>二、nginx配置三级域名解析</h1><p>经过泛域名解析后，现在<code>a.your-domain.com</code>和<code>b.your-domain.com</code>都可以访问<code>12.34.56.78</code>了。</p>
+<p>接下来就是通过nginx配置<code>12.34.56.78</code>的<code>80</code>端口代理，将<code>a.your-domain.com</code>和<code>b.your-domain.com</code>分别代理至不同的服务。</p>
+<p>nginx配置起来也比较简单，只需要在server解析中做如下配置：</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="section">server</span> {</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost, <span class="regexp">*.your-domain.com</span>;</span><br><span class="line">    <span class="attribute">client_max_body_size</span>    <span class="number">100m</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / {</span><br><span class="line">        <span class="attribute">if</span> (<span class="variable">$host</span> = <span class="string">'a.your-domain.com'</span>)</span><br><span class="line">        {</span><br><span class="line">            <span class="attribute">proxy_pass</span> https://localhost:6655;</span><br><span class="line">        }</span><br><span class="line">        <span class="attribute">if</span> (<span class="variable">$host</span> = <span class="string">'b.your-domain.com'</span>)</span><br><span class="line">        {</span><br><span class="line">            <span class="attribute">proxy_pass</span> https://localhost:5566;</span><br><span class="line">        }</span><br><span class="line">        <span class="attribute">if</span> (<span class="variable">$host</span> = <span class="string">'your-domain.com'</span>)</span><br><span class="line">        {</span><br><span class="line">            <span class="attribute">rewrite</span><span class="regexp"> ^(.*)$</span> https://your-domain.com <span class="literal">permanent</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
+<p>上面的配置中，<code>server_name</code>配置<code>*.your-domain.com</code>表示当前nginx解析的服务域名为泛域名。</p>
+<p>然后我们在<code>location /</code>的解析中，使用<code>$host</code>（用户访问的域名）做判断，根据不同的域名，使用nginx自身的代理语法<code>proxy_pass</code>将用户访问转发至不同服务即可。</p>
+<p>最后，我这边对于直接使用二级域名<code>your-domain.com</code>访问的用户，直接使用<code>301</code>永久重定向到了<code>https://your-domain.com</code>。</p>
+<p>配置完成后，使用<code>nginx -t</code>测试配置没有语法错误，然后<code>nginx -s reload</code>重启nginx即可。</p>
+<p>PS：</p>
+<ol>
+<li><p>如果希望配置四级域名的泛解析（如：<code>*.fe.your-domain.com</code>），只需要在域名供应商提供的解析服务中添加<code>*.fe</code>解析即可。</p>
+</li>
+<li><p>关于域名分级：关于域名的分级一直是有争议的，在本文中：<code>.com、.cn、.cc</code>这些是顶级域名，也就是一级域名。<code>baidu.com、taobao.com</code>这些是二级域名。<code>pan.baidu.com</code>这些是三级域名，以此类推，N级域名就是在N-1级上追加了一个<code>xx.</code></p>
+</li>
+</ol>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ash</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://ashshen.cc/2019/05/09/nginx-domain/">https://ashshen.cc/2019/05/09/nginx-domain/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/nginx/">nginx</a><a class="post-meta__tags" href="/tags/domain/">domain</a><a class="post-meta__tags" href="/tags/泛解析/">泛解析</a></div><div class="post-qr-code"><div class="post-qr-code-item"><img class="post-qr-code__img lazy" data-src="/img/alipay.png"><div class="post-qr-code__desc">alipay</div></div><div class="post-qr-code-item"><img class="post-qr-code__img lazy" data-src="/img/wechat.png"><div class="post-qr-code__desc">wechat</div></div></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/02/18/about-generator/"><span>JS中的Generator</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://ashshen.cc/2019/05/09/nginx-domain/';
+  this.page.identifier = '2019/05/09/nginx-domain/';
+  this.page.title = 'nginx配置多级域名泛解析';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'ashshen-cc' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://ashshen-cc.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">©2017 - 2019 By Ash</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><script>document.addEventListener("DOMContentLoaded", function() {
+  var lazyloadImages;
+
+  if ("IntersectionObserver" in window) {
+    lazyloadImages = document.querySelectorAll(".lazy");
+    var imageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.remove("lazy");
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    lazyloadImages.forEach(function(image) {
+      imageObserver.observe(image);
+    });
+  } else {  
+    var lazyloadThrottleTimeout;
+    lazyloadImages = document.querySelectorAll(".lazy");
+    
+    function lazyload () {
+      if(lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }    
+
+      lazyloadThrottleTimeout = setTimeout(function() {
+        var scrollTop = window.pageYOffset;
+        lazyloadImages.forEach(function(img) {
+            if(img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+        });
+        if(lazyloadImages.length == 0) { 
+          document.removeEventListener("scroll", lazyload);
+          window.removeEventListener("resize", lazyload);
+          window.removeEventListener("orientationChange", lazyload);
+        }
+      }, 20);
+    }
+
+    document.addEventListener("scroll", lazyload);
+    window.addEventListener("resize", lazyload);
+    window.addEventListener("orientationChange", lazyload);
+  }
+})
+</script></body></html>

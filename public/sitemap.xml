@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ashshen.cc/2019/05/09/nginx-domain/</loc>
+    
+    <lastmod>2019-05-13T03:50:32.061Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ashshen.cc/2018/09/12/tools/</loc>
+    
+    <lastmod>2019-04-28T02:01:25.579Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ashshen.cc/2017/11/28/vue-upload/</loc>
     
     <lastmod>2019-04-08T07:31:07.573Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>https://ashshen.cc/2017/05/14/ubuntu-shadowsocks/</loc>
     
     <lastmod>2019-04-08T07:30:40.807Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/09/12/tools/</loc>
-    
-    <lastmod>2019-04-08T07:30:31.628Z</lastmod>
     
   </url>
   

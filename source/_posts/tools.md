@@ -27,13 +27,13 @@ PS：vscode也有一个类似的插件：Polacode
 ![carbon](http://web-site-files.ashshen.cc/tools/carbon.png)
 
 
-### 2.Just Free Templates
+### 2.Free Web Templates
 
 免费网页模板素材下载。
 
 优点：免费，包含网页素材和App素材。
 
-地址：http://justfreetemplates.com/
+地址：https://zypopwebtemplates.com/web-templates
 
 截图：
 

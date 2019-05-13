@@ -66,7 +66,27 @@ nginx配置起来也比较简单，只需要在server解析中做如下配置：
 
 然后我们在`location /`的解析中，使用`$host`（用户访问的域名）做判断，根据不同的域名，使用nginx自身的代理语法`proxy_pass`将用户访问转发至不同服务即可。
 
-最后，我这边对于直接使用二级域名`your-domain.com`访问的用户，直接使用`301`永久重定向到了`https://your-domain.com`。
+我这边只是简单的应用转发，所以直接使用`if`语法列出来了，你也可以用通配符来解析。
+
+``` nginx
+server {
+
+    listen   80;
+    server_name ~^(?<subdomain>.+)\.your-domain\.com$;
+
+    index index.php index.html index.htm;
+    set $root_path '/var/www/yanue.net';
+    root $root_path;
+
+    try_files $uri $uri/ @rewrite;
+
+    location @rewrite {
+        rewrite ^/(.*)$ /index.html?_url=/$1;
+    }
+}
+```
+
+`$1`取到的值即为`subdomain`匹配的值。
 
 配置完成后，使用`nginx -t`测试配置没有语法错误，然后`nginx -s reload`重启nginx即可。
 

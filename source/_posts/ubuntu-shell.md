@@ -83,3 +83,4 @@ linux中，vsftp信息保存在`/etc/vsftpd/`中。
 
 查看所有用户：`cat /etc/vsftpd/ftpusers`。无法查看密码，修改密码：`passwd [ftp_username]`。
 
+

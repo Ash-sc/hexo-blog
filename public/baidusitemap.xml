@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ashshen.cc/2019/09/09/npm/</loc>
+    <lastmod>2019-09-16</lastmod>
+  </url>  <url>
+    <loc>https://ashshen.cc/2018/12/10/ubuntu-shell/</loc>
+    <lastmod>2019-07-19</lastmod>
+  </url>  <url>
     <loc>https://ashshen.cc/2019/05/09/nginx-domain/</loc>
     <lastmod>2019-05-13</lastmod>
   </url>  <url>
@@ -14,9 +20,6 @@
     <lastmod>2019-04-08</lastmod>
   </url>  <url>
     <loc>https://ashshen.cc/2017/11/07/vue-notebook/</loc>
-    <lastmod>2019-04-08</lastmod>
-  </url>  <url>
-    <loc>https://ashshen.cc/2018/12/10/ubuntu-shell/</loc>
     <lastmod>2019-04-08</lastmod>
   </url>  <url>
     <loc>https://ashshen.cc/2017/05/14/ubuntu-shadowsocks/</loc>

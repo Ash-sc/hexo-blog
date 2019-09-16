@@ -10,6 +10,7 @@ categories:
 
 本文主要介绍：npm install可以安装来自哪些途径的包、一些npm不常用的命令（repo、docs、ci、shrinkwrap等）、package.json中的各种dependency（dependencies、dev、peer、bundle、optional）。
 
+<!-- more -->
 
 ### 一、npm命令
 

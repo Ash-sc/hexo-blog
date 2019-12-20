@@ -1372,6 +1372,7 @@ footer.is-mobile {
   padding: 0 0 0 0.8rem;
   list-style: none;
   counter-reset: li;
+  background: rgba(27,31,35,0.05);
 }
 #content-inner ol p,
 #content-inner ul p {

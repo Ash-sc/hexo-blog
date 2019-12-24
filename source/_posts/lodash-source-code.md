@@ -146,6 +146,35 @@ module.exports = arrayEach;
 
 一个`forEach`函数的封装，与`Array.prototype.forEach`的区别在于它是可以通过在`iteratee`函数中`return false`来终止循环的。
 
+TIPS：在平时的编码过程中，我们也可以尝试着用while代替for循环；循环判断条件中，将数组length赋值给一个变量会具有更高的可读性和代码执行效率。
+
+## _arrayFilter.js
+
+``` js
+function arrayFilter(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      resIndex = 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
+}
+```
+
+一个过滤数组的方法，实现了数组的的filter方法。
+
+可以从这个方法中学到的点是：
+
+  这里定义了一个空数组`result`和一个变量`resIndex`，遍历数组将符合条件的元素通过`result[resIndex++] = value;`直接赋值到数组中。
+
+  在我们平时的编码过程中，我们一般会习惯不定义`resIndex`而使用`result.push(value)`，但实际上**数组直接赋值的效率是要比push高很多的**（数值大概是30%-600%之间）。
+
 
 
 

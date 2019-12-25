@@ -111,7 +111,7 @@ module.exports = apply;
 
 **当然，你可能会说：“用ES6中的结构符`...`不就行了么？何必这么麻烦”。**
 
-请注意：
+**请注意：**
   
   1. 作为函数库，lodash是要考虑兼容性的，所以短时间内不可能使用ES6+标准的代码。
   2. 作为项目代码，如果你的项目最终构建时没有使用babel等库进行编译，那么使用`...`+ call 代替apply是可行的；但是，如果你使用了babel，那么`a.call(null, ...[1, 2, 3])`将会被编译成`var _a;(_a = a).call.apply(_a, [null].concat([1, 2, 3]));`。
@@ -173,7 +173,7 @@ function arrayFilter(array, predicate) {
 
   这里定义了一个空数组`result`和一个变量`resIndex`，遍历数组将符合条件的元素通过`result[resIndex++] = value;`直接赋值到数组中。
 
-  在我们平时的编码过程中，我们一般会习惯不定义`resIndex`而使用`result.push(value)`，但实际上**数组直接赋值的效率是要比push高很多的**（数值大概是30%-600%之间）。
+  在我们平时的编码过程中，我们一般会习惯不定义`resIndex`而使用`result.push(value)`，但实际上**数组直接赋值的效率是要比push高很多的**。
 
 
 

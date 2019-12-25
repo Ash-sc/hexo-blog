@@ -60,7 +60,7 @@
 <li>返回调用func的[[Call]]内部方法的结果，提供 thisArg 作为该值，argList 作为参数列表。</li>
 </ol>
 <p><strong>当然，你可能会说：“用ES6中的结构符<code>...</code>不就行了么？何必这么麻烦”。</strong></p>
-<p>请注意：</p>
+<p><strong>请注意：</strong></p>
 <ol>
 <li>作为函数库，lodash是要考虑兼容性的，所以短时间内不可能使用ES6+标准的代码。</li>
 <li>作为项目代码，如果你的项目最终构建时没有使用babel等库进行编译，那么使用<code>...</code>+ call 代替apply是可行的；但是，如果你使用了babel，那么<code>a.call(null, ...[1, 2, 3])</code>将会被编译成<code>var _a;(_a = a).call.apply(_a, [null].concat([1, 2, 3]));</code>。</li>
@@ -72,8 +72,8 @@
 <p>一个过滤数组的方法，实现了数组的的filter方法。</p>
 <p>可以从这个方法中学到的点是：</p>
 <p>  这里定义了一个空数组<code>result</code>和一个变量<code>resIndex</code>，遍历数组将符合条件的元素通过<code>result[resIndex++] = value;</code>直接赋值到数组中。</p>
-<p>  在我们平时的编码过程中，我们一般会习惯不定义<code>resIndex</code>而使用<code>result.push(value)</code>，但实际上<strong>数组直接赋值的效率是要比push高很多的</strong>（数值大概是30%-600%之间）。</p>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ash</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://ashshen.cc/2019/12/20/lodash-source-code/">https://ashshen.cc/2019/12/20/lodash-source-code/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/js/">js</a><a class="post-meta__tags" href="/tags/lodash/">lodash</a><a class="post-meta__tags" href="/tags/source-code/">source code</a></div><div class="post-qr-code"><div class="post-qr-code-item"><img class="post-qr-code__img lazy" data-src="/img/alipay.png"><div class="post-qr-code__desc">alipay</div></div><div class="post-qr-code-item"><img class="post-qr-code__img lazy" data-src="/img/wechat.png"><div class="post-qr-code__desc">wechat</div></div></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/09/09/npm/"><span>前端秃头指南之npm</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+<p>  在我们平时的编码过程中，我们一般会习惯不定义<code>resIndex</code>而使用<code>result.push(value)</code>，但实际上<strong>数组直接赋值的效率是要比push高很多的</strong>。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ash</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://ashshen.cc/2019/12/20/lodash-source-code/">https://ashshen.cc/2019/12/20/lodash-source-code/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/js/">js</a><a class="post-meta__tags" href="/tags/lodash/">lodash</a><a class="post-meta__tags" href="/tags/source-code/">source code</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/09/09/npm/"><span>前端秃头指南之npm</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
 var disqus_config = function () {
   this.page.url = 'https://ashshen.cc/2019/12/20/lodash-source-code/';
   this.page.identifier = '2019/12/20/lodash-source-code/';

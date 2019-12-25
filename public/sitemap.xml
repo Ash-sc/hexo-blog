@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ashshen.cc/2018/12/25/fe-note/</loc>
+    
+    <lastmod>2019-12-25T08:27:29.542Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ashshen.cc/2019/12/20/lodash-source-code/</loc>
     
     <lastmod>2019-12-24T07:19:04.078Z</lastmod>
@@ -159,13 +166,6 @@
     <loc>https://ashshen.cc/2017/12/06/fe-page-communication/</loc>
     
     <lastmod>2019-04-08T07:29:05.840Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ashshen.cc/2018/04/04/fe-note/</loc>
-    
-    <lastmod>2019-04-08T07:28:57.159Z</lastmod>
     
   </url>
   

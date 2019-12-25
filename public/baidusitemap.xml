@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ashshen.cc/2018/12/25/fe-note/</loc>
+    <lastmod>2019-12-25</lastmod>
+  </url>  <url>
     <loc>https://ashshen.cc/2019/12/20/lodash-source-code/</loc>
     <lastmod>2019-12-24</lastmod>
   </url>  <url>
@@ -68,9 +71,6 @@
     <lastmod>2019-04-08</lastmod>
   </url>  <url>
     <loc>https://ashshen.cc/2017/12/06/fe-page-communication/</loc>
-    <lastmod>2019-04-08</lastmod>
-  </url>  <url>
-    <loc>https://ashshen.cc/2018/04/04/fe-note/</loc>
     <lastmod>2019-04-08</lastmod>
   </url>  <url>
     <loc>https://ashshen.cc/2017/07/05/electron-react-online-reader/</loc>

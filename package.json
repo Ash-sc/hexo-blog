@@ -4,7 +4,7 @@
   "scripts": {
     "start": "hexo server",
     "dev": "hexo server",
-    "build": "rm -rf public/ && hexo deploy && cp ./google2c880f89adb50099.html ./public"
+    "build": "rm -rf public/ && hexo deploy"
   },
   "private": true,
   "hexo": {

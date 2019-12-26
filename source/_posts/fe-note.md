@@ -68,7 +68,7 @@ LZ77算法的压缩原理：如果文件中有两块内容相同，那么我们�
 
 ## http传输压缩方式
 
-http请求报文压缩也是比较常见的一种性能优化手段。常见的压缩方式有：gzip、deflate、brotli等。
+http请求报文压缩常见的方式有：gzip、deflate、brotli等。
 
 浏览器在发送http请求时，会在请求头部Accept-Encoding中携带浏览器支持的压缩格式，而服务器在返回数据时，同样会在返回头部content-encoding中表明实际使用的压缩格式。
 
@@ -84,6 +84,8 @@ brotli最初发布于2015年，而后google在2015年9月发布了侧重于http�
 其他的压缩方式：sdch。
 
 sdch通过字典压缩算法对各页面相同内容进行压缩，主要分为3个部分：首次请求，下载字典，之后的请求。
+
+当然，还有一些更其他的压缩方式，比如：compress(UNIX)、exi(xml)、bzip2、lzma、xpress(windows商店)、xz等。
 
 **小结：**
 
@@ -240,6 +242,81 @@ push cache是http/2的内容。
 
 **浏览器存储缓存的方式可以有server worker/memory/disk cache和http2的push cache。**
 
+## HTTP协议
+
+### HTTP/0.9
+
+最初版本的HTTP协议并没有版本号，后来它的版本号被定位在 0.9 以区分后来的版本。HTTP/0.9 极其简单：请求由单行指令构成，以唯一可用方法GET开头，其后跟目标资源的路径。
+
+``` text
+GET /mypage.html
+```
+
+响应也极其简单的：只包含响应文档本身。
+
+``` html
+<HTML>
+HTML内容
+</HTML>
+```
+
+HTTP/0.9 的响应内容并不包含HTTP头，只有HTML文件可以传送。
+
+### HTTP/1.0
+
+有了协议版本的概念，并且会随着每个请求发送；有了状态码，使得浏览器可以根据状态码做出相应的处理（缓存等）；开始有了headers的概念；有了content-type，可以传输更加丰富的文件格式。
+
+### HTTP/1.1
+
+实际上http/1.1才是HTTP的第一个标准化版本（1997发布）。
+
+HTTP/1.1中，加入了很多改进：
+
+  1. 连接复用：多个http请求可以使用同一个tcp连接。（keep-alive）
+  2. 流水线操作：允许第一个应答完全被发送前就发送第二个请求。
+  3. 支持响应分块：response headers中添加Transfer-Encoding:chunked表明使用分块编码传输
+  4. 引入额外的缓存控制机制：如上文中提到的cache-control、Etag等。
+  5. 引入内容协商机制。
+  6. Host头部，使得不同域名可配置在同一ip地址。
+
+### HTTP/2
+
+HTTP/2的改动：
+
+  1. 使用二进制协议而不再是文本协议，不再可读。
+  2. 是一个复用协议，可以在一个tcp连接中并行处理http请求（多路复用）。
+  3. 压缩了headers，移除重复和传输重复的数据。
+  4. 允许服务器在客户端缓存中填充数据，也就是服务端推送。
+
+HTTP/2协议的基础是google开发的SPDY协议，可以说SPDY是HTTP/2的前身也不为过。
+
+### HTTP/3
+
+有人称HTTP/3为HTTP/2-over-QUIC，虽然不太认同，但是HTTP/3和QUIC协议的关系还是十分密切的。我们先来简单说说QUIC协议：
+
+QUIC（quick udp internet connection）协议是google开发的一种快速通信协议，基于UDP。对比于HTTP/2+TCP+TLS协议有如下优势：
+
+  1. 减少了TCP三次握手及TLS握手时间
+  2. 改进的拥塞控制
+  3. 避免队头阻塞的多路复用
+  4. 连接迁移
+  5. 前向冗余纠错
+
+我们都知道TCP连接是有三次握手的，而TLS完全握手需要至少2个RTT才能建立，简化握手需要 1 个 RTT 的握手延迟。而TCP和TLS都有队头阻塞的缺点。
+
+QUIC选择了UDP，UDP本身没有连接的概念，不需要三次握手，同时在应用程序层面实现了TCP的可靠性，TLS的安全性和HTTP2的并发性，使得协议的发展不再受限于操作系统和中间设备。（操作系统的更新迭代很大程度上限制了TCP的发展，20年前的XP现在还有在使用）
+
+QUIC的核心特性就是建立连接延时低，可以实现：传输层0RTT建立连接、加密层0RTT建立加密连接。
+
+QUIC切换阻塞控制不需要通过停机和升级，只需要服务端修改配置然后reload即可，这一点是TCP做不到的。
+
+QUIC在丢包重传时的处理也有异于TCP，不使用TCP单调递增的字节序号，而是使用严格递增的packet number + 偏移量Stream Offset。
+
+更多关于QUIC的资料可以查看关于QUIC的专业文档。
+
+在HTTP/3之前，google基于自家开发的QUIC协议与HTTP/2协议是有一些强绑定关系的，所以更多的是把它称之为HTTP/2 over QUIC。
+
+2018年，RFC 8446 TLS 1.3这一标准落地（TLS1.3和QUIC都能做到0-RTT从而降低延迟），HTTP/3也纳入IETF，而QUIC也由自实现的安全协议改为使用TLS1.3作为其安全协议。
 
 
 

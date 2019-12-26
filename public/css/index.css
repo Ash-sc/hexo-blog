@@ -20,7 +20,7 @@ body {
   flex-direction: column;
   min-height: 100%;
   background: #fff;
-  color: #4c4948;
+  color: #5e6d82;
   font-size: 14px;
   font-family: Lato, Helvetica Neue For Number, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
   line-height: 2;
@@ -785,7 +785,7 @@ footer.is-mobile {
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
     padding-left: 0.6rem;
-    color: #4c4948;
+    color: #5e6d82;
     text-shadow: none;
     font-size: 0.8rem;
   }
@@ -977,7 +977,7 @@ footer.is-mobile {
 .article-sort-item__title {
   display: block;
   margin-left: 5rem;
-  color: #4c4948;
+  color: #5e6d82;
   text-decoration: none;
   font-size: 0.8rem;
   cursor: pointer;
@@ -990,7 +990,7 @@ footer.is-mobile {
   font-size: 1.8rem;
 }
 .category-list a {
-  color: #4c4948;
+  color: #5e6d82;
   text-decoration: none;
   cursor: pointer;
 }

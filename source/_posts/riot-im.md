@@ -1,5 +1,5 @@
 ---
-title: 使用docker十分钟搭建一个局域网IM工具 —— Roit
+title: 使用docker十分钟搭建一个局域网IM服务 —— Riot & Synapse
 date: 2020-01-03 16:31:58
 tags: [im]
 categories: 即时通讯
@@ -9,7 +9,7 @@ categories: 即时通讯
 
 `Riot im` 只需要服务器提供注册能力就可以与在不同服务器注册的用户进行通信，并且支持私信端到端加密，因此大受隐私爱好者喜爱。
 
-本篇主要介绍如何使用 `docker` 来搭建一个 `synapse` 服务器供 `Roit im` 使用。
+本篇主要介绍如何使用 `docker` 来搭建一个 `synapse` 服务器供 `Riot im` 使用。
 
 <!-- more -->
 

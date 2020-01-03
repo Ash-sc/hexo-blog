@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="使用docker十分钟搭建一个局域网IM工具 —— Roit"><meta name="keywords" content="im"><meta name="author" content="Ash"><meta name="copyright" content="Ash"><title>使用docker十分钟搭建一个局域网IM工具 —— Roit | 就在记忆里画一个猹🦔</title><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取最新镜像"><span class="toc-number">1.</span> <span class="toc-text">获取最新镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成配置文件"><span class="toc-number">2.</span> <span class="toc-text">生成配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置文件"><span class="toc-number">3.</span> <span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动镜像"><span class="toc-number">4.</span> <span class="toc-text">启动镜像</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img class="lazy" data-src="/img/avatar.jpg"></div><div class="author-info__name text-center">Ash</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/Ash-sc">Github</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">30</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">44</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">24</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">就在记忆里画一个猹🦔</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">使用docker十分钟搭建一个局域网IM工具 —— Roit</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/即时通讯/">即时通讯</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2020/01/03/riot-im/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2020/01/03/riot-im/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><meta name="generator" content="Hexo 3.8.0"><p><code>Riot im</code> 是一个以 <code>Matrix</code> 协议为基础的开源软件，使用 <code>React</code> 开发，有 <code>android</code>、<code>ios</code>、<code>mac</code>、<code>windows</code>、<code>linux</code>多平台客户端，支持文本、markdown、文件、视音频等传输。</p>
+<p><code>Riot im</code> 只需要服务器提供注册能力就可以与在不同服务器注册的用户进行通信，并且支持私信端到端加密，因此大受隐私爱好者喜爱。</p>
+<p>本篇主要介绍如何使用 <code>docker</code> 来搭建一个 <code>synapse</code> 服务器供 <code>Roit im</code> 使用。</p>
+<a id="more"></a>
+<h2 id="获取最新镜像"><a href="#获取最新镜像" class="headerlink" title="获取最新镜像"></a>获取最新镜像</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull matrixdotorg/synapse</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><p>这里更改 <code>your-domain</code> 为你的服务器域名或者ip。<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm \</span><br><span class="line">    --mount type=volume,src=synapse-data,dst=/data \</span><br><span class="line">    -e SYNAPSE_SERVER_NAME=your-domain \</span><br><span class="line">    -e SYNAPSE_REPORT_STATS=yes \</span><br><span class="line">    matrixdotorg/synapse:latest generate</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>生成的配置文件中是默认关闭了注册功能的。</p>
+<p>首先找到上一步中生成的配置文件：<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name homeserver.yaml</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>然后，更新配置文件中：<code>registration_enable</code> 为 <code>true</code>。</p>
+<h2 id="启动镜像"><a href="#启动镜像" class="headerlink" title="启动镜像"></a>启动镜像</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always --name synapse \</span><br><span class="line">    --mount type=volume,src=synapse-data,dst=/data \</span><br><span class="line">    -p 8008:8008 \</span><br><span class="line">    matrixdotorg/synapse:latest</span><br></pre></td></tr></tbody></table></figure>
+<p>服务器地址即为：<code>your-domain:8008</code>。</p>
+<p>可以在浏览器中直接打开验证：</p>
+<p><img alt="示例" class="lazy" data-src="http://web-site-files.ashshen.cc/blog/riot/synapse-page.png"></p>
+<p>然后，使用客户端注册时，选择使用自定义服务器注册，服务器填写上面的服务器地址即可。</p>
+<p>当然，也可以使用nginx等转换成https协议。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ash</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://ashshen.cc/2020/01/03/riot-im/">https://ashshen.cc/2020/01/03/riot-im/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/im/">im</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/12/25/fe-note/"><span>前端笔记</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://ashshen.cc/2020/01/03/riot-im/';
+  this.page.identifier = '2020/01/03/riot-im/';
+  this.page.title = '使用docker十分钟搭建一个局域网IM工具 —— Roit';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'ashshen-cc' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://ashshen-cc.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">©2017 - 2020 By Ash</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text"><a href="http://www.beian.miit.gov.cn/">浙ICP备17006549号-1</a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><script>document.addEventListener("DOMContentLoaded", function() {
+  var lazyloadImages;
+
+  if ("IntersectionObserver" in window) {
+    lazyloadImages = document.querySelectorAll(".lazy");
+    var imageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.remove("lazy");
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    lazyloadImages.forEach(function(image) {
+      imageObserver.observe(image);
+    });
+  } else {  
+    var lazyloadThrottleTimeout;
+    lazyloadImages = document.querySelectorAll(".lazy");
+    
+    function lazyload () {
+      if(lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }    
+
+      lazyloadThrottleTimeout = setTimeout(function() {
+        var scrollTop = window.pageYOffset;
+        lazyloadImages.forEach(function(img) {
+            if(img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+        });
+        if(lazyloadImages.length == 0) { 
+          document.removeEventListener("scroll", lazyload);
+          window.removeEventListener("resize", lazyload);
+          window.removeEventListener("orientationChange", lazyload);
+        }
+      }, 20);
+    }
+
+    document.addEventListener("scroll", lazyload);
+    window.addEventListener("resize", lazyload);
+    window.addEventListener("orientationChange", lazyload);
+  }
+})
+</script></body></html>
